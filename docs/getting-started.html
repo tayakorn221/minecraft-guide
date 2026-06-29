@@ -10,23 +10,34 @@
   --gold:#c9a24b;--gold-bright:#e2bf6e;
   --t1:#7aa45c;--t2:#c89a45;--t3:#bd5651;--t0:#8f8975;
   --good:#86a85f;--bad:#c4625b;
+  --nav-bg:rgba(20,17,12,.95);--code-bg:#100d08;--sb-thumb:#3c3324;
   --serif:"Georgia","Iowan Old Style","Palatino Linotype","Times New Roman",serif;
   --sans:"Leelawadee UI","Segoe UI","Noto Sans Thai",Tahoma,sans-serif;
   --nav-h:58px;
 }
+:root[data-theme="light"]{
+  --bg:#f0e7d2;--surface:#e8ddc2;--raised:#e0d4b6;--raised-2:#d8c9a6;
+  --line:#c5b389;--line-soft:#d6c9a8;--line-bright:#b09a6e;
+  --ink:#2a2216;--ink-dim:#473c28;--ink-mute:#786a4d;
+  --gold:#9b7a28;--gold-bright:#785915;
+  --t1:#4d7a2f;--t2:#946a14;--t3:#a83c34;--t0:#6a6350;
+  --good:#4d7a2f;--bad:#a83c34;
+  --nav-bg:rgba(240,231,210,.95);--code-bg:#e3d7b8;--sb-thumb:#c2b084;
+}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-::selection{background:rgba(201,162,75,.28);color:#fff}
+::selection{background:rgba(201,162,75,.28)}
 ::-webkit-scrollbar{width:11px;height:11px}
 ::-webkit-scrollbar-track{background:var(--surface)}
-::-webkit-scrollbar-thumb{background:#3c3324;border:3px solid var(--surface);border-radius:8px}
+::-webkit-scrollbar-thumb{background:var(--sb-thumb);border:3px solid var(--surface);border-radius:8px}
 ::-webkit-scrollbar-thumb:hover{background:#4d4231}
 body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;position:relative;min-height:100vh}
 body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+body,.nav,main blockquote,main thead th,main tbody td,main pre,.foot a,.shell{transition:background-color .22s ease,border-color .22s ease,color .22s ease}
 
 /* ── top nav ── */
-.nav{position:sticky;top:0;z-index:60;height:var(--nav-h);background:rgba(20,17,12,.95);border-bottom:1px solid var(--line);backdrop-filter:blur(8px);display:flex;align-items:center;gap:18px;padding:0 20px}
+.nav{position:sticky;top:0;z-index:60;height:var(--nav-h);background:var(--nav-bg);border-bottom:1px solid var(--line);backdrop-filter:blur(8px);display:flex;align-items:center;gap:18px;padding:0 20px}
 .nav .brand{font-family:var(--serif);font-weight:700;font-size:17px;color:var(--ink);display:flex;align-items:center;gap:9px;white-space:nowrap;text-decoration:none}
 .nav .brand .di{color:var(--gold);transform:rotate(45deg);display:inline-block;font-size:11px}
 .nav .brand em{font-style:italic;color:var(--gold)}
@@ -37,6 +48,8 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opa
 .nav a.nl.active{color:var(--gold-bright);border-color:var(--line-bright);background:var(--surface)}
 .nav .gh{color:var(--ink-mute);text-decoration:none;font-size:13px;border:1px solid var(--line-bright);padding:6px 12px;border-radius:3px;white-space:nowrap;transition:all .15s}
 .nav .gh:hover{color:var(--ink);border-color:var(--gold)}
+.theme-btn{background:var(--surface);border:1px solid var(--line-bright);color:var(--ink-dim);width:36px;height:36px;border-radius:3px;font-size:15px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:color .15s,border-color .15s}
+.theme-btn:hover{color:var(--gold-bright);border-color:var(--gold)}
 .menu-btn{display:none;background:var(--surface);border:1px solid var(--line-bright);color:var(--ink);width:38px;height:38px;border-radius:3px;font-size:18px;cursor:pointer}
 
 /* ── layout ── */
@@ -74,7 +87,7 @@ main hr::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;ba
 
 /* code */
 main code{font-family:"Consolas","SF Mono",monospace;font-size:.86em;background:var(--raised-2);color:var(--gold-bright);border:1px solid var(--line);border-radius:3px;padding:2px 7px;white-space:nowrap}
-main pre{background:#100d08;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px;padding:16px 18px;overflow-x:auto;margin:16px 0}
+main pre{background:var(--code-bg);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px;padding:16px 18px;overflow-x:auto;margin:16px 0}
 main pre code{background:none;border:none;color:var(--ink-dim);padding:0;white-space:pre;font-size:13.5px;line-height:1.6}
 
 /* tables — ledger style */
@@ -123,11 +136,14 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
   .scrim.show{display:block}
 }
 @media(min-width:901px){.menu-btn,.scrim{display:none}}
-</style></head><body>
+</style>
+<script>try{var _t=localStorage.getItem('mc-theme');if(_t)document.documentElement.dataset.theme=_t}catch(e){}</script>
+</head><body>
 <nav class="nav">
 <button class="menu-btn" aria-label="menu">☰</button>
 <a class="brand" href="index.html"><span class="di">◆</span> ตำรา <em>Minecraft</em></a>
 <div class="links"><a class="nl" href="choose-origin.html">เลือกเผ่า</a><a class="nl active" href="getting-started.html">เริ่มเล่น</a><a class="nl" href="keybinds.html">ปุ่มพลัง</a><a class="nl" href="origins-codex.html">คู่มือเผ่า 27</a><a class="nl" href="join-server.html">เข้าเซิร์ฟเพื่อน</a><a class="nl" href="mods-2612.html">มอดใหม่ 26.1.2</a></div>
+<button class="theme-btn" aria-label="สลับโหมดสว่าง/มืด">☀</button>
 <a class="gh" href="https://github.com/tayakorn221/minecraft-guide" target="_blank" rel="noopener">GitHub ↗</a>
 </nav>
 <div class="scrim"></div>
@@ -446,5 +462,8 @@ const links=[...document.querySelectorAll('.toc a')],secs=links.map(a=>document.
 const spy=()=>{let i=secs.length;while(--i>=0){if(secs[i]&&secs[i].getBoundingClientRect().top<120)break}
   links.forEach(a=>a.classList.remove('on'));if(i>=0&&links[i])links[i].classList.add('on')};
 document.addEventListener('scroll',spy,{passive:true});spy();
+const tb=document.querySelector('.theme-btn');
+function _icon(){const light=document.documentElement.dataset.theme==='light';tb.textContent=light?'☾':'☀';tb.setAttribute('aria-label',light?'สลับเป็นโหมดมืด':'สลับเป็นโหมดสว่าง')}
+if(tb){_icon();tb.onclick=()=>{const next=document.documentElement.dataset.theme==='light'?'dark':'light';document.documentElement.dataset.theme=next;try{localStorage.setItem('mc-theme',next)}catch(e){}_icon()}}
 </script>
 </body></html>
