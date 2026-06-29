@@ -2,6 +2,8 @@
 
 จัดระเบียบเมื่อ 2026-06-29 รวมไฟล์ที่เคยกระจายอยู่ (Downloads + temp) มาไว้ที่เดียว
 
+> 🌐 **เว็บคู่มือ (live):** https://tayakorn221.github.io/minecraft-guide/ — ธีมตำราเวท เปิดอ่านในเบราว์เซอร์/มือถือได้เลย
+
 ## โครงสร้างโฟลเดอร์
 ```
 Documents\Minecraft\
@@ -39,4 +41,6 @@ Documents\Minecraft\
 - คู่มือเผ่า 27 ตัว · เลือกเผ่า (decision) · เริ่มเล่น (getting started) · ปุ่มพลัง active · เข้าเซิร์ฟเพื่อน 26.1.2 · มอดใหม่ 26.1.2
 - หน้าเว็บ `origin-selector.html` (interactive) — สร้างแล้ว
 
-**เฟสถัดไป:** แปลงคู่มือ `.md` → **HTML** (ไฟล์เขียนด้วย heading เป็นชั้น + ตาราง + blockquote ให้แปลงง่ายอยู่แล้ว)
+**เฟส HTML (เสร็จแล้ว):** แปลงคู่มือ `.md` → เว็บ HTML ธีม "ตำราเวท" (เข้าชุด `origin-selector.html`) + GitHub Pages
+- 🌐 live: https://tayakorn221.github.io/minecraft-guide/
+- รีบิลด์ได้: แก้ `.md` แล้วรัน `python build_site.py` (ใช้ Python + `markdown`)
