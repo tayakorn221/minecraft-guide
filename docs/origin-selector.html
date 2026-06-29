@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Origin Selector · ตำราเลือกเผ่า RPG Origins</title>
+<style>
+  :root{
+    --bg:#14110c;--surface:#1c1812;--raised:#242019;--raised-2:#2b2619;
+    --line:#3a3225;--line-soft:#2c2519;--line-bright:#4d4231;
+    --ink:#f3ecdd;--ink-dim:#d2c6ad;--ink-mute:#a1957c;
+    --gold:#c9a24b;--gold-bright:#e2bf6e;
+    --t1:#7aa45c;--t1-soft:#243018;--t2:#c89a45;--t2-soft:#322710;
+    --t3:#bd5651;--t3-soft:#321713;--t0:#8f8975;--t0-soft:#26241c;
+    --good:#86a85f;--bad:#c4625b;
+    --serif:"Georgia","Iowan Old Style","Palatino Linotype","Times New Roman",serif;
+    --sans:"Leelawadee UI","Segoe UI","Noto Sans Thai",Tahoma,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  ::selection{background:rgba(201,162,75,.28);color:#fff}
+  ::-webkit-scrollbar{width:12px;height:12px}
+  ::-webkit-scrollbar-track{background:var(--surface)}
+  ::-webkit-scrollbar-thumb{background:#3c3324;border:3px solid var(--surface);border-radius:8px}
+  ::-webkit-scrollbar-thumb:hover{background:#4d4231}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;min-height:100vh;padding-bottom:120px;-webkit-font-smoothing:antialiased;position:relative}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
+  .rule{display:flex;align-items:center;gap:16px;color:var(--line-bright);justify-content:center;margin:0 auto}
+  .rule::before,.rule::after{content:"";height:1px;background:linear-gradient(90deg,transparent,var(--line-bright));flex:1;max-width:160px}
+  .rule::after{background:linear-gradient(90deg,var(--line-bright),transparent)}
+  .rule .di{color:var(--gold);font-size:10px}
+
+  header{text-align:center;padding:64px 22px 40px;position:relative;z-index:1;border-bottom:1px solid var(--line-soft)}
+  .kicker{font:600 12px/1 var(--sans);letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+  h1{font-family:var(--serif);font-weight:700;font-size:clamp(38px,7vw,72px);line-height:1;letter-spacing:.5px;color:var(--ink);margin-bottom:6px}
+  h1 em{font-style:italic;color:var(--gold)}
+  .h1-th{font-size:clamp(16px,2.6vw,21px);color:var(--ink-dim);font-weight:500;margin-bottom:24px;letter-spacing:.5px}
+  header p.sub{color:var(--ink-mute);font-size:14px;max-width:640px;margin:22px auto 0;line-height:1.7}
+  .legend{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+  .leg{display:flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);padding:9px 16px 9px 13px;border-radius:3px}
+  .leg .swatch{width:12px;height:12px;border-radius:2px;transform:rotate(45deg)}
+  .leg .ln{font-family:var(--serif);font-size:17px;font-weight:700}
+  .leg .ll{font-size:12px;color:var(--ink-mute);letter-spacing:.04em}
+
+  .advisor{position:relative;z-index:1;margin:34px auto 0;max-width:1200px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:3px;padding:20px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  .advisor .seal{font-size:30px;flex-shrink:0;opacity:.92}
+  .advisor .tx{flex:1;min-width:240px}
+  .advisor .tx h3{font-family:var(--serif);font-size:18px;font-weight:700;margin-bottom:3px}
+  .advisor .tx p{font-size:13.5px;color:var(--ink-dim)}
+  .advisor .tx b{color:var(--ink)}
+
+  .btn{font-family:var(--sans);cursor:pointer;border-radius:3px;font-weight:600;transition:background .18s,border-color .18s,color .18s,transform .12s;white-space:nowrap}
+  .btn:active{transform:translateY(1px)}
+  .btn-gold{background:var(--gold);color:#1a1408;border:1px solid var(--gold);padding:13px 24px;font-size:14.5px}
+  .btn-gold:hover{background:var(--gold-bright);border-color:var(--gold-bright)}
+  .btn-line{background:transparent;color:var(--ink-dim);border:1px solid var(--line-bright);padding:11px 18px;font-size:13.5px}
+  .btn-line:hover{color:var(--ink);border-color:var(--ink-mute)}
+  .btn-solid{background:var(--raised-2);color:var(--ink);border:1px solid var(--line-bright);padding:13px 24px;font-size:14.5px}
+  .btn-solid:hover{background:#332d1d;border-color:var(--gold)}
+  .btn-solid:disabled{opacity:.4;cursor:not-allowed}
+
+  .toolbar{position:sticky;top:0;z-index:30;margin-top:30px;padding:16px 0 0;background:rgba(20,17,12,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+  .search{position:relative;margin-bottom:16px}
+  .search input{width:100%;background:var(--surface);border:1px solid var(--line-bright);border-radius:3px;color:var(--ink);font-family:var(--sans);font-size:15px;padding:14px 16px 14px 46px;outline:none;transition:border-color .18s}
+  .search input::placeholder{color:var(--ink-mute)}
+  .search input:focus{border-color:var(--gold)}
+  .search .mag{position:absolute;left:16px;top:50%;transform:translateY(-50%);opacity:.5;font-size:17px}
+  .frow{display:flex;gap:22px;flex-wrap:wrap;align-items:center;padding-bottom:4px}
+  .fgroup{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .flabel{font-size:10.5px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.18em;font-weight:700;margin-right:4px}
+  .chip{background:transparent;border:1px solid var(--line-bright);border-radius:3px;padding:7px 14px;font-size:13px;color:var(--ink-dim);cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:7px;user-select:none;font-family:var(--sans);white-space:nowrap}
+  .chip:hover{color:var(--ink);border-color:var(--ink-mute)}
+  .chip .dot{width:9px;height:9px;border-radius:2px;transform:rotate(45deg);flex-shrink:0}
+  .chip.active{color:#1a1408;font-weight:700}
+  .chip[data-tier="1"].active{background:var(--t1);border-color:var(--t1)}
+  .chip[data-tier="2"].active{background:var(--t2);border-color:var(--t2)}
+  .chip[data-tier="3"].active{background:var(--t3);border-color:var(--t3)}
+  .chip[data-tier="0"].active{background:var(--t0);border-color:var(--t0)}
+  .chip.style-chip.active{background:var(--gold);border-color:var(--gold)}
+  .tb-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 0}
+  .count{font-size:13.5px;color:var(--ink-dim)}
+  .count b{color:var(--ink)}
+  .clear-btn{background:none;border:none;color:var(--ink-mute);font-size:13px;cursor:pointer;font-family:var(--sans);text-decoration:underline;text-underline-offset:3px}
+  .clear-btn:hover{color:var(--ink)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(335px,1fr));gap:22px;margin-top:30px}
+  .card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:4px;display:flex;flex-direction:column;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.018);transition:border-color .2s,transform .2s,box-shadow .2s;animation:rise .5s ease both}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .card:hover{transform:translateY(-3px);border-color:var(--line-bright);box-shadow:0 16px 34px rgba(0,0,0,.4)}
+  .card .spine{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--tc)}
+  .c-head{display:flex;align-items:center;gap:14px;padding:18px 18px 14px 21px}
+  .c-emblem{width:46px;height:46px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:27px;background:var(--raised);border:1px solid var(--line);border-radius:3px}
+  .c-name{flex:1;min-width:0}
+  .c-name h3{font-family:var(--serif);font-size:20px;font-weight:700;line-height:1.1;letter-spacing:.3px}
+  .c-name .c-th{font-size:12.5px;color:var(--ink-dim);margin-top:2px}
+  .c-tier{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:6px;color:var(--tc);align-self:flex-start;margin-top:2px}
+  .c-tier .dot{width:9px;height:9px;border-radius:2px;transform:rotate(45deg);background:var(--tc)}
+  .c-flavor{font-size:14.5px;color:var(--ink);line-height:1.65;padding:0 18px 15px 21px}
+  /* stat block */
+  .c-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-soft);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);margin-bottom:14px}
+  .c-stat{background:var(--surface);padding:8px 21px 8px 21px;display:flex;flex-direction:column;gap:1px}
+  .c-stat:nth-child(even){padding-left:14px}
+  .c-stat .k{font-size:11px;color:var(--ink-mute);letter-spacing:.04em}
+  .c-stat .v{font-size:13.5px;color:var(--ink);font-weight:600}
+  .c-stat .v.dim{color:var(--ink-dim);font-weight:500;font-size:13px}
+  .c-tags{display:flex;flex-wrap:wrap;gap:6px;padding:0 18px 14px 21px}
+  .c-tags span{font-size:12px;color:var(--ink-dim);border:1px solid var(--line);padding:3px 10px;border-radius:2px}
+  .c-warn{margin:0 18px 14px 21px;background:var(--t3-soft);border:1px solid #5a2a24;border-radius:3px;padding:10px 13px;font-size:13px;color:#eab4ac;display:flex;gap:9px;align-items:flex-start;line-height:1.55}
+  .c-warn .wm{flex-shrink:0;color:var(--t3);font-weight:700}
+  .c-sections{padding:0 18px 16px 21px;display:grid;gap:16px}
+  .c-sec h4{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--ink-dim);display:flex;align-items:center;gap:10px;margin-bottom:9px}
+  .c-sec h4::after{content:"";flex:1;height:1px;background:var(--line-soft)}
+  .c-sec ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .c-sec li{font-size:13.5px;color:var(--ink-dim);padding-left:18px;position:relative;line-height:1.55}
+  .c-sec.boon li::before{content:"+";position:absolute;left:0;top:-1px;color:var(--good);font-weight:700;font-size:14px;font-family:var(--serif)}
+  .c-sec.bane li::before{content:"–";position:absolute;left:1px;top:-1px;color:var(--bad);font-weight:700;font-size:15px;font-family:var(--serif)}
+  .c-detail-btn{margin:0 18px 0 21px;padding:12px 0;border-top:1px solid var(--line-soft);background:none;border-left:none;border-right:none;border-bottom:none;color:var(--gold-bright);font-family:var(--sans);font-size:13.5px;font-weight:700;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px;transition:color .15s}
+  .c-detail-btn:hover{color:var(--gold-bright)}
+  .c-detail-btn .arr{transition:transform .15s}
+  .c-detail-btn:hover .arr{transform:translateX(3px)}
+  .c-foot{margin-top:auto;border-top:1px solid var(--line-soft);padding:13px 18px 13px 21px;display:flex;justify-content:space-between;align-items:center}
+  .cmp-toggle{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--ink-dim);cursor:pointer;user-select:none}
+  .cmp-toggle input{display:none}
+  .cmp-box{width:18px;height:18px;border:1px solid var(--line-bright);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent;transition:all .15s}
+  .cmp-toggle input:checked + .cmp-box{background:var(--gold);border-color:var(--gold);color:#1a1408}
+  .cmp-toggle:hover .cmp-box{border-color:var(--gold)}
+  .pips{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink-mute);letter-spacing:.1em}
+  .pips .pl{font-size:9.5px;text-transform:uppercase;letter-spacing:.16em;margin-right:3px}
+  .no-results{grid-column:1/-1;text-align:center;padding:70px 20px;color:var(--ink-dim);font-size:16px}
+  .no-results .big{font-size:46px;margin-bottom:14px;opacity:.4;font-style:normal}
+
+  .cmp-bar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:#1a160f;border-top:1px solid var(--gold);transform:translateY(120%);transition:transform .32s ease;box-shadow:0 -12px 36px rgba(0,0,0,.5)}
+  .cmp-bar.show{transform:translateY(0)}
+  .cmp-inner{max-width:1200px;margin:0 auto;padding:15px 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .cmp-slots{display:flex;gap:10px;flex:1;flex-wrap:wrap}
+  .cmp-slot{background:var(--raised);border:1px solid var(--line-bright);border-radius:3px;padding:8px 13px;display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;font-family:var(--serif)}
+  .cmp-slot .x{cursor:pointer;color:var(--ink-mute);font-size:17px;line-height:1}.cmp-slot .x:hover{color:var(--bad)}
+  .cmp-actions{display:flex;gap:11px;align-items:center}
+  .cmp-actions .hint{font-size:13px;color:var(--ink-dim)}
+
+  .overlay{position:fixed;inset:0;z-index:80;background:rgba(8,6,4,.78);display:none;align-items:flex-start;justify-content:center;padding:42px 16px;overflow-y:auto}
+  .overlay.show{display:flex;animation:fade .2s}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  .modal{background:var(--surface);border:1px solid var(--line-bright);border-top:3px solid var(--gold);border-radius:4px;max-width:940px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,.6);animation:pop .3s ease;margin:auto 0;overflow:hidden}
+  @keyframes pop{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .modal-head{display:flex;justify-content:space-between;align-items:center;padding:22px 26px;border-bottom:1px solid var(--line)}
+  .modal-head h2{font-family:var(--serif);font-size:23px;font-weight:700;display:flex;align-items:center;gap:11px}
+  .modal-close{background:var(--raised);border:1px solid var(--line-bright);color:var(--ink-dim);width:36px;height:36px;border-radius:3px;font-size:20px;cursor:pointer;line-height:1;transition:all .18s}
+  .modal-close:hover{color:#fff;border-color:var(--bad)}
+  .modal-body{padding:26px}
+
+  /* detail modal */
+  .dt-head{display:flex;gap:18px;align-items:flex-start;padding-bottom:18px;margin-bottom:20px;border-bottom:1px solid var(--line-soft)}
+  .dt-emblem{width:58px;height:58px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:34px;background:var(--raised);border:1px solid var(--line);border-radius:3px}
+  .dt-titles{flex:1}
+  .dt-titles .dt-en{font-family:var(--serif);font-size:26px;font-weight:700;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .dt-titles .dt-tier{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+  .dt-titles .dt-th{font-size:13px;color:var(--ink-dim);margin-top:2px}
+  .dt-titles .dt-flavor{color:var(--ink);margin-top:10px;font-size:14.5px;line-height:1.65}
+  .dt-statbar{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-bottom:22px}
+  .dt-stat{flex:1;min-width:120px;padding:11px 16px;border-right:1px solid var(--line-soft)}
+  .dt-stat:last-child{border-right:none}
+  .dt-stat .k{font-size:11px;color:var(--ink-mute);letter-spacing:.03em}
+  .dt-stat .v{font-size:14.5px;font-weight:700;color:var(--ink);margin-top:3px}
+  .dt-sec{margin-bottom:24px}
+  .dt-sec>h3{font-family:var(--serif);font-size:16px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px;color:var(--ink)}
+  .dt-sec>h3 .ic{color:var(--gold)}
+  .dt-sec>h3::after{content:"";flex:1;height:1px;background:var(--line-soft)}
+  .power{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line-soft)}
+  .power:last-child{border-bottom:none}
+  .power .pk{flex-shrink:0;width:6px;height:6px;border-radius:50%;background:var(--tc);margin-top:8px}
+  .power .pbody{flex:1}
+  .power .pn{font-weight:700;font-size:14.5px;color:var(--ink);font-family:var(--serif)}
+  .power .pn .kind{font-family:var(--sans);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:2px 7px;border-radius:2px;margin-left:8px;vertical-align:1px}
+  .power .pn .kind.act{background:var(--t2-soft);color:var(--t2);border:1px solid #4a3a14}
+  .power .pn .kind.bane{background:var(--t3-soft);color:var(--t3);border:1px solid #4a221d}
+  .power .pd{font-size:13.5px;color:var(--ink-dim);line-height:1.6;margin-top:4px}
+  .tiplist{list-style:none;display:flex;flex-direction:column;gap:11px}
+  .tiplist li{font-size:14px;color:var(--ink-dim);line-height:1.65;padding-left:24px;position:relative}
+  .tiplist.tips li::before{content:"◆";position:absolute;left:0;top:1px;color:var(--gold);font-size:10px}
+  .fixlist{list-style:none;display:flex;flex-direction:column;gap:0}
+  .fixlist li{display:grid;grid-template-columns:1fr;gap:3px;padding:11px 0;border-bottom:1px solid var(--line-soft)}
+  .fixlist li:last-child{border-bottom:none}
+  .fixlist .prob{font-size:13.5px;color:#e0a79f;display:flex;align-items:center;gap:8px;font-weight:600}
+  .fixlist .prob::before{content:"✕";color:var(--bad);font-weight:700;font-size:11px}
+  .fixlist .sol{font-size:13.5px;color:var(--ink-dim);padding-left:19px;display:flex;align-items:flex-start;gap:8px;line-height:1.6}
+  .fixlist .sol::before{content:"→";color:var(--good);font-weight:700;flex-shrink:0}
+
+  .wiz-prog{display:flex;align-items:center;gap:14px;margin-bottom:30px}
+  .wiz-prog .track{flex:1;height:4px;background:var(--raised);border-radius:2px;overflow:hidden}
+  .wiz-prog .fill{height:100%;background:var(--gold);transition:width .4s ease}
+  .wiz-prog .step-n{font-size:13px;color:var(--ink-dim);font-weight:600;white-space:nowrap}
+  .wiz-q{animation:slidein .32s ease}
+  @keyframes slidein{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+  .wiz-q .qnum{font-family:var(--serif);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+  .wiz-q .qhead{font-family:var(--serif);font-size:25px;font-weight:700;margin-bottom:6px;line-height:1.2}
+  .wiz-q .qsub{font-size:13.5px;color:var(--ink-mute);margin-bottom:24px}
+  .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:11px}
+  .opt{position:relative;background:var(--raised);border:1px solid var(--line-bright);border-radius:3px;padding:18px 14px;cursor:pointer;transition:all .17s;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+  .opt:hover{border-color:var(--ink-mute);background:#2b261c}
+  .opt.sel{border-color:var(--gold);background:var(--t2-soft)}
+  .opt .oic{font-size:28px;line-height:1}
+  .opt .olabel{font-size:13px;font-weight:600;color:var(--ink)}
+  .opt.sel::after{content:"◆";position:absolute;top:9px;right:11px;color:var(--gold);font-size:10px}
+  .wiz-nav{display:flex;justify-content:space-between;margin-top:30px;gap:12px}
+
+  .res-intro{color:var(--ink-dim);font-size:14px;line-height:1.65;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line-soft)}
+  .res-intro b{color:var(--ink)}
+  .res-card{position:relative;background:var(--raised);border:1px solid var(--line);border-left:3px solid var(--tc);border-radius:3px;padding:18px 20px;margin-bottom:14px;display:flex;gap:18px;align-items:flex-start;animation:rise .45s ease both}
+  .res-card .rank{font-family:var(--serif);font-size:34px;font-weight:700;color:var(--line-bright);line-height:1;flex-shrink:0;width:38px;text-align:center}
+  .res-card .ric{font-size:34px;flex-shrink:0}
+  .res-card .rbody{flex:1;min-width:0}
+  .res-card .rtop{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .res-card .rtop .en{font-family:var(--serif);font-size:21px;font-weight:700}
+  .res-card .medal{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+  .res-card .rtier{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--tc)}
+  .res-card .rth{font-size:12px;color:var(--ink-mute);margin-top:1px}
+  .res-card .rsum{font-size:13px;color:var(--ink-dim);margin-top:7px;line-height:1.55}
+  .res-card .why{font-size:13px;color:var(--ink-dim);margin-top:11px;padding:10px 13px;background:var(--surface);border:1px solid var(--line-soft);border-radius:3px}
+  .res-card .why b{color:var(--gold)}
+  .res-card .why2{margin-top:9px;font-size:12.5px;color:#cf9d96}
+  .res-card .rmore{margin-top:10px}
+  .rmore-btn{background:none;border:none;color:var(--gold);font-family:var(--sans);font-size:12.5px;font-weight:600;cursor:pointer;padding:0}
+  .rmore-btn:hover{color:var(--gold-bright)}
+  .retake{text-align:center;margin-top:10px}
+
+  .cmp-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:3px}
+  table.cmp-table{width:100%;border-collapse:collapse;font-size:13px;min-width:560px}
+  table.cmp-table th,table.cmp-table td{padding:14px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line-soft);border-right:1px solid var(--line-soft)}
+  table.cmp-table tr td:last-child,table.cmp-table tr th:last-child{border-right:none}
+  table.cmp-table thead th{text-align:center;background:var(--raised);font-family:var(--serif)}
+  table.cmp-table thead .cmp-emoji{font-size:30px;display:block;margin-bottom:5px}
+  table.cmp-table thead .cmp-en{font-size:16px;font-weight:700}
+  table.cmp-table thead .cmp-th{font-size:11px;color:var(--ink-mute);font-weight:400;font-family:var(--sans)}
+  table.cmp-table .rowlabel{font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;font-weight:700;color:var(--ink-mute);background:var(--surface);white-space:nowrap;width:96px}
+  table.cmp-table td ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+  table.cmp-table td li{padding-left:16px;position:relative;color:var(--ink-dim);font-size:12.5px;line-height:1.5}
+  table.cmp-table td.pros li::before{content:"+";position:absolute;left:0;color:var(--good);font-weight:700;font-family:var(--serif)}
+  table.cmp-table td.cons li::before{content:"–";position:absolute;left:1px;color:var(--bad);font-weight:700;font-family:var(--serif)}
+
+  footer{text-align:center;padding:38px 22px;color:var(--ink-mute);font-size:12.5px;border-top:1px solid var(--line);margin-top:40px;position:relative;z-index:1;line-height:1.8}
+  footer b{color:var(--ink-dim)}
+  footer .rule{margin-bottom:18px}
+
+  @media(max-width:640px){
+    .grid{grid-template-columns:1fr}
+    .advisor{flex-direction:column;text-align:center}
+    .cmp-inner{flex-direction:column;align-items:stretch}
+    .cmp-actions{justify-content:space-between}
+    .frow{gap:14px}
+    .wiz-q .qhead{font-size:21px}
+    .res-card .rank{display:none}
+    .dt-stat{min-width:50%}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.05ms!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">RPG Origins · Rise of Power</div>
+  <h1>Choose Your <em>Origin</em></h1>
+  <div class="h1-th">ตำราเลือกเผ่า — 27 เผ่า พร้อมค่าสเตตัสจริง พลังเต็ม ทิป และวิธีแก้จุดอ่อน</div>
+  <div class="rule"><span class="di">◆</span></div>
+  <div class="legend">
+    <div class="leg"><span class="swatch" style="background:var(--t3)"></span><span class="ln" style="color:var(--t3)">10</span><span class="ll">เผ่าแดง · พลังแรง</span></div>
+    <div class="leg"><span class="swatch" style="background:var(--t2)"></span><span class="ln" style="color:var(--t2)">9</span><span class="ll">เผ่าเหลือง · กลางๆ</span></div>
+    <div class="leg"><span class="swatch" style="background:var(--t1)"></span><span class="ln" style="color:var(--t1)">7</span><span class="ll">เผ่าเขียว · เล่นง่าย</span></div>
+    <div class="leg"><span class="swatch" style="background:var(--t0)"></span><span class="ln" style="color:var(--t0)">1</span><span class="ll">Human · วานิลลา</span></div>
+  </div>
+  <p class="sub">ค่าสเตตัส (เลือด/ขนาด/คูลดาวน์) ดึงจากไฟล์มอดจริง · กดปุ่ม “พลังเต็ม · ทิป · วิธีแก้จุดอ่อน” ในการ์ดเพื่อดูเชิงลึก</p>
+</header>
+
+<div class="wrap">
+  <div class="advisor">
+    <div class="seal">🧭</div>
+    <div class="tx">
+      <h3>สาย "สำรวจ + สร้างของ" เริ่มที่ไหนดี?</h3>
+      <p>เริ่มที่ <b>Arachnid · Avian · Elytrian</b> (เขียว เล่นง่าย) → ขยับไป <b>Enderian</b> → ท้าด้วย <b>Fae</b> (บิน+ฟาร์มไว ไม่กลัวแดด/น้ำ)</p>
+    </div>
+    <button class="btn btn-gold" onclick="openQuiz()">ปรึกษาตำรา — แนะนำเผ่าให้ฉัน</button>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="wrap">
+    <div class="search"><span class="mag">🔍</span><input id="searchInput" type="text" placeholder="ค้นหา… เช่น บิน, ปีนกำแพง, ใต้น้ำ, เนเธอร์, Fae"></div>
+    <div class="frow">
+      <div class="fgroup"><span class="flabel">พลัง</span>
+        <div class="chip" data-tier="1"><span class="dot" style="background:var(--t1)"></span>เขียว</div>
+        <div class="chip" data-tier="2"><span class="dot" style="background:var(--t2)"></span>เหลือง</div>
+        <div class="chip" data-tier="3"><span class="dot" style="background:var(--t3)"></span>แดง</div>
+        <div class="chip" data-tier="0"><span class="dot" style="background:var(--t0)"></span>Human</div>
+      </div>
+      <div class="fgroup"><span class="flabel">สไตล์</span>
+        <div class="chip style-chip" data-style="explore">สำรวจ</div>
+        <div class="chip style-chip" data-style="build">สร้าง</div>
+        <div class="chip style-chip" data-style="combat">บู๊</div>
+        <div class="chip style-chip" data-style="survival">เอาตัวรอด</div>
+        <div class="chip style-chip" data-style="magic">เวทมนตร์</div>
+      </div>
+    </div>
+    <div class="tb-foot"><div class="count">แสดง <b id="visCount">27</b> จาก 27 เผ่า</div><button class="clear-btn" onclick="clearFilters()">ล้างตัวกรอง</button></div>
+  </div>
+</div>
+
+<div class="wrap"><div class="grid" id="grid"></div></div>
+
+<div class="cmp-bar" id="cmpBar">
+  <div class="cmp-inner">
+    <div class="cmp-slots" id="cmpSlots"></div>
+    <div class="cmp-actions">
+      <span class="hint" id="cmpHint">เลือกได้ 2–3 เผ่า</span>
+      <button class="btn btn-line" onclick="clearCompare()">ล้าง</button>
+      <button class="btn btn-solid" id="cmpBtn" onclick="openCompare()" disabled>เทียบเผ่า</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()"><div class="modal" id="modal"></div></div>
+
+<footer>
+  <div class="rule"><span class="di">◆</span></div>
+  ค่าสเตตัสดึงจากไฟล์มอดจริง · <b>Origins 1.13.0</b> + <b>Medieval Origins 7.0.4</b> (MC 1.21.1) · อัปเดต 2026-06-29<br>
+  impact = ดีกรีพลัง/ความยาก · 20 HP = 10 ♥ · เปลี่ยนเผ่าทีหลังได้ด้วย <b>Orb of Origin</b>
+</footer>
+
+<script>
+/* ============================= DATA ============================= */
+const STYLES={explore:"สำรวจ",build:"สร้าง",combat:"บู๊",survival:"เอาตัวรอด",magic:"เวทมนตร์"};
+const TIER={
+  1:{name:"เขียว",label:"impact 1 · เล่นง่าย",c:"var(--t1)"},
+  2:{name:"เหลือง",label:"impact 2 · กลางๆ",c:"var(--t2)"},
+  3:{name:"แดง",label:"impact 3 · พลังแรง",c:"var(--t3)"},
+  0:{name:"Human",label:"impact 0 · วานิลลา",c:"var(--t0)"}
+};
+/* power kind: '' passive, 'act' active/cooldown, 'bane' weakness */
+const ORIGINS=[
+/* ---------- 🔴 RED ---------- */
+{en:"Banshee",th:"แบนชี — วิญญาณโหยหวน",icon:"👻",tier:3,styles:["combat","survival","magic"],
+ sum:"วิญญาณเศร้าโศก บินทะลุร่างได้ สายซัพพอร์ต/คำสาป ฟื้นพลังจากแสงจันทร์ — แต่เปราะและแพ้เหล็ก",
+ stats:{hp:"5 ♥ (−10)",size:"ปกติ",diet:"แสงจันทร์ (กินอาหารไม่ได้)",key:"Wail 40s · Spectral 45s"},
+ pros:["กลายเป็นวิญญาณทะลุของแข็งได้ (Spectral)","กรีดร้องผลักศัตรู + ทำให้มึนงง","ไม่มีวันอดตาย ฟื้นพลังจากแสงจันทร์","คำสาป + อาวุธ/เกราะต้องสาปบัฟแรง"],
+ cons:["เลือดเหลือครึ่งคน (5 ♥)","แพ้เหล็ก/เงิน ใส่ไม่ได้เลย","กินอาหารไม่ฟื้นพลัง พึ่งแสงจันทร์อย่างเดียว"],
+ powers:[["Spectral","กลายเป็นวิญญาณไร้ตัวตน เดินทะลุทุกอย่างได้ แต่ใช้พลังมาก ใช้ตอนหิวจัดไม่ได้","act"],["Preemptive Elegy","ปล่อยเสียงกรีดร้อง ผลักศัตรูรอบตัว + สร้างวงโครงกระดูกป้องกัน เป้าที่โดนตรงๆ จะมึนงง","act"],["Lunar Nexus","ฟื้นพลังจากแสงจันทร์โดยตรง กินอาหารไม่ได้ผล แต่แลกมาด้วยการไม่มีวันอดตาย",""],["Hexed","ทุกครั้งที่โดนตี มีโอกาสสาปผู้โจมตีให้ค่อยๆ ตายอย่างทรมาน",""],["Cursed Sigil","ดาเมจเพิ่มเมื่อถืออาวุธต้องสาป",""],["Cursed Ward","กันดาเมจเพิ่มตามจำนวนชิ้นเกราะต้องสาปที่สวม",""],["Dimeritium Shackles","แพ้โลหะกดเวท (เหล็ก/เงิน) อย่างรุนแรง","bane"],["Immaterial","เลือดเหลือครึ่งหนึ่งของคนปกติ","bane"]],
+ tips:["เล่นเป็นสายหลอน/ซัพพอร์ต — ใช้ Spectral มุดหนีหรือผ่านกำแพง แล้วโผล่ออกมาโจมตี","ลงทุนกับชุด/อาวุธ \"ต้องสาป\" (Cursed) เพราะ Sigil + Ward คือคอร์พลัง ยิ่งสวมเยอะยิ่งอึด","นอนกลางแจ้งใต้แสงจันทร์เพื่อฟื้นพลัง อย่าขุดมุดดินตอนกลางคืนถ้าพลังต่ำ"],
+ fixes:[["เลือดน้อยแค่ 5 ♥","ใช้ Spectral หนีเมื่อพลังต่ำ + สะสมเกราะต้องสาปให้ Cursed Ward กันดาเมจ"],["ใส่เหล็ก/เงินไม่ได้","ใช้เกราะหนัง/ทอง/เพชร/เนเธอไรต์แทน หรือสายเกราะต้องสาปโดยเฉพาะ"],["กินอาหารไม่ฟื้นพลัง","วางแผนกิจกรรมกลางคืนกลางแจ้ง ให้แสงจันทร์เติมพลังเสมอ"]],
+ warn:null,flags:{}},
+
+{en:"Blazeborn",th:"เบลซบอร์น — ทายาทเบลซ",icon:"🔥",tier:3,styles:["combat","survival"],
+ sum:"ทายาทเบลซ เกิดในเนเธอร์ ภูมิคุ้มกันไฟ/พิษ/หิวเต็มตัว — แต่กลัวน้ำสุดขีด",
+ stats:{hp:"10 ♥ (ปกติ)",size:"ปกติ",diet:"ภูมิพิษ + ความหิว",key:"ติดไฟ = ตีแรงขึ้น"},
+ pros:["ภูมิคุ้มกันไฟทุกชนิด ลาวาก็ไม่กลัว","เกิดในเนเธอร์ตั้งแต่เริ่ม","ติดไฟอยู่ตีแรงขึ้น (Burning Wrath)","ภูมิคุ้มกันพิษและความหิว"],
+ cons:["โดนน้ำ/ฝนเจ็บต่อเนื่อง (กลัวน้ำสุดขีด)"],
+ powers:[["Fire Immunity","ภูมิคุ้มกันความเสียหายจากไฟทุกประเภท",""],["Nether Inhabitant","จุดเกิดธรรมชาติอยู่ในเนเธอร์",""],["Burning Wrath","ขณะติดไฟ การโจมตีของคุณแรงขึ้น",""],["Hotblooded","ร่างกายร้อนเผาพิษทิ้ง ภูมิคุ้มกันพิษและสถานะหิว",""],["Hydrophobia","ได้รับดาเมจต่อเนื่องเมื่อสัมผัสน้ำ","bane"]],
+ tips:["ตั้งฐานหลักในเนเธอร์ได้สบาย ลุยลาวา เก็บของหายากในป้อมเนเธอร์ได้โดยไม่ต้องกลัว","จงใจจุดไฟใส่ตัวเอง (เดินบนไฟ/ลาวาตื้น) ก่อนสู้ เพื่อกระตุ้น Burning Wrath","พกวัสดุสร้างสะพานข้ามน้ำ และทำหลังคากันฝนรอบฐาน"],
+ fixes:[["โดนน้ำ/ฝนเจ็บ","หลีกน้ำเปิด ใช้สะพานบล็อก ทำหลังคากันฝน — น้ำตื้นก็อันตราย วางแผนเส้นทางเสมอ"],["ตกน้ำลึกฉุกเฉิน","พกถังน้ำ/บล็อกถมหนีขึ้นฝั่งเร็วที่สุด หรือใช้ Riptide ดีดตัวออก"]],
+ warn:null,flags:{water:true}},
+
+{en:"Fae",th:"เฟ — ภูตป่าเวทมนตร์",icon:"🧚",tier:3,styles:["explore","build","survival","magic"],
+ sum:"ภูตป่าตัวจิ๋ว ลอยบินได้ เร่งพืชโตทันที ฮีลปาร์ตี้ — ไม่กลัวแดด/น้ำ ทำงานกลางวันได้ (ดีสุดในโซนแดงสำหรับสายสร้าง)",
+ stats:{hp:"8 ♥ (−4)",size:"เตี้ย 122 ซม.",diet:"ภูมิพิษ/มึนงง",key:"Blessing 45s · Nourish 15s"},
+ pros:["ลอยบินกลางอากาศได้สบาย (Wings)","พรธรรมชาติ: โปรยเมล็ดลงไร่ + ฮีลพวกพ้อง","เร่งพืชโตทันทีรอบตัว (ฟาร์มไวมาก)","อยู่ในป่าฟื้นเลือดเร็ว + ภูมิพิษ/ต้านเวท","ไม่กลัวแดด/น้ำ ทำงานกลางวันได้เต็มที่"],
+ cons:["มอบไล่ตามจากระยะไกล (Allure)","ตัวเตี้ย 122 ซม. + ใส่เหล็ก/เงินไม่ได้","เลือดน้อยกว่าคน (8 ♥)"],
+ powers:[["Wings","ตัวเบา ลอยร่อนกลางอากาศได้",""],["Nature's Blessing","เปิดพลังชีวิตชั่วคราว: เดินบนไร่จะโปรยเมล็ด + ปล่อยคลื่นฮีลและล้างสถานะร้ายให้พวกพ้อง","act"],["Nourishment","ปล่อยพลังชีวิต เร่งพืชรอบตัวให้โตทันที","act"],["Forest Kin","ขณะอยู่ในป่า แผลหายเร็วขึ้น",""],["Nature's Ward","ภูมิคุ้มกันพิษ/คลื่นไส้ + ต้านทานการโจมตีเวท",""],["Allure","มอบหลงเสน่ห์ ไล่ตามจากระยะไกลกว่าปกติมาก","bane"],["Diminutive","ตัวเตี้ยมาก","bane"],["Magical Suppression","ทนใส่เหล็ก/เงินไม่ได้","bane"],["Fragile Frame","เลือดน้อยกว่าคน","bane"]],
+ tips:["เผ่าฟาร์มเมอร์เทพ — Nourishment เร่งพืชโตทันที ทำฟาร์มอัตโนมัติแทบไม่ต้องรอ","บินสำรวจกลางวันได้สบายเพราะไม่กลัวแดด/น้ำ ต่างจากเผ่าแดงอื่นๆ","เล่นเป็นเซิร์ฟเวอร์ซัพพอร์ต: Nature's Blessing ฮีล + ล้าง debuff ทั้งทีม"],
+ fixes:[["ใส่เหล็ก/เงินไม่ได้","ใช้เกราะหนัง → ทอง → เพชร → เนเธอไรต์ ข้ามเหล็กไปเลย"],["มอบไล่จากไกล (Allure)","บินขึ้นที่สูงหนี หรือเคลียร์มอบก่อนตั้งแคมป์ อย่าทิ้งให้รุม"],["เลือดแค่ 8 ♥","ปักหลักใกล้ป่า (Forest Kin ฟื้นไว) และพึ่งระยะบินหนีแทนการปะทะ"]],
+ warn:null,flags:{}},
+
+{en:"Gorgon",th:"กอร์กอน — ปีศาจผมงู",icon:"🐍",tier:3,styles:["combat","magic"],
+ sum:"ปีศาจผมงู สายตาแปรศัตรูเป็นหิน เลือดต่ำตีแรง พิษเข้มข้น — แต่กลางวันกลายเป็นหินถ้าไม่ใส่หมวก",
+ stats:{hp:"10 ♥ (ปกติ)",size:"ปกติ",diet:"ภูมิพิษ",key:"Petrifying Gaze 25s"},
+ pros:["สายตาแปรมอบที่สบตาเป็นหินชั่วครู่ (CC แรง)","เลือดยิ่งต่ำยิ่งตีแรงมาก (Revenge)","ภูมิคุ้มกันพิษ + สาดเลือดพิษใส่ศัตรูเมื่อโดนตี"],
+ cons:["กลัวน้ำ โดนน้ำเจ็บ","กลางวันกลายเป็นหิน ขยับไม่ได้ (กันด้วยหมวก)","แพ้เงิน/เหล็ก ใส่หรือถือไม่ได้"],
+ powers:[["Petrifying Gaze","สบตามอบที่หันมาทางคุณ เปลี่ยนเป็นหินชั่วครู่ (ไม่ได้ผลกับบอส)","act"],["Revenge","เลือดยิ่งต่ำ ดาเมจยิ่งเพิ่มขึ้นมาก",""],["Poisoned Blood","ภูมิพิษ + มีโอกาสสาดเลือดพิษใส่ศัตรูรอบตัวเมื่อโดนตี",""],["To Stone","อยู่กลางแดดกลางวันจะกลายเป็นหินจนถึงกลางคืน — กันได้ด้วยการสวมหมวก","bane"],["Hydrophobe","ทนความบริสุทธิ์ของน้ำไม่ได้ โดนน้ำเจ็บ","bane"],["Silver Aversion","แพ้เงิน (นับเหล็กด้วย) ใส่/ถือแล้วเจ็บ","bane"]],
+ tips:["สายนักสู้ในถ้ำ/ดันเจี้ยน — Revenge ทำให้ยิ่งเลือดแดงยิ่งอันตราย เล่นเสี่ยงได้ผล","ใช้ Petrifying Gaze หยุดมอบแรงๆ แล้วรุมตี เป็น CC ฟรีไม่มีต้นทุน","พกหมวกติดหัวตลอดเวลาเพื่อเดินกลางวันได้"],
+ fixes:[["กลางวันกลายเป็นหิน","สวมหมวกใบใดก็ได้ (เทอร์เทิล/หนัง/เหล็กไม่ได้) — ห้ามถอดตอนกลางแจ้ง"],["แพ้เหล็ก/เงิน","ใช้เกราะ/อาวุธทอง เพชร เนเธอไรต์ หรือหิน เลี่ยงเหล็กทั้งหมด"],["กลัวน้ำ","หลีกน้ำเปิด ทำสะพาน ระวังฝน"]],
+ warn:null,flags:{water:true,daylight:true}},
+
+{en:"Merling",th:"เมอร์ลิง — ชาวสมุทร",icon:"🐟",tier:3,styles:["explore","survival"],
+ sum:"เจ้าแห่งใต้น้ำเต็มรูปแบบ หายใจ/ขุด/ว่ายใต้น้ำได้หมด — แต่หายใจบนบกไม่ได้ ต้องกลับลงน้ำเสมอ",
+ stats:{hp:"10 ♥ (ปกติ)",size:"ปกติ",diet:"ปกติ",key:"ขุด/ว่าย/ลอยตัวใต้น้ำ"},
+ pros:["หายใจใต้น้ำได้ตลอด (Gills)","มองเห็นใต้น้ำชัดเจน","ขุดบล็อกใต้น้ำได้เหมือนบนบก (ปกติช้ามาก)","ว่ายน้ำเร็วขึ้น + ลอยตัวใต้น้ำได้ตามใจ"],
+ cons:["หายใจบนบกไม่ได้ — ขาดอากาศเหมือนคนปกติจมน้ำ"],
+ powers:[["Gills","หายใจใต้น้ำได้ แต่หายใจบนบกไม่ได้","bane"],["Wet Eyes","มองเห็นใต้น้ำคมชัดสมบูรณ์",""],["Aqua Affinity","ขุดบล็อกใต้น้ำได้รวดเร็วเหมือนอยู่บนบก",""],["Fins","ความเร็วว่ายน้ำเพิ่มขึ้น",""],["Like Water","ใต้น้ำไม่จมลงพื้น ลอยอยู่ระดับที่ต้องการได้",""]],
+ tips:["สร้างฐาน/เมืองใต้น้ำได้สบายเพราะขุดเร็วและไม่ต้องห่วงอากาศ","สำรวจมหาสมุทร ซากเรือ มอนูเมนต์ใต้น้ำ เก็บของได้คล่องที่สุดในเกม","เวลาขึ้นบกให้คุมเวลา — ทำคลอง/บ่อน้ำเชื่อมไว้ในฐานเพื่อหายใจ"],
+ fixes:[["หายใจบนบกไม่ได้","สวมหมวก Turtle Shell + เอนแชนต์ Respiration ยืดเวลาบนบก, ทำคลองน้ำในบ้าน, พกถังน้ำราดตัว"],["เดินทางบนบกไกล","วางจุดน้ำเป็นระยะ หรือใช้ม้า/เรือ ลดเวลาแห้งให้น้อยที่สุด"]],
+ warn:null,flags:{}},
+
+{en:"Moon Elf",th:"มูนเอลฟ์ — นักลอบสังหารจันทรา",icon:"🌙",tier:3,styles:["combat","survival"],
+ sum:"นักลอบสังหารกริช ล่องหนในเงามืด ลอบโจมตีดาเมจมหาศาล หลบหลีกคล่อง — แต่เปราะและนอนไม่ได้",
+ stats:{hp:"5 ♥ (−10)",size:"สูงกว่าคน",diet:"ปกติ",key:"ลอบโจมตี + โอกาสหลบ"},
+ pros:["ตีแรงเป็นพิเศษด้วยกริช/มีด (Moonlight Rogue)","ล่องหนตอนย่องในที่มืด + พุ่งระยะสั้น ลอบโจมตีนัดแรกดาเมจพิเศษ","มีโอกาสหลบทุกการโจมตี (Nimble)"],
+ cons:["นอนในโลกปกติไม่ได้","ใส่เกราะหนักช้าลง (Elegant)","เลือดน้อย (5 ♥) + รับดาเมจกายภาพเพิ่ม"],
+ powers:[["Moonlight Rogue","ดาเมจสูงขึ้นเมื่อใช้อาวุธเบาซ่อนง่าย เช่น กริชและมีด",""],["To the Shadows","ในที่มืด ย่อเพื่อล่องหน + เคลื่อนตัวระยะสั้น นัดแรกจากการล่องหนดาเมจพิเศษ (ยิ่งใช้กริชยิ่งแรง)","act"],["Nimble","ปฏิกิริยาไว มีโอกาสหลบการโจมตีใดๆ",""],["Foreign World","นอนในโลกปกติไม่ได้","bane"],["Elegant","ใส่เกราะหนักทำให้ช้าลง (กันด้วยเอนแชนต์)","bane"],["Fragile","เลือดน้อย + รับดาเมจกายภาพเพิ่ม","bane"]],
+ tips:["เล่นสายอัสแซสซิน: ดับไฟรอบตัว ย่องเข้าหา ลอบโจมตีนัดเดียวเก็บเป้า แล้วหายเข้าเงา","พกกริช/มีดเป็นอาวุธหลักเสมอ เพื่อรีดดาเมจ Moonlight Rogue + ลอบโจมตีให้สุด","หลีกการตีกันตรงๆ เลือดแค่ 5 ♥ — พึ่ง Nimble หลบ + ระยะหนี"],
+ fixes:[["นอนไม่ได้ (ข้ามคืน/ตั้ง spawn)","ใช้ Respawn Anchor หรือตั้งจุดเกิดด้วยวิธีอื่น และกันแฟนทอมด้วยที่หลบในร่ม"],["เลือดน้อย + รับดาเมจเพิ่ม","เน้นลอบโจมตีจบไว เลี่ยงการประจัน ใช้ความมืดเป็นเกราะ"],["เกราะหนักช้าลง","ใส่เกราะเบาหรือเอนแชนต์แก้ penalty"]],
+ warn:null,flags:{noSleep:true}},
+
+{en:"Ogre",th:"ออเกอร์ — ยักษ์ออร์ค",icon:"👹",tier:3,styles:["combat","survival"],
+ sum:"ยักษ์พละกำลังดิบ เลือดหนา ถนัดขวาน ลุยฝูงได้ — แต่ตัวใหญ่ +50% จนลอดประตูไม่ได้",
+ stats:{hp:"15 ♥ (+10)",size:"ยักษ์ 268 ซม. (+50%)",diet:"ไม่กลัวพิษ/หิว แต่หิวไว",key:"Bloodlust 30s · ดาเมจ +35%"},
+ pros:["เลือดหนา 15 ♥ + ทนหลายหมัด (Stocky)","ขวานในมือยักษ์ตีแรงมาก +35% ดาเมจ","ไม่กลัวพิษ/ความหิว (Lead Belly)","Bloodlust คลั่ง: เหยียบลุยฝูงศัตรูได้รวดเร็ว"],
+ cons:["หิวตลอดเวลา ต้องกินถี่มาก (Ravenous)","ช้ากว่าคนอื่น (Sluggish)","ถือโล่ไม่ได้ (Unwieldy)"],
+ powers:[["Stocky","ผิวหนาและกระดูกแน่น เลือดสูงขึ้น +10 (รวม 15 ♥) ทนหมัดได้มากกว่าคนอื่น",""],["Ravager","ขวานเข้ามือยักษ์ ฟันแรงขึ้นมาก (ดาเมจ +35%)",""],["Bloodlust","คลั่งโดยไม่ทันตั้งตัว เหยียบลุยฝูงศัตรูได้เร็ว แต่มองสภาพรอบตัวแทบไม่ออก","act"],["Lead Belly","กินอะไรก็ได้ ไม่เจอพิษและความหิว",""],["Gargantuan","ตัวใหญ่ +50% ลอดประตูหรือเข้าที่แคบไม่ได้ (Step Height สูงข้ามบล็อกได้)","bane"],["Ravenous","แทบไม่เคยอิ่ม ต้องกินแทบตลอดเวลา","bane"],["Sluggish","ตัวใหญ่จึงเคลื่อนที่ช้ากว่าคนอื่น","bane"]],
+ tips:["แทงค์/บรูทแนวหน้า — ถือขวาน บุกเข้ากลางฝูงแล้วเปิด Bloodlust กวาดเรียบ","ออกแบบบ้านให้ \"ยักษ์อยู่ได้\": ประตูสูง 3 บล็อก เพดานโปร่ง ไม่มีช่องแคบ","Step Height สูงทำให้เดินข้ามรั้ว/บล็อกเตี้ยได้โดยไม่ต้องกระโดด ใช้ลุยภูมิประเทศได้ดี"],
+ fixes:[["ลอดประตู/ที่แคบไม่ได้","ทำช่องประตูสูง ≥3 บล็อก เพดานบ้าน ≥3 บล็อก หลีกอุโมงค์/ถ้ำเตี้ย"],["หิวไวมาก","พกอาหารสะสมเยอะ (สเต็ก/ขนมปัง) ทำฟาร์มอาหารใหญ่ — โชคดีที่กินของถูกๆ ได้หมด"],["ช้า + ถือโล่ไม่ได้","ชดเชยด้วยเลือดหนา ใส่เกราะแน่นๆ และพึ่ง Bloodlust ปิดระยะ"]],
+ warn:"ตัวใหญ่ +50% (สูง 268 ซม.) ลอดประตูและสิ่งก่อสร้างเล็กไม่ได้ — ต้องออกแบบบ้านเผื่อยักษ์",flags:{door:true}},
+
+{en:"Phantom",th:"แฟนทอม — ครึ่งภูตราตรี",icon:"🦇",tier:3,styles:["explore","combat","survival"],
+ sum:"ครึ่งคนครึ่งแฟนทอม สลับร่างเดินทะลุกำแพง + ล่องหน — แต่กลางวันลุกไหม้และหิวไว",
+ stats:{hp:"7 ♥ (−6)",size:"ปกติ",diet:"แปลงร่าง = หิวไว",key:"สลับร่าง (ต้องอิ่มพอวิ่ง)"},
+ pros:["สลับร่างมนุษย์↔แฟนทอมได้ตามใจ","ร่างแฟนทอมเดินทะลุของแข็ง (ยกเว้นออบซิเดียน)","ล่องหนขณะแปลงร่าง"],
+ cons:["กลางวันเริ่มลุกไหม้ถ้าไม่ได้ล่องหน","แปลงร่างแล้วหิวเร็ว","เลือดน้อยกว่าคน 3 หัวใจ (7 ♥)"],
+ powers:[["Phantom Form","สลับร่างมนุษย์↔แฟนทอมได้ตามใจ แต่ต้องอิ่มพอจะวิ่งได้","act"],["Phasing","ร่างแฟนทอมเดินทะลุของแข็งได้ ยกเว้นออบซิเดียน",""],["Invisibility","ขณะอยู่ร่างแฟนทอม ตัวล่องหน",""],["Translucent","ผิวกึ่งโปร่งแสง",""],["Photoallergic","เริ่มลุกไหม้กลางแดดกลางวันถ้าไม่ได้ล่องหน","bane"],["Fast Metabolism","อยู่ร่างแฟนทอมทำให้หิวเร็ว","bane"],["Fragile","เลือดน้อยกว่าคน 3 หัวใจ","bane"]],
+ tips:["สายสอดแนม/ลอบเข้าฐาน — แปลงร่างทะลุกำแพงเข้าไปสำรวจหรือหนีได้เนียนๆ","กลางวันให้แปลงร่าง (ล่องหน = ไม่ไหม้) หรืออยู่ในร่ม ตอนกลางคืนค่อยลุยเต็มที่","กินให้อิ่มก่อนแปลงร่าง เพราะร่างแฟนทอมกินพลังหิวเร็ว"],
+ fixes:[["กลางวันลุกไหม้","แปลงร่างล่องหนไว้ หรือเดินใต้ร่ม/ในอุโมงค์ตอนกลางวัน — สายสร้างกลางแจ้งจะลำบาก"],["เลือดน้อย + หิวไว","พกอาหารเยอะ ใช้การทะลุกำแพงหนีแทนการสู้ตรงๆ"]],
+ warn:"กลางวันเริ่มลุกไหม้ถ้าไม่ได้ล่องหน — ไม่เหมาะสายสร้างกลางแจ้งตอนกลางวัน",flags:{daylight:true}},
+
+{en:"Plague Victim",th:"เพลกวิกทิม — เหยื่อโรคระบาด",icon:"🧟",tier:3,styles:["combat","survival","magic"],
+ sum:"ครึ่งตายโรคระบาด ออร่าทำร้ายรอบตัว แพร่เชื้อ ฟื้นชีพได้ — แต่ใส่เกราะไม่ได้เลยและชาวบ้านไม่เทรด",
+ stats:{hp:"8 ♥ (−4) + ช้า",size:"ปกติ",diet:"ภูมิพิษ/wither",key:"ฟื้นชีพ ทุก 5 นาที"},
+ pros:["ออร่าโรคค่อยๆ ดูดชีวิตทุกสิ่งมีชีวิตรอบตัว","ภูมิคุ้มกันพิษและ wither","แพร่เชื้อใส่ศัตรูเมื่อโจมตี","ฟื้นชีพแทนตายได้ทุก 5 นาที (Eternal Suffering)"],
+ cons:["ใส่เกราะไม่ได้เลย (ผิวบอบบาง)","ชาวบ้านไม่ยอมเทรด","นอนไม่ได้ + เลือด/ความเร็วลดลง"],
+ powers:[["Foul Aura","ออร่าน่าสยองแผ่รอบตัว ค่อยๆ กลืนกินชีวิตของสิ่งมีชีวิตที่อยู่ใกล้",""],["Plague Immunity","เนื้อตายไปจนไม่มีอะไรให้ตายเพิ่ม ภูมิคุ้มกันพิษและ wither",""],["Contagious Hex","ทุกครั้งที่โจมตี มีโอกาสแพร่เชื้อโรค",""],["Eternal Suffering","ทุก 5 นาที เมื่อจะตาย จะถูกบังคับให้มีชีวิตต่อแทน (กันตาย 1 ครั้ง)","act"],["Contagious","ชาวบ้านหวาดกลัว ไม่ยอมเทรดด้วย","bane"],["Sensitive Skin","ผิวเต็มไปด้วยแผล ใส่เกราะไม่ได้เพราะเจ็บ","bane"],["Insomniac","ทรมานเกินกว่าจะนอนได้","bane"],["Skin and Bones","โรคดูดวิญญาณ เลือดและความเร็วลดลง","bane"]],
+ tips:["สายเดินสนาม debuff — เดินเข้าฝูงศัตรู ปล่อย Foul Aura ดูดเลือดพวกมันทีละนิด","พึ่งยา Resistance/Regeneration และระยะหลบแทนเกราะที่ใส่ไม่ได้","ใช้ Eternal Suffering เป็นไพ่กันตายในจังหวะเสี่ยง (คูลดาวน์ 5 นาที)"],
+ fixes:[["ใส่เกราะไม่ได้เลย","พึ่งยา Resistance + Regen, โล่, ระยะหนี และ Foul Aura กดดันให้ศัตรูตายก่อน"],["ชาวบ้านไม่เทรด","หาของจาก Wandering Trader, ปล้น/สำรวจ, หรือพึ่งเพื่อนร่วมทีมเป็นคนเทรด"],["นอนไม่ได้","กันแฟนทอมด้วยที่หลบในร่ม/แมว และตั้ง spawn ด้วยวิธีอื่น"]],
+ warn:"ใส่เกราะไม่ได้เลย (ผิวบอบบาง) + ชาวบ้านไม่ยอมเทรดด้วย — เล่นยากสำหรับมือใหม่",flags:{noArmor:true,noTrade:true,noSleep:true}},
+
+{en:"Revenant",th:"เรเวแนนต์ — ผู้คืนชีพ",icon:"☠️",tier:3,styles:["combat","survival","magic"],
+ sum:"เนโครแมนเซอร์ เรียกและบังคับอันเดดเป็นกองทัพ เป็นมิตรกับ Pillager — แต่เก็บเกี่ยวพืชไม่ได้เลย",
+ stats:{hp:"10 ♥ (ปกติ)",size:"ปกติ",diet:"กินซากอันเดดเสริมพลัง",key:"Summon 2.5s · Ward 45s"},
+ pros:["เรียก/บังคับอันเดดเป็นลูกสมุน ติดอาวุธ/เกราะได้","กินซากอันเดดเสริมพลังลูกสมุน (ทำให้ถาวรได้)","ตั้งวงโครงกระดูกเป็นโล่กำบัง (Reaper's Ward)","ดูดพลังชีวิตศัตรูเมื่อโดนตี + ภูมิ wither/พิษ","Pillager ยอมรับ (ไม่โดนโจมตี)"],
+ cons:["เก็บเกี่ยวพืชผลไม่ได้เลย (พืชเหี่ยว)","ชาวบ้านไม่เทรด + Iron Golem โจมตี","นอนไม่ได้ + มอบส่วนใหญ่ตีแรงใส่เพิ่ม"],
+ powers:[["Revenance","ปลุกสร้างสัตว์อันเดดเป็นลูกสมุน ตามตัว/วาร์ป/ติดอาวุธเกราะได้ (ซอมบี้ใช้ธนูไม่ได้)","act"],["Command Undead","สั่งลูกสมุนรบให้ตาม/นั่ง/วาร์ปมาหา","act"],["Putrid Communion","กินเนื้อ/กระดูกอันเดดเพื่อเสริมการเรียกครั้งถัดไป — รบยืดเวลาจนถาวร, พาหนะเพิ่มสเตตัส",""],["Reaper's Ward","เสกวงโครงกระดูกชั่วคราวเป็นโล่ป้องกัน + ทำดาเมจศัตรูรอบข้าง","act"],["Essence Extraction","เมื่อโดนตี สะสมพลังดูดชีวิตจากศัตรู",""],["Necrotic Curse","ภูมิ wither/พิษ แต่รับ Smite เพิ่ม และเอฟเฟกต์ฮีล/ฮาร์มกลับด้านเหมือนอันเดด",""],["Black Thumb","เก็บเกี่ยวพืชไม่ได้ พืชเหี่ยวเมื่อสัมผัส","bane"],["Chaotic Ally","ชาวบ้านไม่เทรด + Iron Golem โจมตี (แต่ Pillager ทน)","bane"],["Unguarded","มอบส่วนใหญ่ตีแรงใส่เพิ่ม","bane"]],
+ tips:["สาย Summoner: สร้างกองทัพอันเดด ใช้ Putrid Communion ทำให้ลูกสมุนถาวร แล้วบุกเป็นฝูง","เป็นมิตรกับ Pillager — เข้า Outpost/Raid ฝั่งศัตรูได้แบบไม่โดนรุม ใช้หาของหายาก","Reaper's Ward เป็นทั้งโล่และดาเมจ ใช้ตอนโดนรุมเพื่อตั้งหลัก"],
+ fixes:[["เก็บพืชไม่ได้","พึ่งเนื้อสัตว์/ตกปลาเป็นอาหารหลัก, ให้ลูกทีมหรือลูกสมุนเก็บพืชแทน, ซื้อจาก Pillager-friendly แหล่งอื่น"],["ชาวบ้านไม่เทรด + Golem โจมตี","เลี่ยงหมู่บ้านปกติ ใช้ Pillager Outpost เป็นแหล่งของ, อย่าเข้าใกล้ Iron Golem"],["รับ Smite/ฮีลกลับด้าน","ระวังศัตรูถืออาวุธ Smite, ใช้ Potion of Harming รักษาตัว (อันเดดฮีลด้วยฮาร์ม)"]],
+ warn:"เก็บเกี่ยวพืชผลไม่ได้เลย + ชาวบ้านไม่เทรด & Iron Golem โจมตี — ไม่เข้าสายฟาร์ม/สร้าง",flags:{noTrade:true,noFarm:true,noSleep:true}},
+
+/* ---------- 🟡 YELLOW ---------- */
+{en:"Arachnae",th:"อาแรคนี — ครึ่งแมงมุม",icon:"🕷️",tier:2,styles:["explore","combat","survival"],
+ sum:"ครึ่งแมงมุม ปีนกำแพง มองทะลุความมืด กัดมีพิษ — แต่กินจุ ใส่เกราะหนักไม่ได้ และเปราะ",
+ stats:{hp:"7 ♥ (−6)",size:"ปกติ",diet:"กินจุกว่าปกติ",key:"ปีนกำแพง + กัดพิษ"},
+ pros:["ปีนกำแพงได้ทุกชนิด (Climber)","มองเห็นชัดในที่มืดสนิท (Many Eyes)","กัด/โจมตีมีโอกาสติดพิษศัตรู"],
+ cons:["ต้องกินอาหารมากกว่าปกติ (Bottomless Stomach)","ใส่เกราะหนักกว่าเหล็กแล้วขยับยาก","เลือดน้อยกว่าคนเล็กน้อย (7 ♥)"],
+ powers:[["Climber","ขนละเอียดที่ขาทำให้ปีนกำแพงได้",""],["Many Eyes","ตาแปดดวงปรับเข้ากับความมืด มองเห็นชัดแม้แสงน้อยมาก",""],["Venomous Bite","เขี้ยวมีพิษ ทุกการโจมตีมีโอกาสทำให้ติดพิษ",""],["Bottomless Stomach","ต้องการอาหารปริมาณมากกว่าปกติเพื่ออยู่รอด","bane"],["Brittle","เปลือกแข็งทำให้ใส่เกราะหนักกว่าเหล็กแล้วขยับลำบาก (กันด้วยเอนแชนต์)","bane"],["Fragile","เปลือกเปราะ เลือดน้อยกว่าคนปกติเล็กน้อย","bane"]],
+ tips:["สำรวจถ้ำ/ดันเจี้ยนเก่ง — ปีนผนังขึ้นลงโดยไม่ต้องบันได + มองเห็นในมืดไม่ต้องคบเพลิง","ใช้พิษกัดสึกศัตรูที่เลือดเยอะ (มินิบอส) แล้วถอยให้พิษทำงาน","ทำฟาร์มอาหารไว้เยอะเพราะกินจุ"],
+ fixes:[["ใส่เกราะหนักช้า","ใส่เกราะหนัง/ทอง/เชนเมล หรือเอนแชนต์แก้ penalty เพื่อใส่เพชรได้"],["กินจุ","ตั้งฟาร์มสัตว์/พืชใหญ่ พกอาหารสะสมเสมอ"],["เลือดน้อย","ใช้การปีนหนีขึ้นที่สูง + พิษกัดระยะ แทนการตีกันตรงๆ"]],
+ warn:null,flags:{}},
+
+{en:"Dwarf",th:"ดวอร์ฟ — คนแคระนักขุด",icon:"⛏️",tier:2,styles:["explore","survival","build"],
+ sum:"นักขุดเหมืองในตำนาน ขุดหินไม่ต้องใช้จอบ มองเห็นในมืด ลอดอุโมงค์เตี้ย — แต่แพ้แดดและว่ายน้ำไม่เป็น",
+ stats:{hp:"10 ♥ (ปกติ)",size:"เตี้ย 102 ซม.",diet:"ปกติ",key:"Potent Brew 180s"},
+ pros:["ขุดหินได้โดยไม่ต้องใช้อีเทม + ขุดทุกอย่างเร็วกว่า (Dwarven Tech)","ลอดอุโมงค์สูง 1 บล็อกได้ (Stocky)","มองเห็นชัดในมืดโดยไม่ต้องใช้แสง","ดื่มเหล้าฟื้นเลือดเต็ม (Potent Brew, คูลดาวน์ 3 นาที)"],
+ cons:["แดดแยงตา ทำให้ตาบอดชั่วคราว (กันด้วยหมวกทอง)","จมน้ำเร็ว ว่ายน้ำไม่เป็น (Dense)"],
+ powers:[["Dwarven Tech","ขุดหินได้โดยไม่ต้องมีจอบ และขุดทุกอย่างเร็วกว่าคนอื่น",""],["Nocturnal Eyes","เพ่งมองในที่มืดได้ชัดโดยไม่ต้องมีแสง",""],["Stocky","เตี้ยพอจะลอดอุโมงค์สูง 1 เมตร (และเกือบกว้างเท่ากัน)",""],["Potent Brew","ดื่มเหล้าแรงเพื่อฟื้นเลือดจนเต็มทันที","act"],["Darkness Dweller","แสงแดดตรงเผาตาคนแคระ ทำให้ตาบอดชั่วคราว — กันด้วยหมวกทองหรือเอนแชนต์","bane"],["Dense","หนักมากเมื่อเทียบกับขนาด จมน้ำเร็ว ว่ายไม่ได้","bane"]],
+ tips:["นักขุดที่ดีที่สุด — ขุดหินไม่ต้องพกจอบ ลงเหมืองได้เร็วและลึก มองเห็นในมืดไม่ต้องคบเพลิง","ลอดอุโมงค์ 1 บล็อกได้ ขุด strip mine แบบเตี้ยประหยัดเวลา","Potent Brew เป็นฮีลฉุกเฉินฟรี (แค่มีเหล้า) ใช้แทนยาในสนาม"],
+ fixes:[["แดดทำตาบอด","สวมหมวกทอง (หรือเอนแชนต์) — เผ่านี้ออกแบบมาให้อยู่ใต้ดิน กลางแจ้งกลางวันต้องเตรียมตัว"],["ว่ายน้ำไม่เป็น/จมเร็ว","หลีกน้ำลึก พกบล็อกถมหนี หรือเอนแชนต์ Depth Strider/Frost Walker"]],
+ warn:null,flags:{water:true,daylight:true}},
+
+{en:"Enderian",th:"เอนเดอเรียน — ลูกมังกรเอนเดอร์",icon:"🟣",tier:2,styles:["explore","build","combat"],
+ sum:"ลูกเอนเดอร์ดราก้อน วาร์ปได้ทันใจ ตัวสูงเอื้อมไกล (สร้างสูงสะดวก) — แต่กลัวน้ำและฟักทอง",
+ stats:{hp:"10 ♥ (ปกติ)",size:"สูง · เอื้อมไกล",diet:"ปกติ",key:"Teleport ~1.5s"},
+ pros:["ขว้างเอนเดอร์เพิร์ลวาร์ปได้โดยไม่เจ็บ ตามใจ (Teleportation)","ตัวสูงเอื้อมถึงบล็อก/ตัวละครไกลขึ้น — สร้างและต่อยอดสะดวก (Slender Body)"],
+ cons:["โดนน้ำ/ฝนเจ็บต่อเนื่อง (กลัวน้ำ)","กลัวฟักทอง (มองเห็นแล้วเสียขวัญ)"],
+ powers:[["Teleportation","ขว้างเอนเดอร์เพิร์ลที่ไม่ทำดาเมจ เพื่อวาร์ปได้ตามใจ","act"],["Slender Body","เอื้อมถึงบล็อกและตัวละครได้ไกลกว่าปกติ",""],["Hydrophobia","ได้รับดาเมจต่อเนื่องเมื่อสัมผัสน้ำ","bane"],["Scared of Gourds","กลัวฟักทอง (มีเหตุผลของมัน)","bane"]],
+ tips:["เดินทาง/หนีเก่งมาก — วาร์ปข้ามเหว ขึ้นที่สูง หรือหนีศัตรูได้ฟรีไม่เปลืองเพิร์ลแบบปกติ","เอื้อมไกลทำให้วางบล็อกตอนสร้างสูงหรือถมเหวสะดวกกว่าเผ่าอื่น","ระวังเส้นทางที่มีน้ำ และอย่าให้ศัตรูใส่หัวฟักทองมาขู่"],
+ fixes:[["กลัวน้ำ","เลี่ยงน้ำเปิด/ฝน วาร์ปข้ามแทนการว่าย ทำหลังคากันฝน"],["ฟักทอง","อย่าวางฟักทองใกล้ฐาน และระวังจุดที่มีฟักทองธรรมชาติ"]],
+ warn:null,flags:{water:true}},
+
+{en:"Feline",th:"ฟีไลน์ — เผ่าแมว",icon:"🐱",tier:2,styles:["explore","survival"],
+ sum:"เผ่าแมว ตกไม่เจ็บทุกความสูง เดินไร้เสียง ครีปเปอร์กลัว มองเห็นกลางคืน — ขุดหินได้จำกัด",
+ stats:{hp:"9 ♥ (−2)",size:"ปกติ",diet:"ปกติ",key:"ตกไม่เจ็บ + ไร้เสียง"},
+ pros:["ตกไม่เจ็บไม่ว่าสูงแค่ไหน (Acrobatics)","กระโดดสูงขึ้นเมื่อวิ่ง (Strong Ankles)","เดินไร้เสียงสั่นสะเทือน — Sculk/Warden ไม่รับรู้","ครีปเปอร์กลัว ไม่ระเบิดก่อนถูกตี","มองเห็นในที่มืดได้บ้าง (Nocturnal)"],
+ cons:["เลือดน้อยกว่าคน 1 หัวใจ (9 ♥)","แขนอ่อน ขุดหินธรรมชาติได้จำกัด (Weak Arms)"],
+ powers:[["Acrobatics","ไม่รับดาเมจตกไม่ว่าตกจากที่สูงแค่ไหน",""],["Strong Ankles","กระโดดได้สูงขึ้นเมื่อกระโดดขณะวิ่ง",""],["Velvet Paws","ฝีเท้าไม่สร้างแรงสั่นสะเทือนที่สิ่งมีชีวิตรอบข้างจะรับรู้",""],["Catlike Appearance","ครีปเปอร์กลัว จะระเบิดก็ต่อเมื่อคุณโจมตีมันก่อน",""],["Nocturnal","มองเห็นในที่มืดได้เล็กน้อยเมื่อไม่อยู่ในน้ำ",""],["Nine Lives","เลือดน้อยกว่าคน 1 หัวใจ","bane"],["Weak Arms","ถ้าไม่มี Strength จะขุดหินธรรมชาติได้เฉพาะบล็อกที่มีหินติดกันไม่เกิน 2 ด้าน","bane"]],
+ tips:["นักสำรวจ/ปาร์กัวร์เทพ — กระโดดลงเหวลึกได้โดยไม่ตาย ย่นเวลาเดินทางมาก","ผ่านพื้นที่ Warden (Deep Dark) ได้เนียนเพราะไร้แรงสั่นสะเทือน","เดินผ่านครีปเปอร์ได้สบาย ไม่ต้องกลัวระเบิดแอบใส่"],
+ fixes:[["ขุดหินได้จำกัด","ดื่มยา Strength ก่อนขุด หรือขุดเป็นแนวทีละบล็อก — สาย mining ล้วนๆ จะอึดอัดนิดหน่อย"],["เลือดน้อย 1 หัวใจ","พึ่งความคล่องตัว/กระโดดหนี ใช้เกราะชดเชย"]],
+ warn:null,flags:{}},
+
+{en:"High Elf",th:"ไฮเอลฟ์ — เอลฟ์ชั้นสูง",icon:"🔮",tier:2,styles:["magic","combat"],
+ sum:"เมจสายธาตุชั้นสูง มานาเยอะ ดาเมจเวทสูง ต้านเวทเก่ง — แต่อ่อนแอทางกายภาพ",
+ stats:{hp:"8 ♥ (−4)",size:"สูงกว่าคน",diet:"ปกติ",key:"ร่ายเวท 1.5s–150s"},
+ pros:["ร่ายเวทหลากหลายจากการถือไอเทมต่างๆ (Draw Essence)","ดาเมจเวทเพิ่ม + รับดาเมจเวทน้อยลง (Mystic Affinity)","มานามากกว่าเผ่าอื่น + ฟื้นมานาไว (Highborne)"],
+ cons:["รับดาเมจกายภาพเพิ่ม + เลือดน้อย (8 ♥)","ใส่เกราะหนักช้าลง (Elegant)"],
+ powers:[["Draw Essence","ถือไอเทมต่างชนิดเพื่อดึงพลังออกมาร่ายเวทแบบต่างๆ","act"],["Mystic Affinity","ผู้บงการพลังเวทที่เก่งกาจ ทำดาเมจเวทมากขึ้นและรับดาเมจเวทน้อยลง",""],["Highborne","มานาเยอะกว่าเผ่าอื่นโดยกำเนิด และฟื้นมานาได้เร็ว",""],["Fragile","ไม่ถนัดประชิด รับดาเมจกายภาพมากขึ้นและเลือดน้อย","bane"],["Elegant","ใส่เกราะหนักทำให้ช้าลง (กันด้วยเอนแชนต์)","bane"]],
+ tips:["เล่นเมจระยะไกล — ใช้ Draw Essence สลับเวทตามไอเทมที่ถือ จัดการศัตรูก่อนเข้าระยะประชิด","ต้านเวทเก่ง เหมาะสู้กับศัตรู/ผู้เล่นสายเวทด้วยกัน","วางตำแหน่งหลังแนว ปล่อยให้สายแทงค์รับหน้า"],
+ fixes:[["อ่อนแอกายภาพ + เลือดน้อย","รักษาระยะ ใช้เวทกดดัน อย่าให้ศัตรูเข้าประชิด"],["เกราะหนักช้าลง","ใส่เกราะเบาหรือเอนแชนต์แก้ penalty"]],
+ warn:null,flags:{}},
+
+{en:"Incubus",th:"อินคิวบัส — ปีศาจไฟ",icon:"😈",tier:2,styles:["combat","magic"],
+ sum:"ปีศาจไฟ เก่งเวทไฟ แข็งแกร่งสุดในเนเธอร์ (เลือดเพิ่มเป็น 17 ♥!) — แต่อ่อนแอในโลกปกติและกลัวน้ำ",
+ stats:{hp:"10 ♥ · ในเนเธอร์ 17 ♥",size:"ปกติ",diet:"กินเนื้อ · อิ่มจากไฟ",key:"เวทไฟ 1.5s–90s"},
+ pros:["เก่งเวทไฟ + ปล่อยเปลวเพลิงได้ (Demon Fire)","ไฟไม่ทำร้าย + อิ่มจากไฟ (Hellborne)","แลกเลือดเป็นพลังโจมตีชั่วคราว (Unholy Deal)","ในเนเธอร์แข็งแกร่งขึ้นมาก: ดาเมจเพิ่ม + เลือดสูงถึง 17 ♥"],
+ cons:["โดนน้ำลวกเจ็บ (กลัวน้ำ)","กินได้แต่เนื้อ (Carnivore)","รับ Smite เพิ่ม + เอฟเฟกต์ฮีลกลับด้าน","อ่อนแอในโลกปกติ (Realm Advantage)"],
+ powers:[["Demon Fire","ถนัดเวทไฟทั้งหมดโดยกำเนิด ปล่อยเปลวเพลิงได้ (สเกลตาม Fire Spell Power)","act"],["Hellborne","ไฟเหมือนบ้าน ไม่ทำดาเมจและช่วยให้อิ่ม",""],["Unholy Deal","แลกพลังชีวิตบางส่วนเป็นพลังดิบชั่วคราว","act"],["Realm Advantage","อ่อนแอในมิติที่มีแดด แต่แข็งแกร่งมากในเนเธอร์ (ดาเมจ + เลือด)",""],["Carnivore","กินได้แต่เนื้อสัตว์เท่านั้น","bane"],["Hydrophobe","น้ำลวกตัว โดนแล้วเจ็บ","bane"],["Impure","รับดาเมจ Smite เพิ่ม และเอฟเฟกต์ฮีล/ฮาร์มกลับด้าน","bane"]],
+ tips:["ตั้งฐานหลักในเนเธอร์ — Realm Advantage ทำให้เลือดพุ่งเป็น 17 ♥ และดาเมจเพิ่ม กลายเป็นนักรบโหด","ใช้ Unholy Deal เบิร์สต์ดาเมจในจังหวะชี้ขาด (ระวังเลือดเพราะแลกด้วย HP)","ลงเวทไฟ (Fire Spell Power) เพื่อรีด Demon Fire ให้สุด"],
+ fixes:[["อ่อนแอในโลกปกติ","ทำกิจกรรมหลักในเนเธอร์ ถ้าต้องอยู่โอเวอร์เวิลด์ให้เล่นระมัดระวังขึ้น"],["กลัวน้ำ","หลีกน้ำ/ฝน ใช้สะพานบล็อก"],["รับ Smite + ฮีลกลับด้าน","ระวังศัตรูถือ Smite, ใช้ Potion of Harming รักษาตัว (เหมือนอันเดด)"]],
+ warn:null,flags:{water:true}},
+
+{en:"Pixie",th:"พิกซี่ — ภูตจิ๋ว",icon:"✨",tier:2,styles:["explore","survival"],
+ sum:"ภูตจิ๋วที่สุดในเกม (22 ซม.) บินได้ ตกไม่เจ็บ ขุดเจอของมีค่า — แต่เปราะ ช้า และชาวบ้านไม่เทรด",
+ stats:{hp:"5 ♥ (−10)",size:"จิ๋ว 22 ซม.",diet:"ปกติ",key:"บินได้ · ช้าลงเล็กน้อย"},
+ pros:["บินและพุ่งตัวขึ้น/ไปข้างหน้าได้ (On the Dusts)","ตัวจิ๋วมาก 22 ซม. แทรกช่องเล็กได้","ตกไม่เจ็บ (Feather Footed)","นั่งบนหัวผู้เล่นอื่นได้ (Shortcut)","ขุดหินมีโอกาสได้ของมีค่า (Good Fortunes)"],
+ cons:["เลือดแค่ 5 ♥ + เคลื่อนที่ช้าลง","ชาวบ้านไม่ยอมเทรด (เจ้าปัญหา)"],
+ powers:[["On the Dusts","บินและพุ่งตัวไปข้างหน้า/ขึ้นบนได้ (อ่านคำแนะนำการบินในเกม)","act"],["Bitesize","เล็กที่สุดเผ่าหนึ่ง สูงไม่ถึงเข่าคนปกติ — แทรกช่องเล็กได้",""],["Feather Footed","เบาจนตกไม่เจ็บ",""],["Good Fortunes","เกี่ยวข้องกับโชคลาภ ขุดหินธรรมดามีโอกาสได้ของมีค่า",""],["Shortcut","คลิกขวาผู้เล่นอื่นด้วยมือเปล่าเพื่อขึ้นไปนั่งบนหัว",""],["Troublemaker","ชาวบ้านรู้กิตติศัพท์เรื่องก่อกวน ไม่ยอมเทรด","bane"]],
+ tips:["บินสำรวจ + แทรกตัวเข้าช่องเล็กที่เผ่าอื่นเข้าไม่ได้","ขุดหินเยอะๆ เพื่อลุ้น Good Fortunes ได้ของมีค่าฟรีระหว่างทำเหมือง","เล่นคู่กับเพื่อน: เกาะหัวเพื่อน (Shortcut) เดินทางประหยัดแรง"],
+ fixes:[["เลือดแค่ 5 ♥ + ช้า","หลีกการปะทะ บินหนีขึ้นที่สูง ใช้ขนาดจิ๋วซ่อนตัว"],["ชาวบ้านไม่เทรด","หาของจาก Wandering Trader/สำรวจเอง หรือพึ่งเพื่อนเทรดให้"]],
+ warn:null,flags:{noTrade:true}},
+
+{en:"Siren",th:"ไซเรน — เงือกขับขาน",icon:"🧜‍♀️",tier:2,styles:["explore","combat","survival"],
+ sum:"เงือกขับขานสะกดศัตรู เจ้าแห่งน้ำ ฟื้นเลือดไวใต้น้ำ ชวนเทรดดี — แต่โดนไฟตายเกือบทันที",
+ stats:{hp:"10 ♥ (ปกติ)",size:"ปกติ",diet:"ฟื้นไวใต้น้ำ",key:"Song 30s · 75s"},
+ pros:["ในน้ำ: หายใจ มองชัด ว่ายเร็ว เต็มประสิทธิภาพ (Amphibious)","เพลงไซเรนหยุดศัตรูในวงกว้างชั่วคราว (Siren's Song)","ฟื้นเลือดเร็วมากเมื่อจมน้ำเต็มตัว (Holy Water)","ชวนชาวบ้านให้เทรดดีขึ้น (Captivating)"],
+ cons:["บนบกฟื้นเลือดได้แค่ใช้ยา (Out of Your Depth)"],
+ powers:[["Amphibious","ในน้ำหายใจและทำกิจกรรมได้ปกติ มองชัด ว่ายเร็วขึ้น",""],["Siren's Song","เปิดใช้เพื่อสะกดศัตรูในวงกว้าง ห้ามไม่ให้ทำร้ายคุณชั่วครู่ (ไม่ได้ผลกับบอส/ผู้เล่น)","act"],["Holy Water","ร่างฟื้นฟูเร็วมาก แต่เฉพาะตอนจมอยู่ใต้น้ำเต็มตัว",""],["Captivating","กดปุ่มเพื่อเอาใจชาวบ้าน รับเรตเทรดที่ดีขึ้น","act"],["Out of Your Depth","บนบกฟื้น/รีเจนเลือดได้แค่ใช้ยาเท่านั้น","bane"],["Flammable","ไฟกับไซเรนไม่ถูกกัน สัมผัสไฟแทบตายทันที","bane"]],
+ tips:["นักสู้แนวน้ำ — ดึงศัตรูลงน้ำ ใช้ Holy Water ฟื้นเลือดไว ขณะปล่อย Siren's Song หยุดมัน","Captivating ทำให้เป็นพ่อค้าคนกลางที่ดี ได้ของถูกจากชาวบ้าน","ตั้งฐานริมน้ำ มีบ่อน้ำให้กระโดดลงฟื้นเลือดได้ทันที"],
+ fixes:[["โดนไฟ = ตายเกือบทันที","ใส่เกราะเอนแชนต์ Fire Protection IV, หลีกลาวา/ไฟ/แมกม่าบล็อกสุดชีวิต — นี่คือจุดตายที่ต้องระวังที่สุด"],["บนบกฟื้นช้า","พกยา Regeneration/Healing, ตั้งบ่อน้ำใกล้ตัวไว้กระโดดฟื้น"]],
+ warn:"โดนไฟ = ตายเกือบทันที (Flammable) — ระวังลาวา/เปลวไฟยิ่งกว่าทุกอย่าง",flags:{fire:true}},
+
+{en:"Valkyrie",th:"วาลคีรี — นักรบสวรรค์มีปีก",icon:"👼",tier:2,styles:["combat","magic","explore"],
+ sum:"นักรบมีปีกสายฮีล บินอิสระ ปราบอันเดดเก่ง ฟื้นฟูพวกพ้อง — แต่อ่อนแอเมื่อรายล้อมด้วยอันเดด",
+ stats:{hp:"10 ♥ (ปกติ)",size:"ปกติ",diet:"ปกติ",key:"Intervention 60s"},
+ pros:["ปีกขนนกขาว บินได้อิสระ (Feathered)","ทุกการโจมตีที่ 3 ปล่อย Divine Smite ใส่ศัตรูรอบตัว","ฆ่าอันเดดยิ่งเสริมพลัง + ลด debuff (Vanquisher)","พุ่งขึ้นฟ้า/พุ่งโจมตี + ฮีลและล้าง debuff พวกพ้อง (Intervention)","เก่งเวทฮีล + ถนัดหอก/ทวน (Heavenly Implements)"],
+ cons:["อันเดดใกล้ตัวทำให้อ่อนแอ ช้าลง และรับดาเมจเพิ่ม (Corruption)"],
+ powers:[["Feathered","มีปีกขนนกขาวขนาดใหญ่ บินได้อย่างอิสระ",""],["Divine Smite","ทุกการโจมตีครั้งที่ 3 จะ smite ศัตรูรอบข้าง (สเกลตาม Healing Spell Power)",""],["Vanquisher","สังหารอันเดดเพื่อกระตุ้น Divine Smite และลดผลของ Corruption ทีละนิด","act"],["Intervention","พุ่งขึ้นฟ้า/พุ่งไปข้างหน้า กันดาเมจตกจนกว่าจะลงพื้น เมื่อลงพื้นจะปล่อยพลังศักดิ์สิทธิ์ ล้าง debuff + ฮีลพวกพ้อง และผลักศัตรู","act"],["Heavenly Implements","มี Healing Spell Power มากกว่าปกติ และถนัดอาวุธหอก/ทวน",""],["Corruption","อันเดดที่อยู่ใกล้ทำให้อ่อนแอ ช้าลง และรับดาเมจเพิ่ม","bane"]],
+ tips:["นักรบ-ฮีลเลอร์ลูกผสม — บินเข้าโจมตี ปล่อย Intervention ฮีลทีมแล้วผลักศัตรูออก","ล่าอันเดดเป็นพิเศษ: Vanquisher ทำให้ยิ่งฆ่ายิ่งแกร่งและลด Corruption","ถือหอก/ทวนเพื่อรีดดาเมจ Heavenly Implements + ลงเวทฮีลเสริม Divine Smite"],
+ fixes:[["อ่อนแอเมื่อถูกอันเดดรุม","อย่าให้อันเดดล้อม — ฆ่าให้ไว (Vanquisher ลด Corruption) หรือบินขึ้นหนีแล้วตีทีละตัว"]],
+ warn:null,flags:{}},
+
+/* ---------- 🟢 GREEN ---------- */
+{en:"Alfiq",th:"อัลฟิค — แมวคล่องแคล่ว",icon:"🐈",tier:1,styles:["explore","combat","survival"],
+ sum:"แมวมนุษย์คล่องแคล่ว ต่อยมือเปล่าแรง (+4 ดาเมจ) ปีนผนัง พุ่งกระโจน ล้วงเอเมอรัลด์ชาวบ้าน",
+ stats:{hp:"10 ♥ (ปกติ)",size:"ปกติ",diet:"กินเนื้อ",key:"เช้ามืด/พลบค่ำ = เร็วขึ้น"},
+ pros:["เล็บคมต่อยมือเปล่าแรง (+4 ดาเมจ) + ปีนผนังได้ (Clawed)","ตกไม่เจ็บถ้ามองตรงลงล่าง (On Your Feet)","ช่วงเช้ามืด/พลบค่ำ เร็วและตีไวขึ้นมาก (Crepuscular)","ล้วงเอเมอรัลด์จากชาวบ้านได้ (Pickpocket)","พุ่งกระโจนระยะไกล + ชนแรง (Pounce)"],
+ cons:["ใช้เครื่องมือ/อาวุธมีด้ามได้ดาเมจ/ความเร็วน้อยลง (Poor Grip)","ชอบเกราะเบา (เกราะหนักต้องเอนแชนต์)"],
+ powers:[["Clawed","เล็บคมพับเก็บได้ ต่อยมือเปล่าแรงขึ้น (+4) และปีน/เกาะผนังชันได้ (สลับเปิดปิดได้)","act"],["On Your Feet","ขณะร่อนลง ถ้ามองตรงลงล่าง จะไม่รับดาเมจตก",""],["Crepuscular","ใกล้พระอาทิตย์ตก/ขึ้น เคลื่อนที่และโจมตีเร็วขึ้นมาก เวลาอื่นช้าลงเล็กน้อย",""],["Pickpocket","ย่องคลิกขวาด้านหลังชาวบ้านด้วยมือเปล่า มีโอกาสขโมยเอเมอรัลด์ (หรือโดนจับได้)","act"],["Pounce","ย่อค้างชาร์จแล้วพุ่งกระโจนไกล โดนศัตรูระหว่างพุ่งจะดาเมจเพิ่ม","act"],["Poor Grip","ใช้เครื่องมือช้าลงและอาวุธมีด้าม (ดาบ/ขวาน) ดาเมจน้อยลง (×0.8)","bane"]],
+ tips:["สายต่อยมือเปล่า — Clawed +4 ดาเมจ ทำให้หมัดเปล่าแรงกว่าดาบในมือ Alfiq เสียอีก","วางแผนสู้ช่วงเช้ามืด/พลบค่ำ ที่ Crepuscular บัฟความเร็วโจมตีสูงสุด","ใช้ Pickpocket หาเอเมอรัลด์ฟรี และ Pounce ปิดระยะ/หนี"],
+ fixes:[["อาวุธมีด้ามอ่อนลง","สู้ด้วยมือเปล่า (Clawed แรงกว่า) หรือใช้อาวุธไม่มีด้าม"],["เกราะหนักช้าลง","ใส่เกราะเบาหรือเอนแชนต์แก้ penalty"]],
+ warn:null,flags:{}},
+
+{en:"Arachnid",th:"อาแรคนิด — เผ่าแมงมุม",icon:"🕸️",tier:1,styles:["explore","combat","survival"],
+ sum:"เผ่าแมงมุม ปีนกำแพงทุกชนิด เชี่ยวชาญใยดักศัตรู คราฟต์ใยได้ — เริ่มง่าย เหมาะสายสำรวจ/สร้าง",
+ stats:{hp:"7 ♥ (−6)",size:"ปกติ",diet:"กินเนื้อ (ผักไม่ได้)",key:"ปีนกำแพง + ดักใย"},
+ pros:["ปีนกำแพงได้ทุกชนิด ไม่ต้องใช้บันได (Climbing)","เชี่ยวชาญใยแมงมุม: เดิน/ปีนใยได้ ตีศัตรูติดใย ตรวจจับศัตรูในใย คราฟต์ใยจากเชือก"],
+ cons:["กินได้แต่เนื้อ (กินผักไม่ได้)","เลือดน้อยกว่าคน 3 หัวใจ (7 ♥)"],
+ powers:[["Climbing","ปีนกำแพงทุกชนิดได้ ไม่ใช่แค่บันได",""],["Master of Webs","เดิน/ปีนใยแมงมุมได้คล่อง ตีศัตรูประชิดทำให้ติดใย ตรวจจับสิ่งมีชีวิต (ที่ไม่ใช่สัตว์ขาปล้อง) ที่ติดใย และคราฟต์ใยจากเชือกได้","act"],["Carnivore","กินได้แต่เนื้อสัตว์","bane"],["Fragile","เลือดน้อยกว่าคน 3 หัวใจ","bane"]],
+ tips:["เผ่าเริ่มต้นที่ดีสำหรับสายสำรวจ — ปีนหน้าผา/อาคารตรงๆ ขึ้นที่สูงโดยไม่ต้องสร้างบันได","วางกับดักใย: ตีศัตรูให้ติดใยแล้วรุม หรือกั้นทางหนีด้วยใยที่คราฟต์เอง","ตรวจจับศัตรูที่ติดใยช่วยกัน ambush ในถ้ำมืด"],
+ fixes:[["กินผักไม่ได้","ฟาร์มสัตว์/ตกปลาเป็นอาหารหลัก พกเนื้อย่างเสมอ"],["เลือดน้อย 3 หัวใจ","ใช้การปีนหนีขึ้นที่สูง + ดักใยกันศัตรูก่อนเข้าประชิด"]],
+ warn:null,flags:{}},
+
+{en:"Avian",th:"เอเวียน — เผ่านกร่อน",icon:"🐦",tier:1,styles:["explore","build","survival"],
+ sum:"เผ่านกที่ร่อนตกไม่เจ็บ เดินเร็ว ออกไข่ฟรี — จุดอ่อนเบามาก เหมาะสายสำรวจ/สร้างเริ่มต้น",
+ stats:{hp:"10 ♥ (ปกติ)",size:"ปกติ",diet:"มังสวิรัติ",key:"ร่อนตกไม่เจ็บ + เดินเร็ว"},
+ pros:["ร่อนลงพื้นเบาเหมือนขนนก ตกไม่เจ็บ (ถ้าไม่ย่อง)","บัฟความเร็วเดินใช้ได้ตอนลอยตัวกลางอากาศด้วย (Like Air)","เดินเร็วกว่าคนอื่นเล็กน้อย (Tailwind)","ตื่นเช้าออกไข่ให้ (Oviparous)"],
+ cons:["เตียงนอนต้องอยู่สูง ≥86 บล็อก (Fresh Air)","กินเนื้อไม่ได้ (มังสวิรัติ)"],
+ powers:[["Featherweight","ร่อนลงพื้นเบาเหมือนขนนก ไม่รับดาเมจตก เว้นแต่กำลังย่อ",""],["Like Air","ตัวปรับความเร็วเดินมีผลตอนลอยอยู่กลางอากาศด้วย",""],["Tailwind","เดินเท้าเร็วกว่าคนอื่นเล็กน้อย",""],["Oviparous","ทุกครั้งที่ตื่นนอนตอนเช้า จะออกไข่ให้ 1 ฟอง",""],["Fresh Air","เตียงนอนต้องอยู่ที่ระดับความสูง ≥86 บล็อก ถึงจะนอนได้","bane"],["Vegetarian","ย่อยเนื้อไม่ได้","bane"]],
+ tips:["เผ่าเริ่มต้นที่บาลานซ์ที่สุดเผ่าหนึ่ง — ตกไม่เจ็บ + เดินเร็ว ใช้สำรวจ/สร้างได้ทุกสถานการณ์","ใช้ Featherweight ลงจากที่สูงตอนสร้างหรือสำรวจภูเขาได้ไร้กังวล (อย่าลืม: ย่อจะตกเจ็บ)","ทำหอนอนสูง ≥86 บล็อก แล้วเก็บไข่ฟรีทุกเช้า"],
+ fixes:[["เตียงต้องสูง ≥86","สร้างห้องนอนบนยอดหอ/ภูเขา ใช้ครั้งเดียวคุ้ม — เก็บไข่ฟรีเป็นโบนัส"],["กินเนื้อไม่ได้","ฟาร์มผัก/ขนมปัง/มันฝรั่ง เป็นอาหารหลัก"]],
+ warn:null,flags:{}},
+
+{en:"Elytrian",th:"เอลีเทรียน — ผู้มีปีกเอลิทรา",icon:"🪽",tier:1,styles:["explore","combat"],
+ sum:"มีปีกเอลิทราติดตัว พุ่งขึ้นฟ้าเองทุก 30 วิ บินสำรวจสุดยอด — แต่ใส่เกราะหนักไม่ได้และกลัวเพดานต่ำ",
+ stats:{hp:"10 ♥ (ปกติ)",size:"ปกติ",diet:"ปกติ",key:"Boost 30s (พุ่ง ~20 บล็อก)"},
+ pros:["มีปีกเอลิทราโดยไม่ต้องใส่ (Winged)","พุ่งขึ้นฟ้า ~20 บล็อกทุก 30 วินาที — บินได้ไม่ต้องพลุ (Gift of the Winds)","บินโจมตีดาเมจเยอะขึ้นมาก (Aerial Combatant)"],
+ cons:["ใส่เกราะหนัก (เกินเชนเมล) ไม่ได้","อยู่ใต้เพดานต่ำนานๆ จะอ่อนแอ + ช้า (Claustrophobia)","รับดาเมจจากการตก/ชนกำแพงเพิ่ม (Brittle Bones)"],
+ powers:[["Winged","มีปีกเอลิทราติดตัวโดยไม่ต้องสวมใส่",""],["Gift of the Winds","ทุก 30 วินาที พุ่งตัวขึ้นฟ้า ~20 บล็อก ใช้เริ่มบินได้โดยไม่ต้องพลุ","act"],["Aerial Combatant","ทำดาเมจมากขึ้นอย่างมากขณะบินด้วยเอลิทรา",""],["Need for Mobility","ใส่เกราะที่ค่าป้องกันสูงกว่าเชนเมลไม่ได้","bane"],["Claustrophobia","อยู่ในที่เพดานต่ำนานเกินไปจะอ่อนแอและช้าลง","bane"],["Brittle Bones","รับดาเมจจากการตกและบินชนบล็อกมากขึ้น","bane"]],
+ tips:["นักบินสำรวจที่ดีที่สุด — Gift of the Winds พุ่งขึ้นเองทุก 30 วิ ร่อนได้ทั้งแผนที่โดยไม่ต้องพลุจรวด","สู้ทางอากาศ: บินโฉบโจมตี (Aerial Combatant) ดาเมจสูงกว่าภาคพื้นมาก","ออกแบบบ้าน/ฐานให้โปร่ง เพดานสูง เลี่ยง Claustrophobia"],
+ fixes:[["ใส่เกราะหนักไม่ได้","ใส่เชนเมล/หนัง/ทอง แล้วเอนแชนต์ Protection ชดเชยค่าป้องกัน"],["เพดานต่ำทำให้อ่อนแอ","สร้างที่โล่ง/เพดานสูง อย่าขลุกในอุโมงค์เตี้ยนาน"],["รับดาเมจตก/ชนเพิ่ม","ฝึกบินให้ชำนาญ ร่อนลงนุ่มๆ เลี่ยงพุ่งชนกำแพง"]],
+ warn:null,flags:{}},
+
+{en:"Goblin",th:"ก็อบลิน — จอมสะสมทอง",icon:"💰",tier:1,styles:["explore","survival"],
+ sum:"ก็อบลินคลั่งทอง ของทองบัฟแรง หาของหายากเก่ง ว่องไวหนีเก่ง — แต่ตัวเล็กและเปราะ",
+ stats:{hp:"น้อยกว่าคน",size:"เตี้ย 92 ซม. (−10%)",diet:"ปกติ",key:"ของทองบัฟ + ว่องไว"},
+ pros:["ใส่/ใช้ของทองได้โบนัสพิเศษ (Greedy) — ทองที่คนอื่นมองข้าม","ของทองในมือใช้ทนนานกว่าปกติมาก (Careful Hoarder)","หาของหายากเก่ง เจอลูทที่คนอื่นพลาด (Cunning)","ว่องไว วิ่งหนีศัตรูที่แกร่งกว่าได้ (Nimble)"],
+ cons:["ตัวเตี้ยมาก 92 ซม. (Stunted)","เลือดน้อย + รับดาเมจง่าย (Frail)"],
+ powers:[["Greedy","มีสายสัมพันธ์พิเศษกับสมบัติ ได้โบนัสเพิ่มเมื่อใช้/สวมของทอง",""],["Careful Hoarder","ของทองในมือก็อบลินทนทานนานกว่าคนทั่วไปมาก",""],["Cunning","ฉลาด รู้ว่าจะหาลูทหายากที่คนอื่นพลาดได้ที่ไหน",""],["Nimble","แม้เตี้ยแต่เร็ว วิ่งหนีศัตรูที่แข็งแกร่งกว่าได้",""],["Stunted","เตี้ยมาก ไม่ถึงครึ่งของคนปกติ",""],["Frail","ตัวเล็กจึงเลือดน้อยและรับดาเมจง่าย","bane"]],
+ tips:["สายลูท/นักผจญภัย — ใช้เกราะ/เครื่องมือทอง (ปกติอ่อนแอ) แต่บัฟ Greedy + ทนนานทำให้คุ้ม","Cunning ช่วยหาของหายากในหีบดันเจี้ยน เหมาะสายเก็บสมบัติ","พึ่งความเร็ว Nimble หนีศัตรูแทนการสู้ตรงๆ"],
+ fixes:[["เปราะ + เลือดน้อย","เล่นแบบ hit-and-run ใช้ความเร็วหนี และสวมเกราะทอง (บัฟ Greedy) เพื่อชดเชย"],["ของทองปกติเปราะ","Careful Hoarder ทำให้ทนนานขึ้นมาก ใช้คุ้มกว่าเผ่าอื่นใส่ทอง"]],
+ warn:null,flags:{}},
+
+{en:"Shulk",th:"ชัลค์ — ญาติชัลเกอร์",icon:"📦",tier:1,styles:["build","survival","explore"],
+ sum:"ญาติชัลเกอร์ เกราะธรรมชาติในตัว + ช่องเก็บของพิเศษ 9 ช่องที่ตายแล้วไม่หาย — เหมาะสายสร้าง/เก็บของ",
+ stats:{hp:"10 ♥ (ปกติ)",size:"ปกติ",diet:"หิวเร็ว",key:"+9 ช่อง · ของไม่หายตอนตาย"},
+ pros:["ช่องเก็บของเพิ่ม 9 ช่อง — ของในนั้นไม่หายตอนตาย! (Hoarder)","ผิวกันดาเมจเองโดยไม่ต้องใส่เกราะ (Sturdy Skin)","ทุบหินธรรมชาติได้โดยไม่ต้องใช้อีเทม (Strong Arms)"],
+ cons:["ถือโล่ไม่ได้ (Unwieldy)","หิวเร็ว ต้องกินมากกว่าปกติ (Large Appetite)"],
+ powers:[["Hoarder","มีช่องเก็บของเพิ่ม 9 ช่อง และของในช่องเหล่านี้จะไม่หายเมื่อตาย",""],["Sturdy Skin","แม้ไม่สวมเกราะ ผิวก็ให้การป้องกันตามธรรมชาติ",""],["Strong Arms","แข็งแรงพอจะทุบหินธรรมชาติได้โดยไม่ต้องใช้จอบ",""],["Unwieldy","รูปมือไม่เอื้อให้ถือโล่ตั้งได้","bane"],["Large Appetite","เหนื่อย/หิวเร็วกว่าคนอื่น ต้องกินมากขึ้น","bane"]],
+ tips:["เผ่าสาย Hardcore/เซิร์ฟเวอร์ที่สุด — เก็บของล้ำค่าไว้ใน 9 ช่องพิเศษ ตายแล้วของไม่หาย ลดความเสี่ยงมหาศาล","เกราะธรรมชาติ + ทุบหินไม่ต้องใช้จอบ ทำให้เริ่มเกมไวและอึดตั้งแต่ต้น","พกอาหารเยอะเพราะหิวเร็ว"],
+ fixes:[["ถือโล่ไม่ได้","พึ่ง Sturdy Skin + เกราะสวม หลบหลีก หรือใช้ totem แทนการบล็อก"],["หิวเร็ว","ตั้งฟาร์มอาหารและพกสะสมเสมอ"]],
+ warn:null,flags:{}},
+
+{en:"Wood Elf",th:"วูดเอลฟ์ — เอลฟ์พงไพร",icon:"🏹",tier:1,styles:["combat","explore","survival"],
+ sum:"นักธนูชั้นเยี่ยม ซ่อนตัวในพุ่มไม้ ยิงทะลุ 2 ศัตรู ตามรอยเป้า — แต่เปราะ ประชิดอ่อน และกินเนื้อไม่ได้",
+ stats:{hp:"7 ♥ (−6)",size:"สูงกว่าคน",diet:"มังสวิรัติ",key:"ธนูแรง + ยิงทะลุ"},
+ pros:["ธนูแรงและแม่นขึ้นเสมอ (Natural Archer)","ซ่อนตัวในพุ่มไม้/ใบไม้ + มองเห็นกลางคืน (Forest Vision)","อัดธนูเพื่อยิงไกล แม่น และทะลุ 2 ศัตรู (Focus)","ตามรอยศัตรูที่ทำร้ายได้ชั่วครู่แม้ไม่เห็นตัว (Eagle Eyed)"],
+ cons:["กินเนื้อไม่ได้ (มังสวิรัติ)","เลือดน้อย + ใส่เกราะหนักช้าลง (7 ♥)","ดาเมจประชิดน้อยลงแต่ตีเร็วขึ้น (Graceful)"],
+ powers:[["Natural Archer","ฝึกธนูมาทั้งชีวิต ลูกธนูร้ายแรงกว่าเสมอ",""],["Forest Vision","ขณะอยู่ในพุ่มไม้/ใบไม้ ย่อเพื่อได้ Night Vision และล่องหนจากมอบรอบข้าง","act"],["Focus","อัดธนูค้างไม่กี่วินาที แล้วปล่อยลูกที่เร็วและแม่นขึ้น บินไกลและทะลุศัตรู 2 ตัว","act"],["Eagle Eyed","ตามรอยศัตรูที่เพิ่งทำดาเมจได้ชั่วครู่ แม้มันจะหลบสายตา",""],["Steward","อยู่ร่วมกับป่า ย่อยเนื้อไม่ได้","bane"],["Graceful","ไม่แรงแต่เร็ว ดาเมจประชิดน้อยลงแต่ตีเร็วขึ้น","bane"],["Elegant","เลือดน้อยและใส่เกราะหนักช้าลง (กันด้วยเอนแชนต์)","bane"]],
+ tips:["นักธนูบริสุทธิ์ — เล่นระยะไกล อัด Focus ยิงทะลุแถวศัตรู เก็บเป้าก่อนเข้าระยะ","ใช้ Forest Vision ซุ่มในพุ่มไม้ มองเห็นกลางคืนและล่องหนจากมอบ เป็นนักซุ่มยิงชั้นดี","Eagle Eyed ช่วยไล่ล่าเป้าที่หนี — ยิงโดน 1 ดอกแล้วตามต่อได้"],
+ fixes:[["ประชิดอ่อน + เลือดน้อย","รักษาระยะ ใช้ธนูเป็นหลัก ถอยยิงเมื่อศัตรูเข้าใกล้ (kite)"],["กินเนื้อไม่ได้","ฟาร์มผัก/ผลไม้เป็นอาหารหลัก"],["เกราะหนักช้าลง","ใส่เกราะเบาหรือเอนแชนต์แก้ penalty"]],
+ warn:null,flags:{}},
+
+/* ---------- ⚪ HUMAN ---------- */
+{en:"Human",th:"ฮิวแมน — มนุษย์ธรรมดา",icon:"🧍",tier:0,styles:["explore","build","combat","survival","magic"],
+ sum:"มนุษย์ธรรมดา ประสบการณ์ Minecraft วานิลลา — ไม่มีพลัง ไม่มีจุดอ่อน เหมาะมือใหม่และคนที่อยากเล่นบาลานซ์",
+ stats:{hp:"10 ♥ (ปกติ)",size:"ปกติ",diet:"ทุกอย่าง",key:"ไม่มีพลัง/จุดอ่อน"},
+ pros:["ไม่มีจุดอ่อนใดๆ เล่นได้ทุกสไตล์","ไม่ต้องจำกฎพิเศษ เริ่มง่ายที่สุด","ปรับตัวเข้ากับทุกสถานการณ์/ทุกมิติ"],
+ cons:["ไม่มีพลังพิเศษเลย"],
+ powers:[["Vanilla","ประสบการณ์ Minecraft ปกติทุกประการ ไม่มีพลังและไม่มีจุดอ่อน",""]],
+ tips:["เหมาะมือใหม่ที่อยากเรียนรู้เกมก่อน หรือคนที่อยากเล่นบาลานซ์ไม่มีข้อจำกัด","เล่นได้ทุกสไตล์ ทุกมิติ ไม่ต้องวางแผนรับมือจุดอ่อนใดๆ","เปลี่ยนเป็นเผ่าอื่นทีหลังได้ด้วย Orb of Origin เมื่อพร้อม"],
+ fixes:[],
+ warn:null,flags:{}},
+];
+
+/* ============================= STATE ============================= */
+let activeTiers=new Set(),activeStyles=new Set(),searchTerm="",compareList=[];
+const grid=document.getElementById('grid');
+
+function cardHTML(o,idx){
+  const t=TIER[o.tier],fill=o.tier===0?0:o.tier;
+  let pips='';for(let i=1;i<=3;i++)pips+=`<span class="pip" style="color:${i<=fill?t.c:'var(--line-bright)'}">◆</span>`;
+  const tags=o.styles.map(s=>`<span>${STYLES[s]}</span>`).join('');
+  const pros=o.pros.map(p=>`<li>${p}</li>`).join('');
+  const cons=o.cons.map(c=>`<li>${c}</li>`).join('');
+  const warnHTML=o.warn?`<div class="c-warn"><span class="wm">⚠</span><span><b>คำเตือน</b> · ${o.warn}</span></div>`:'';
+  const checked=compareList.includes(o.en)?'checked':'';
+  const delay=Math.min(idx*34,440);
+  const s=o.stats;
+  return `<article class="card" data-en="${o.en}" style="--tc:${t.c};animation-delay:${delay}ms">
+    <span class="spine"></span>
+    <div class="c-head">
+      <div class="c-emblem">${o.icon}</div>
+      <div class="c-name"><h3>${o.en}</h3><div class="c-th">${o.th}</div></div>
+      <div class="c-tier"><span class="dot"></span>${t.name}</div>
+    </div>
+    <p class="c-flavor">${o.sum}</p>
+    <div class="c-stats">
+      <div class="c-stat"><span class="k">❤ เลือด</span><span class="v">${s.hp}</span></div>
+      <div class="c-stat"><span class="k">↥ ขนาด</span><span class="v dim">${s.size}</span></div>
+      <div class="c-stat"><span class="k">🍖 อาหาร</span><span class="v dim">${s.diet}</span></div>
+      <div class="c-stat"><span class="k">⚡ กลไกเด่น</span><span class="v dim">${s.key}</span></div>
+    </div>
+    <div class="c-tags">${tags}</div>
+    ${warnHTML}
+    <div class="c-sections">
+      <div class="c-sec boon"><h4>ข้อดี</h4><ul>${pros}</ul></div>
+      <div class="c-sec bane"><h4>ข้อเสีย</h4><ul>${cons}</ul></div>
+    </div>
+    <button class="c-detail-btn" onclick="openDetail('${o.en}')">พลังเต็ม · ทิป · วิธีแก้จุดอ่อน <span class="arr">→</span></button>
+    <div class="c-foot">
+      <label class="cmp-toggle"><input type="checkbox" ${checked} onchange="toggleCompare('${o.en}',this)"><span class="cmp-box">✓</span> เทียบเผ่านี้</label>
+      <div class="pips"><span class="pl">impact</span>${pips}</div>
+    </div>
+  </article>`;
+}
+function matchesFilter(o){
+  if(activeTiers.size&&!activeTiers.has(o.tier))return false;
+  if(activeStyles.size){for(const s of activeStyles)if(!o.styles.includes(s))return false;}
+  if(searchTerm){
+    const powtext=o.powers.map(p=>p[0]+' '+p[1]).join(' ');
+    const tiptext=(o.tips||[]).join(' ');
+    const hay=(o.en+' '+o.th+' '+o.sum+' '+o.pros.join(' ')+' '+o.cons.join(' ')+' '+(o.warn||'')+' '+powtext+' '+tiptext).toLowerCase();
+    if(!hay.includes(searchTerm.toLowerCase()))return false;
+  }
+  return true;
+}
+function render(){
+  const vis=ORIGINS.filter(matchesFilter);
+  grid.innerHTML=vis.length?vis.map(cardHTML).join(''):`<div class="no-results"><div class="big">⌖</div>ไม่พบเผ่าที่ตรงกับเงื่อนไข<br><button class="clear-btn" onclick="clearFilters()">ล้างตัวกรอง</button></div>`;
+  document.getElementById('visCount').textContent=vis.length;
+}
+
+/* ============================= FILTERS ============================= */
+document.querySelector('.frow').addEventListener('click',e=>{
+  const chip=e.target.closest('.chip');if(!chip)return;
+  if(chip.dataset.tier!==undefined){
+    const t=parseInt(chip.dataset.tier);
+    activeTiers.has(t)?(activeTiers.delete(t),chip.classList.remove('active')):(activeTiers.add(t),chip.classList.add('active'));
+  }else if(chip.dataset.style){
+    const s=chip.dataset.style;
+    activeStyles.has(s)?(activeStyles.delete(s),chip.classList.remove('active')):(activeStyles.add(s),chip.classList.add('active'));
+  }
+  render();
+});
+document.getElementById('searchInput').addEventListener('input',e=>{searchTerm=e.target.value.trim();render();});
+function clearFilters(){activeTiers.clear();activeStyles.clear();searchTerm='';document.getElementById('searchInput').value='';document.querySelectorAll('.chip.active').forEach(c=>c.classList.remove('active'));render();}
+
+/* ============================= COMPARE ============================= */
+function toggleCompare(en,el){
+  if(el&&el.checked){if(compareList.length>=3){el.checked=false;flashHint('เทียบได้สูงสุด 3 เผ่า');return;}if(!compareList.includes(en))compareList.push(en);}
+  else compareList=compareList.filter(x=>x!==en);
+  updateCmpBar();
+}
+function flashHint(msg){const h=document.getElementById('cmpHint');const old=h.textContent;h.textContent=msg;h.style.color='var(--t2)';setTimeout(()=>{h.textContent=old;h.style.color='';},1600);}
+function updateCmpBar(){
+  const bar=document.getElementById('cmpBar'),slots=document.getElementById('cmpSlots');
+  if(!compareList.length){bar.classList.remove('show');return;}
+  bar.classList.add('show');
+  slots.innerHTML=compareList.map(en=>{const o=ORIGINS.find(x=>x.en===en);return `<div class="cmp-slot">${o.icon} ${o.en} <span class="x" onclick="removeCompare('${en}')">×</span></div>`;}).join('');
+  document.getElementById('cmpBtn').disabled=compareList.length<2;
+  document.getElementById('cmpHint').textContent=compareList.length<2?'เลือกอีกอย่างน้อย 1 เผ่า':`พร้อมเทียบ ${compareList.length} เผ่า`;
+}
+function removeCompare(en){compareList=compareList.filter(x=>x!==en);const cb=document.querySelector(`.card[data-en="${CSS.escape(en)}"] input[type=checkbox]`);if(cb)cb.checked=false;updateCmpBar();}
+function clearCompare(){compareList=[];document.querySelectorAll('.cmp-toggle input').forEach(c=>c.checked=false);updateCmpBar();}
+
+/* ============================= MODAL ============================= */
+const overlay=document.getElementById('overlay'),modal=document.getElementById('modal');
+function closeModal(){overlay.classList.remove('show');document.body.style.overflow='';}
+function showModal(html){modal.innerHTML=html;overlay.classList.add('show');document.body.style.overflow='hidden';modal.parentElement.scrollTop=0;}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+/* ----- DETAIL ----- */
+function openDetail(en){
+  const o=ORIGINS.find(x=>x.en===en),t=TIER[o.tier],s=o.stats;
+  const powers=o.powers.map(p=>{
+    const kind=p[2]==='act'?'<span class="kind act">ใช้งาน</span>':p[2]==='bane'?'<span class="kind bane">จุดอ่อน</span>':'';
+    return `<div class="power"><span class="pk"></span><div class="pbody"><div class="pn">${p[0]}${kind}</div><div class="pd">${p[1]}</div></div></div>`;
+  }).join('');
+  const tips=(o.tips||[]).map(x=>`<li>${x}</li>`).join('');
+  const fixes=(o.fixes||[]).map(f=>`<li><span class="prob">${f[0]}</span><span class="sol">${f[1]}</span></li>`).join('');
+  const tipSec=tips?`<div class="dt-sec"><h3><span class="ic">◆</span> ทิปการเล่น</h3><ul class="tiplist tips">${tips}</ul></div>`:'';
+  const fixSec=fixes?`<div class="dt-sec"><h3><span class="ic">⚒</span> วิธีแก้/รับมือจุดอ่อน</h3><ul class="fixlist">${fixes}</ul></div>`:'';
+  showModal(`<div class="modal-head"><h2 style="font-size:18px">ตำราเผ่า</h2><button class="modal-close" onclick="closeModal()">×</button></div>
+    <div class="modal-body" style="--tc:${t.c}">
+      <div class="dt-head">
+        <div class="dt-emblem">${o.icon}</div>
+        <div class="dt-titles">
+          <div class="dt-en">${o.en} <span class="dt-tier" style="color:${t.c}">${t.label}</span></div>
+          <div class="dt-th">${o.th}</div>
+          <div class="dt-flavor">${o.sum}</div>
+        </div>
+      </div>
+      <div class="dt-statbar">
+        <div class="dt-stat"><div class="k">❤ เลือด</div><div class="v">${s.hp}</div></div>
+        <div class="dt-stat"><div class="k">↥ ขนาด</div><div class="v">${s.size}</div></div>
+        <div class="dt-stat"><div class="k">🍖 อาหาร</div><div class="v">${s.diet}</div></div>
+        <div class="dt-stat"><div class="k">⚡ กลไกเด่น</div><div class="v">${s.key}</div></div>
+      </div>
+      <div class="dt-sec"><h3><span class="ic">✦</span> พลังทั้งหมด (${o.powers.length})</h3>${powers}</div>
+      ${tipSec}
+      ${fixSec}
+    </div>`);
+}
+
+function openCompare(){
+  if(compareList.length<2)return;
+  const list=compareList.map(en=>ORIGINS.find(x=>x.en===en));
+  const head=list.map(o=>`<th><span class="cmp-emoji">${o.icon}</span><span class="cmp-en">${o.en}</span><div class="cmp-th">${o.th}</div></th>`).join('');
+  const tierRow=list.map(o=>{const t=TIER[o.tier];return `<td style="text-align:center"><span style="color:${t.c};font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.05em">${t.label}</span></td>`;}).join('');
+  const hpRow=list.map(o=>`<td style="text-align:center;font-family:var(--serif);font-weight:700">${o.stats.hp}</td>`).join('');
+  const sizeRow=list.map(o=>`<td style="text-align:center;font-size:12.5px;color:var(--ink-dim)">${o.stats.size}</td>`).join('');
+  const keyRow=list.map(o=>`<td style="text-align:center;font-size:12.5px;color:var(--ink-dim)">${o.stats.key}</td>`).join('');
+  const styleRow=list.map(o=>`<td>${o.styles.map(s=>`<div style="font-size:12px;color:var(--ink-dim)">${STYLES[s]}</div>`).join('')}</td>`).join('');
+  const prosRow=list.map(o=>`<td class="pros"><ul>${o.pros.map(p=>`<li>${p}</li>`).join('')}</ul></td>`).join('');
+  const consRow=list.map(o=>`<td class="cons"><ul>${o.cons.map(c=>`<li>${c}</li>`).join('')}</ul></td>`).join('');
+  const warnRow=list.map(o=>`<td style="font-size:12px;color:${o.warn?'#cf9d96':'var(--ink-mute)'}">${o.warn?'⚠ '+o.warn:'—'}</td>`).join('');
+  showModal(`<div class="modal-head"><h2>⚖ เทียบเผ่า (${list.length})</h2><button class="modal-close" onclick="closeModal()">×</button></div>
+    <div class="modal-body"><div class="cmp-table-wrap"><table class="cmp-table">
+      <thead><tr><th></th>${head}</tr></thead><tbody>
+      <tr><td class="rowlabel">ระดับพลัง</td>${tierRow}</tr>
+      <tr><td class="rowlabel">เลือด</td>${hpRow}</tr>
+      <tr><td class="rowlabel">ขนาด</td>${sizeRow}</tr>
+      <tr><td class="rowlabel">กลไกเด่น</td>${keyRow}</tr>
+      <tr><td class="rowlabel">สไตล์</td>${styleRow}</tr>
+      <tr><td class="rowlabel">ข้อดี</td>${prosRow}</tr>
+      <tr><td class="rowlabel">ข้อเสีย</td>${consRow}</tr>
+      <tr><td class="rowlabel">คำเตือน</td>${warnRow}</tr>
+    </tbody></table></div></div>`);
+}
+
+/* ============================= WIZARD ============================= */
+const QUIZ=[
+  {key:"style",q:"คุณชอบเล่นสไตล์ไหนมากที่สุด?",sub:"เลือก 1 ข้อ — ตำราจะให้คะแนนเผ่าที่ตรงสไตล์",
+   opts:[{v:"explore",ic:"🧭",label:"สำรวจโลก เดินทาง"},{v:"build",ic:"🏗️",label:"สร้างของ ฟาร์ม"},{v:"combat",ic:"⚔️",label:"บู๊ ต่อสู้"},{v:"survival",ic:"🛡️",label:"เอาตัวรอด อึด"},{v:"magic",ic:"✨",label:"เวทมนตร์ พลังพิเศษ"}]},
+  {key:"tier",q:"คุณอยากเล่นยากแค่ไหน?",sub:"พลังยิ่งแรง จุดอ่อนยิ่งหนัก",
+   opts:[{v:1,ic:"🟢",label:"เล่นง่าย จุดอ่อนเบา"},{v:2,ic:"🟡",label:"กลางๆ ท้าทายพอดี"},{v:3,ic:"🔴",label:"พลังแรงสุด รับจุดอ่อนหนักได้"}]},
+  {key:"deal",q:"มีอะไรที่คุณ \"รับไม่ได้เลย\" ไหม?",sub:"ตำราจะตัดเผ่าที่ติดข้อจำกัดนั้นออก",
+   opts:[{v:"none",ic:"😎",label:"ไม่มี ลุยได้หมด"},{v:"water",ic:"💧",label:"ต้องลงน้ำได้ ไม่กลัวน้ำ"},{v:"daylight",ic:"☀️",label:"ต้องอยู่/สร้างกลางวันสบาย"},{v:"noTrade",ic:"💎",label:"ต้องเทรดชาวบ้านได้"},{v:"noArmor",ic:"🛡️",label:"ต้องใส่เกราะได้"}]}
+];
+let quizAns={},quizStep=0;
+function openQuiz(){quizAns={};quizStep=0;renderWizard();}
+function renderWizard(){
+  const q=QUIZ[quizStep],pct=(quizStep/QUIZ.length)*100;
+  const opts=q.opts.map(o=>{
+    const val=typeof o.v==='number'?o.v:`'${o.v}'`,sel=quizAns[q.key]===o.v?'sel':'';
+    return `<div class="opt ${sel}" onclick="pickQuiz('${q.key}',${val})"><span class="oic">${o.ic}</span><span class="olabel">${o.label}</span></div>`;
+  }).join('');
+  showModal(`<div class="modal-head"><h2>ปรึกษาตำราเลือกเผ่า</h2><button class="modal-close" onclick="closeModal()">×</button></div>
+    <div class="modal-body">
+      <div class="wiz-prog"><div class="track"><div class="fill" style="width:${pct}%"></div></div><span class="step-n">คำถามที่ ${quizStep+1} จาก ${QUIZ.length}</span></div>
+      <div class="wiz-q">
+        <div class="qnum">— ข้อ ${quizStep+1} —</div>
+        <div class="qhead">${q.q}</div>
+        <div class="qsub">${q.sub}</div>
+        <div class="opts">${opts}</div>
+      </div>
+      <div class="wiz-nav">
+        <button class="btn btn-line" onclick="${quizStep===0?'closeModal()':'wizBack()'}">${quizStep===0?'ปิด':'← ย้อนกลับ'}</button>
+        <button class="btn btn-solid" id="wizNext" ${quizAns[q.key]===undefined?'disabled':''} onclick="wizNext()">${quizStep===QUIZ.length-1?'ดูเผ่าที่แนะนำ':'ถัดไป →'}</button>
+      </div>
+    </div>`);
+}
+function pickQuiz(key,val){
+  quizAns[key]=val;renderWizard();
+  if(quizStep<QUIZ.length-1)setTimeout(()=>{if(quizAns[QUIZ[quizStep].key]!==undefined){quizStep++;renderWizard();}},250);
+}
+function wizBack(){if(quizStep>0){quizStep--;renderWizard();}}
+function wizNext(){if(quizAns[QUIZ[quizStep].key]===undefined)return;if(quizStep<QUIZ.length-1){quizStep++;renderWizard();}else showResults();}
+
+function scoreOrigin(o){
+  let score=0;const reasons=[];const deal=quizAns.deal;
+  if(deal==='water'&&o.flags.water)return{score:-999};
+  if(deal==='daylight'&&o.flags.daylight)return{score:-999};
+  if(deal==='noTrade'&&o.flags.noTrade)return{score:-999};
+  if(deal==='noArmor'&&o.flags.noArmor)return{score:-999};
+  if(o.styles.includes(quizAns.style)){score+=5;reasons.push(`ตรงสไตล์ ${STYLES[quizAns.style]}`);}
+  if(o.tier===quizAns.tier){score+=4;reasons.push(`ระดับพลังตรงใจ (${TIER[o.tier].name})`);}
+  else if(Math.abs(o.tier-quizAns.tier)===1&&o.tier!==0)score+=1.5;
+  else if(o.tier===0&&quizAns.tier===1)score+=1;
+  score+=Math.max(0,1.2-Object.keys(o.flags).length*0.3);
+  if(quizAns.style==='build'){if(o.flags.noFarm||o.flags.door)score-=3;if(['Shulk','Fae','Enderian','Avian'].includes(o.en))score+=1.5;}
+  return{score,reasons};
+}
+function showResults(){
+  const ranked=ORIGINS.map(o=>({o,...scoreOrigin(o)})).filter(r=>r.score>-900).sort((a,b)=>b.score-a.score||a.o.tier-b.o.tier);
+  const top=ranked.slice(0,3);
+  const medalTxt=['อันดับ 1 · ที่แนะนำ','อันดับ 2','อันดับ 3'];
+  const DEAL={none:'ไม่มี',water:'ไม่กลัวน้ำ',daylight:'อยู่กลางวันได้',noTrade:'เทรดชาวบ้านได้',noArmor:'ใส่เกราะได้'};
+  const cards=top.map((r,i)=>{
+    const o=r.o,t=TIER[o.tier];
+    const why=r.reasons&&r.reasons.length?r.reasons.join(' · '):'เป็นตัวเลือกที่สมดุลกับคำตอบของคุณ';
+    return `<div class="res-card" style="--tc:${t.c};animation-delay:${i*80}ms">
+      <div class="rank">${i+1}</div>
+      <div class="ric">${o.icon}</div>
+      <div class="rbody">
+        <div class="rtop"><span class="en">${o.en}</span><span class="medal">${medalTxt[i]}</span><span class="rtier">${t.label}</span></div>
+        <div class="rth">${o.th}</div>
+        <div class="rsum">${o.sum}</div>
+        <div class="why"><b>ทำไมเหมาะกับคุณ</b> · ${why}</div>
+        ${o.warn?`<div class="why why2">⚠ ${o.warn}</div>`:''}
+        <div class="rmore"><button class="rmore-btn" onclick="openDetail('${o.en}')">ดูพลังเต็ม · ทิป · วิธีแก้จุดอ่อน →</button></div>
+      </div></div>`;
+  }).join('');
+  showModal(`<div class="modal-head"><h2>คำแนะนำจากตำรา</h2><button class="modal-close" onclick="closeModal()">×</button></div>
+    <div class="modal-body">
+      <p class="res-intro">จากคำตอบของคุณ — สไตล์ <b>${STYLES[quizAns.style]}</b> · ความยาก <b>${TIER[quizAns.tier].name}</b> · ข้อจำกัด <b>${DEAL[quizAns.deal]||'—'}</b> · ตำราคัด 3 เผ่าที่เหมาะที่สุดมาให้</p>
+      ${cards}
+      <div class="retake"><button class="btn btn-line" onclick="openQuiz()">↻ ถามใหม่อีกครั้ง</button></div>
+    </div>`);
+}
+
+render();
+</script>
+</body>
+</html>

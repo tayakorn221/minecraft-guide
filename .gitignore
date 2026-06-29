@@ -1,0 +1,11 @@
+# ไฟล์สำรอง/ไบนารีใหญ่ — ไม่ขึ้น public (เป็นมอดของผู้พัฒนาอื่น + ไฟล์ใหญ่)
+modpacks/
+backups/
+
+# config เครื่องมือส่วนตัว
+CLAUDE.md
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
