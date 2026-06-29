@@ -18,8 +18,8 @@
 :root[data-theme="light"]{
   --bg:#f0e7d2;--surface:#e8ddc2;--raised:#e0d4b6;--raised-2:#d8c9a6;
   --line:#c5b389;--line-soft:#d6c9a8;--line-bright:#b09a6e;
-  --ink:#2a2216;--ink-dim:#473c28;--ink-mute:#786a4d;
-  --gold:#9b7a28;--gold-bright:#785915;
+  --ink:#2a2216;--ink-dim:#473c28;--ink-mute:#706245;
+  --gold:#7e6010;--gold-bright:#785915;
   --t1:#4d7a2f;--t2:#946a14;--t3:#a83c34;--t0:#6a6350;
   --good:#4d7a2f;--bad:#a83c34;
   --nav-bg:rgba(240,231,210,.95);--code-bg:#e3d7b8;--sb-thumb:#c2b084;
@@ -124,6 +124,36 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 .credit{text-align:center;color:var(--ink-mute);font-size:12px;padding:36px 0 10px;line-height:1.8}
 .credit .di{color:var(--gold);transform:rotate(45deg);display:inline-block;margin:0 6px}
 
+/* ── mobile guide nav (ใน toc drawer) ── */
+.toc-guides{display:none}
+.toc-guides .tl{font-size:10.5px;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);font-weight:700;margin-bottom:12px;padding-left:13px}
+.toc-guides a{display:block;color:var(--ink-dim);text-decoration:none;padding:7px 13px;border-left:2px solid var(--line-soft);font-size:13.5px;font-family:var(--serif);transition:color .15s,border-color .15s}
+.toc-guides a:hover{color:var(--ink)}
+.toc-guides a.cur{color:var(--gold-bright);border-left-color:var(--gold)}
+
+/* ── landing (หน้าแรก) ── */
+.landing-wrap{max-width:1000px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
+.landing{padding:0 0 60px}
+.hero{text-align:center;padding:58px 12px 44px;border-bottom:1px solid var(--line);margin-bottom:38px}
+.hero .kicker{margin-bottom:14px}
+.hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(40px,8vw,74px);line-height:1.02;color:var(--ink);margin:4px 0 16px;letter-spacing:.5px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero .lead{color:var(--ink-dim);font-size:clamp(15px,2.2vw,18px);max-width:640px;margin:0 auto;line-height:1.7}
+.gsec{margin-bottom:36px}
+.gsec-h{font-family:var(--serif);font-weight:700;font-size:20px;color:var(--gold-bright);margin-bottom:16px;display:flex;align-items:center;gap:11px}
+.gsec-h .di{color:var(--gold);transform:rotate(45deg);display:inline-block;font-size:11px}
+.gsec-h::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line-bright),transparent)}
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:15px}
+.gcard{background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:19px 20px 17px;text-decoration:none;display:flex;flex-direction:column;gap:7px;position:relative;overflow:hidden;transition:border-color .2s,transform .2s,box-shadow .2s;animation:rise .5s ease both}
+.gcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold);opacity:0;transition:opacity .2s}
+.gcard:hover{border-color:var(--line-bright);transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,0,0,.34)}
+.gcard:hover::before{opacity:1}
+.gcard .gc-n{font-family:var(--serif);font-size:19px;font-weight:700;color:var(--ink);line-height:1.15}
+.gcard .gc-d{font-size:13.5px;color:var(--ink-dim);line-height:1.55;flex:1}
+.gcard .gc-go{font-size:12.5px;color:var(--gold-bright);font-weight:700;margin-top:3px}
+.gcard.feat{background:var(--raised);border-color:var(--line-bright)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
 /* ── responsive ── */
 @media(max-width:900px){
   .shell{grid-template-columns:1fr;gap:0}
@@ -132,6 +162,7 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
   .menu-btn{display:flex;align-items:center;justify-content:center}
   main{padding:26px 0 60px}
   .nav .links{display:none}
+  .toc-guides{display:block}
   .scrim{position:fixed;inset:var(--nav-h) 0 0;background:rgba(8,6,4,.6);z-index:54;display:none}
   .scrim.show{display:block}
 }
@@ -148,7 +179,7 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 </nav>
 <div class="scrim"></div>
 <div class="shell">
-<aside class="toc"><div class="tl">ในหน้านี้</div><a class="" href="#tl-dr-3-มอดที่เปลี่ยนวิธีเล่นมากสุด">TL;DR — 3 มอดที่เปลี่ยนวิธีเล่นมากสุด</a><a class="" href="#ตารางภาพรวมทั้งชุด">ตารางภาพรวมทั้งชุด</a><a class="" href="#เจาะรายตัว-วิธีใช้จริงในเกม">เจาะรายตัว — วิธีใช้จริงในเกม</a><a class="h3" href="#veinminer-ขุดทั้งสายทีเดียว">⛏️ VeinMiner — ขุดทั้งสายทีเดียว</a><a class="h3" href="#waystones-เสาวาร์ปข้ามแมพ">🪧 Waystones — เสาวาร์ปข้ามแมพ</a><a class="h3" href="#traveler-s-backpack-เป้สวมหลังสารพัดประโยชน์">🎒 Traveler's Backpack — เป้สวมหลังสารพัดประโยชน์</a><a class="h3" href="#combatify-รื้อระบบคอมแบทใหม่">⚔️ Combatify — รื้อระบบคอมแบทใหม่</a><a class="h3" href="#mutantmonsters-มินิบอส-5-ตัว">👹 MutantMonsters — มินิบอส 5 ตัว</a><a class="h3" href="#easy-anvils-ทั่งไม่พัง-ตีได้ไม่จำกัด">🔨 Easy Anvils — ทั่งไม่พัง ตีได้ไม่จำกัด</a><a class="h3" href="#comforts-ถุงนอน-amp-เปลญวน-นอนได้ทุกที่">🛏️ Comforts — ถุงนอน &amp; เปลญวน นอนได้ทุกที่</a><a class="h3" href="#highlighter-ไฮไลต์ของที่เพิ่งเก็บ">✨ Highlighter — ไฮไลต์ของที่เพิ่งเก็บ</a><a class="" href="#คอมโบเด็ด-ใช้คู่กันดี">🔗 คอมโบเด็ด — ใช้คู่กันดี</a><a class="" href="#เช็คลิสต์เริ่มใช้เร็ว">✅ เช็คลิสต์เริ่มใช้เร็ว</a><a class="h3" href="#หมายเหตุฝั่ง-client-server-เผื่อแก้ปัญหา">หมายเหตุฝั่ง client/server (เผื่อแก้ปัญหา)</a></aside>
+<aside class="toc"><div class="toc-guides"><div class="tl">คู่มือทั้งหมด</div><a href="index.html">หน้าแรก</a><a href="choose-origin.html">เลือกเผ่า</a><a href="getting-started.html">เริ่มเล่น</a><a href="keybinds.html">ปุ่มพลัง</a><a href="origins-codex.html">คู่มือเผ่า 27</a><a href="join-server.html">เข้าเซิร์ฟเพื่อน</a><a href="mods-2612.html" class="cur">มอดใหม่ 26.1.2</a></div><div class="tl">ในหน้านี้</div><a class="" href="#tl-dr-3-มอดที่เปลี่ยนวิธีเล่นมากสุด">TL;DR — 3 มอดที่เปลี่ยนวิธีเล่นมากสุด</a><a class="" href="#ตารางภาพรวมทั้งชุด">ตารางภาพรวมทั้งชุด</a><a class="" href="#เจาะรายตัว-วิธีใช้จริงในเกม">เจาะรายตัว — วิธีใช้จริงในเกม</a><a class="h3" href="#veinminer-ขุดทั้งสายทีเดียว">⛏️ VeinMiner — ขุดทั้งสายทีเดียว</a><a class="h3" href="#waystones-เสาวาร์ปข้ามแมพ">🪧 Waystones — เสาวาร์ปข้ามแมพ</a><a class="h3" href="#traveler-s-backpack-เป้สวมหลังสารพัดประโยชน์">🎒 Traveler's Backpack — เป้สวมหลังสารพัดประโยชน์</a><a class="h3" href="#combatify-รื้อระบบคอมแบทใหม่">⚔️ Combatify — รื้อระบบคอมแบทใหม่</a><a class="h3" href="#mutantmonsters-มินิบอส-5-ตัว">👹 MutantMonsters — มินิบอส 5 ตัว</a><a class="h3" href="#easy-anvils-ทั่งไม่พัง-ตีได้ไม่จำกัด">🔨 Easy Anvils — ทั่งไม่พัง ตีได้ไม่จำกัด</a><a class="h3" href="#comforts-ถุงนอน-amp-เปลญวน-นอนได้ทุกที่">🛏️ Comforts — ถุงนอน &amp; เปลญวน นอนได้ทุกที่</a><a class="h3" href="#highlighter-ไฮไลต์ของที่เพิ่งเก็บ">✨ Highlighter — ไฮไลต์ของที่เพิ่งเก็บ</a><a class="" href="#คอมโบเด็ด-ใช้คู่กันดี">🔗 คอมโบเด็ด — ใช้คู่กันดี</a><a class="" href="#เช็คลิสต์เริ่มใช้เร็ว">✅ เช็คลิสต์เริ่มใช้เร็ว</a><a class="h3" href="#หมายเหตุฝั่ง-client-server-เผื่อแก้ปัญหา">หมายเหตุฝั่ง client/server (เผื่อแก้ปัญหา)</a></aside>
 <main><h1>คู่มือใช้งานมอดชุดใหม่ — Minecraft 26.1.2 (ลง 2026-06-28)</h1>
 <blockquote class="tip">
 <p>อ้างอิงจากไฟล์ jar จริงใน <code>.minecraft\mods\</code> ทุกตัว — ชื่อไอเทม/สูตร/ปุ่ม/ดรอป ดึงจากในมอดตรง ๆ
@@ -208,8 +239,8 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 </tr>
 <tr>
 <td><strong>Advanced Netherite</strong></td>
-<td>เกราะ/อาวุธสายเหนือ netherite</td>
-<td>คราฟต์ต่อยอดจาก netherite</td>
+<td>เกราะ/อาวุธเหนือ netherite — 4 สาย (netherite+diamond/emerald/gold/iron) ครบชุด + มี spear</td>
+<td>คราฟต์ต่อยอดจาก netherite ingot</td>
 <td>client+server</td>
 </tr>
 <tr>
@@ -408,7 +439,7 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 <p><strong>สิ่งที่เปลี่ยน (รวม ๆ):</strong>
 - ระยะเอื้อมโจมตี (attack reach) และจังหวะคูลดาวน์ตีต่างจาก vanilla
 - <strong>โล่</strong> ทำงานละเอียดขึ้น (มีโล่หลายระดับวัสดุ, กลไกบล็อก/โดนปลดต่างเดิม)
-- เพิ่ม <strong>หมวดอาวุธ</strong>: knife (มีดสั้น), longsword (ดาบยาว), spear, mace ฯลฯ — ของเดิมถูกจัดหมวดใหม่</p>
+- เพิ่ม <strong>อาวุธใหม่ทุกวัสดุ</strong> (wood→netherite): <strong>knife</strong> (มีดสั้น), <strong>longsword</strong> (ดาบยาว), <strong>shield</strong> (โล่โลหะ) — ⚠️ <strong>ไม่มี spear/mace</strong> (spear อยู่ใน Advanced Netherite ต่างหาก)</p>
 <p><strong>อาวุธ/โล่ใหม่ที่คราฟต์ได้</strong> (ทุกวัสดุ: wood/stone/copper/iron/gold/diamond/netherite):
 - <strong>Knife</strong> = วัสดุ×1 วางบน stick×1 (แนวตั้ง <code>X</code>/<code>#</code>) → ตีเร็ว ดาเมจน้อย
 - <strong>Longsword</strong> = วัสดุ×2 + Knife วัสดุเดียวกัน×1 (<code>X</code>/<code>X</code>/<code>#</code> โดย #=knife) → ระยะเอื้อมไกล
@@ -437,7 +468,7 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 <tr>
 <td><strong>Mutant Skeleton</strong></td>
 <td>สเกเลตัน</td>
-<td>ชิ้นส่วนกระดูก (limb/rib/pelvis/shoulder pad) + <strong>Skull</strong> → คราฟต์เป็น <strong>ชุดเกราะ Mutant Skeleton</strong></td>
+<td>ชิ้นส่วนกระดูก (limb/pelvis/rib cage/arms) → คราฟต์ <strong>ชุดเกราะ Mutant Skeleton</strong> · <strong>Skull</strong> (เอาไปทำ Chemical X)</td>
 </tr>
 <tr>
 <td><strong>Mutant Creeper</strong></td>
@@ -456,10 +487,12 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 </tr>
 </tbody>
 </table></div>
-<p><strong>ชุดเกราะ Mutant Skeleton (คราฟต์จากชิ้นส่วน) — โบนัสติดเกราะ:</strong>
-- Boots = กระโดดสูงขึ้น | Leggings = วิ่งเร็วขึ้น | Chestplate = ขึ้นธนูไว (quick draw) | Skull/หัว = ปลดล็อก multishot ให้ธนู</p>
+<p><strong>ชุดเกราะ Mutant Skeleton</strong> — คราฟต์จากชิ้นส่วนกระดูกที่ดรอป ได้ <strong>4 ชิ้น: boots / leggings / chestplate / arms</strong> (ชุดนี้ <strong>ไม่มี helmet</strong> — เช่น chestplate = arms + rib cage)</p>
+<blockquote class="warn">
+<p>⚠️ โบนัสรายชิ้น (กระโดดสูง / วิ่งเร็ว / ขึ้นธนูไว ฯลฯ) <strong>ต้องเช็คในเกม</strong> — ค่าอยู่ในโค้ดมอด หาจากไฟล์ตรงๆ ไม่ได้</p>
+</blockquote>
 <p><strong>ของพิเศษอื่น:</strong>
-- <strong>Chemical X</strong> — ได้เป็นโพชั่น ใช้สร้าง Mutant Snow Golem / Spider Pig
+- <strong>Chemical X</strong> — คราฟต์: <strong>obsidian (หรือ crying obsidian)×4 ล้อมของดรอปบอส×1</strong> (Hulk Hammer / Endersoul Hand / Creeper Shard / Mutant Skeleton Skull) → ใช้สร้าง Mutant Snow Golem / Spider Pig
 - <strong>Creeper Minion</strong> — ฟักจาก Creeper Minion Egg เป็นสัตว์เลี้ยง ใช้ <strong>Creeper Minion Tracker</strong> ตั้งค่ารัศมีระเบิด/ขี่บ่า/โชว์ชื่อ
 - <strong>Hulk Hammer</strong> — ใช้ฆ่า Mutant Zombie ได้ปั๊บ (advancement "Hulk Smash!")</p>
 <blockquote class="warn">
@@ -543,7 +576,7 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 <li><strong>client เท่านั้น</strong> (เพื่อนไม่ต้องลง): <code>veinminer-client</code> (ปุ่ม+รูปทรงขุด), <code>Highlighter</code></li>
 <li>เล่นเซิร์ฟเพื่อน: ฝั่งเซิร์ฟต้องมีมอด server ครบ ของพวกนี้ถึงทำงาน — Combatify ควรตั้งค่าให้ตรงกันสองฝั่ง</li>
 </ul><div class="foot"><a class="pv" href="join-server.html"><div class="fl">← ก่อนหน้า</div><div class="ft">เข้าเซิร์ฟเพื่อน</div></a></div>
-<div class="credit"><span class="di">◆</span> ตำรา Minecraft · RPG Origins + เซิร์ฟเพื่อน 26.1.2 <span class="di">◆</span><br>เนื้อหาตรวจกับไฟล์มอดจริง · เฟส HTML</div>
+<div class="credit"><span class="di">◆</span> ตำรา Minecraft · RPG Origins + เซิร์ฟเพื่อน 26.1.2 <span class="di">◆</span><br>เนื้อหาตรวจกับไฟล์มอดจริง (jar)</div>
 </main></div>
 <script>
 const mb=document.querySelector('.menu-btn'),toc=document.querySelector('.toc'),scrim=document.querySelector('.scrim');

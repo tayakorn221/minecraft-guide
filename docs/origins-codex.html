@@ -18,8 +18,8 @@
 :root[data-theme="light"]{
   --bg:#f0e7d2;--surface:#e8ddc2;--raised:#e0d4b6;--raised-2:#d8c9a6;
   --line:#c5b389;--line-soft:#d6c9a8;--line-bright:#b09a6e;
-  --ink:#2a2216;--ink-dim:#473c28;--ink-mute:#786a4d;
-  --gold:#9b7a28;--gold-bright:#785915;
+  --ink:#2a2216;--ink-dim:#473c28;--ink-mute:#706245;
+  --gold:#7e6010;--gold-bright:#785915;
   --t1:#4d7a2f;--t2:#946a14;--t3:#a83c34;--t0:#6a6350;
   --good:#4d7a2f;--bad:#a83c34;
   --nav-bg:rgba(240,231,210,.95);--code-bg:#e3d7b8;--sb-thumb:#c2b084;
@@ -124,6 +124,36 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 .credit{text-align:center;color:var(--ink-mute);font-size:12px;padding:36px 0 10px;line-height:1.8}
 .credit .di{color:var(--gold);transform:rotate(45deg);display:inline-block;margin:0 6px}
 
+/* ── mobile guide nav (ใน toc drawer) ── */
+.toc-guides{display:none}
+.toc-guides .tl{font-size:10.5px;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);font-weight:700;margin-bottom:12px;padding-left:13px}
+.toc-guides a{display:block;color:var(--ink-dim);text-decoration:none;padding:7px 13px;border-left:2px solid var(--line-soft);font-size:13.5px;font-family:var(--serif);transition:color .15s,border-color .15s}
+.toc-guides a:hover{color:var(--ink)}
+.toc-guides a.cur{color:var(--gold-bright);border-left-color:var(--gold)}
+
+/* ── landing (หน้าแรก) ── */
+.landing-wrap{max-width:1000px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
+.landing{padding:0 0 60px}
+.hero{text-align:center;padding:58px 12px 44px;border-bottom:1px solid var(--line);margin-bottom:38px}
+.hero .kicker{margin-bottom:14px}
+.hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(40px,8vw,74px);line-height:1.02;color:var(--ink);margin:4px 0 16px;letter-spacing:.5px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero .lead{color:var(--ink-dim);font-size:clamp(15px,2.2vw,18px);max-width:640px;margin:0 auto;line-height:1.7}
+.gsec{margin-bottom:36px}
+.gsec-h{font-family:var(--serif);font-weight:700;font-size:20px;color:var(--gold-bright);margin-bottom:16px;display:flex;align-items:center;gap:11px}
+.gsec-h .di{color:var(--gold);transform:rotate(45deg);display:inline-block;font-size:11px}
+.gsec-h::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line-bright),transparent)}
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:15px}
+.gcard{background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:19px 20px 17px;text-decoration:none;display:flex;flex-direction:column;gap:7px;position:relative;overflow:hidden;transition:border-color .2s,transform .2s,box-shadow .2s;animation:rise .5s ease both}
+.gcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold);opacity:0;transition:opacity .2s}
+.gcard:hover{border-color:var(--line-bright);transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,0,0,.34)}
+.gcard:hover::before{opacity:1}
+.gcard .gc-n{font-family:var(--serif);font-size:19px;font-weight:700;color:var(--ink);line-height:1.15}
+.gcard .gc-d{font-size:13.5px;color:var(--ink-dim);line-height:1.55;flex:1}
+.gcard .gc-go{font-size:12.5px;color:var(--gold-bright);font-weight:700;margin-top:3px}
+.gcard.feat{background:var(--raised);border-color:var(--line-bright)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
 /* ── responsive ── */
 @media(max-width:900px){
   .shell{grid-template-columns:1fr;gap:0}
@@ -132,6 +162,7 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
   .menu-btn{display:flex;align-items:center;justify-content:center}
   main{padding:26px 0 60px}
   .nav .links{display:none}
+  .toc-guides{display:block}
   .scrim{position:fixed;inset:var(--nav-h) 0 0;background:rgba(8,6,4,.6);z-index:54;display:none}
   .scrim.show{display:block}
 }
@@ -148,7 +179,7 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 </nav>
 <div class="scrim"></div>
 <div class="shell">
-<aside class="toc"><div class="tl">ในหน้านี้</div><a class="" href="#ข้อมูล-instance">📦 ข้อมูล Instance</a><a class="" href="#อ่านจุดสี-impact-ยังไง">🔵 อ่านจุดสี (impact) ยังไง</a><a class="" href="#แนะนำสำหรับสาย-สำรวจ-สร้าง">🎯 แนะนำสำหรับสาย "สำรวจ + สร้าง"</a><a class="" href="#แดง-impact-3-พลังแรง-จุดอ่อนหนัก">🔴 แดง — impact 3 (พลังแรง จุดอ่อนหนัก)</a><a class="h3" href="#banshee">Banshee</a><a class="h3" href="#blazeborn">Blazeborn</a><a class="h3" href="#fae">Fae</a><a class="h3" href="#gorgon">Gorgon</a><a class="h3" href="#merling">Merling</a><a class="h3" href="#moon-elf">Moon Elf</a><a class="h3" href="#ogre">Ogre</a><a class="h3" href="#phantom">Phantom</a><a class="h3" href="#plague-victim">Plague Victim</a><a class="h3" href="#revenant">Revenant</a><a class="" href="#เหลือง-impact-2-กลางๆ">🟡 เหลือง — impact 2 (กลางๆ)</a><a class="h3" href="#arachnae">Arachnae</a><a class="h3" href="#dwarf">Dwarf</a><a class="h3" href="#enderian">Enderian</a><a class="h3" href="#feline">Feline</a><a class="h3" href="#high-elf">High Elf</a><a class="h3" href="#incubus">Incubus</a><a class="h3" href="#pixie">Pixie</a><a class="h3" href="#siren">Siren</a><a class="h3" href="#valkyrie">Valkyrie</a><a class="" href="#เขียว-impact-1-เล่นง่าย">🟢 เขียว — impact 1 (เล่นง่าย)</a><a class="h3" href="#alfiq">Alfiq</a><a class="h3" href="#arachnid">Arachnid</a><a class="h3" href="#avian">Avian</a><a class="h3" href="#elytrian">Elytrian</a><a class="h3" href="#goblin">Goblin</a><a class="h3" href="#shulk">Shulk</a><a class="h3" href="#wood-elf">Wood Elf</a><a class="" href="#impact-0">⚪ impact 0</a><a class="h3" href="#human">Human</a></aside>
+<aside class="toc"><div class="toc-guides"><div class="tl">คู่มือทั้งหมด</div><a href="index.html">หน้าแรก</a><a href="choose-origin.html">เลือกเผ่า</a><a href="getting-started.html">เริ่มเล่น</a><a href="keybinds.html">ปุ่มพลัง</a><a href="origins-codex.html" class="cur">คู่มือเผ่า 27</a><a href="join-server.html">เข้าเซิร์ฟเพื่อน</a><a href="mods-2612.html">มอดใหม่ 26.1.2</a></div><div class="tl">ในหน้านี้</div><a class="" href="#ข้อมูล-instance">📦 ข้อมูล Instance</a><a class="" href="#อ่านจุดสี-impact-ยังไง">🔵 อ่านจุดสี (impact) ยังไง</a><a class="" href="#แนะนำสำหรับสาย-สำรวจ-สร้าง">🎯 แนะนำสำหรับสาย "สำรวจ + สร้าง"</a><a class="" href="#แดง-impact-3-พลังแรง-จุดอ่อนหนัก">🔴 แดง — impact 3 (พลังแรง จุดอ่อนหนัก)</a><a class="h3" href="#banshee">Banshee</a><a class="h3" href="#blazeborn">Blazeborn</a><a class="h3" href="#fae">Fae</a><a class="h3" href="#gorgon">Gorgon</a><a class="h3" href="#merling">Merling</a><a class="h3" href="#moon-elf">Moon Elf</a><a class="h3" href="#ogre">Ogre</a><a class="h3" href="#phantom">Phantom</a><a class="h3" href="#plague-victim">Plague Victim</a><a class="h3" href="#revenant">Revenant</a><a class="" href="#เหลือง-impact-2-กลางๆ">🟡 เหลือง — impact 2 (กลางๆ)</a><a class="h3" href="#arachnae">Arachnae</a><a class="h3" href="#dwarf">Dwarf</a><a class="h3" href="#enderian">Enderian</a><a class="h3" href="#feline">Feline</a><a class="h3" href="#high-elf">High Elf</a><a class="h3" href="#incubus">Incubus</a><a class="h3" href="#pixie">Pixie</a><a class="h3" href="#siren">Siren</a><a class="h3" href="#valkyrie">Valkyrie</a><a class="" href="#เขียว-impact-1-เล่นง่าย">🟢 เขียว — impact 1 (เล่นง่าย)</a><a class="h3" href="#alfiq">Alfiq</a><a class="h3" href="#arachnid">Arachnid</a><a class="h3" href="#avian">Avian</a><a class="h3" href="#elytrian">Elytrian</a><a class="h3" href="#goblin">Goblin</a><a class="h3" href="#shulk">Shulk</a><a class="h3" href="#wood-elf">Wood Elf</a><a class="" href="#impact-0">⚪ impact 0</a><a class="h3" href="#human">Human</a></aside>
 <main><p>﻿# 🎮 RPG Origins - คู่มือเผ่าทั้งหมด (Origins Guide)</p>
 <blockquote class="tip">
 <p>ดึงจากไฟล์มอดจริงในเครื่อง (Origins 1.13.0 + Medieval Origins 7.0.4) — อัปเดต 2026-06-29</p>
@@ -483,7 +514,7 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 <h2 id="impact-0">⚪ impact 0</h2>
 <h3 id="human">Human</h3>
 <p><em>A regular human. Your ordinary Minecraft experience awaits.</em></p><div class="foot"><a class="pv" href="keybinds.html"><div class="fl">← ก่อนหน้า</div><div class="ft">ปุ่มพลัง</div></a><a class="nx" href="join-server.html"><div class="fl">ถัดไป →</div><div class="ft">เข้าเซิร์ฟเพื่อน</div></a></div>
-<div class="credit"><span class="di">◆</span> ตำรา Minecraft · RPG Origins + เซิร์ฟเพื่อน 26.1.2 <span class="di">◆</span><br>เนื้อหาตรวจกับไฟล์มอดจริง · เฟส HTML</div>
+<div class="credit"><span class="di">◆</span> ตำรา Minecraft · RPG Origins + เซิร์ฟเพื่อน 26.1.2 <span class="di">◆</span><br>เนื้อหาตรวจกับไฟล์มอดจริง (jar)</div>
 </main></div>
 <script>
 const mb=document.querySelector('.menu-btn'),toc=document.querySelector('.toc'),scrim=document.querySelector('.scrim');

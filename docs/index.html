@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="th"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>หน้าแรก · ตำรา RPG Origins</title>
+<title>ตำรา Minecraft · คู่มือ RPG Origins + เซิร์ฟเพื่อน 26.1.2</title>
 <style>
 :root{
   --bg:#14110c;--surface:#1c1812;--raised:#242019;--raised-2:#2b2619;
@@ -18,8 +18,8 @@
 :root[data-theme="light"]{
   --bg:#f0e7d2;--surface:#e8ddc2;--raised:#e0d4b6;--raised-2:#d8c9a6;
   --line:#c5b389;--line-soft:#d6c9a8;--line-bright:#b09a6e;
-  --ink:#2a2216;--ink-dim:#473c28;--ink-mute:#786a4d;
-  --gold:#9b7a28;--gold-bright:#785915;
+  --ink:#2a2216;--ink-dim:#473c28;--ink-mute:#706245;
+  --gold:#7e6010;--gold-bright:#785915;
   --t1:#4d7a2f;--t2:#946a14;--t3:#a83c34;--t0:#6a6350;
   --good:#4d7a2f;--bad:#a83c34;
   --nav-bg:rgba(240,231,210,.95);--code-bg:#e3d7b8;--sb-thumb:#c2b084;
@@ -124,6 +124,36 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 .credit{text-align:center;color:var(--ink-mute);font-size:12px;padding:36px 0 10px;line-height:1.8}
 .credit .di{color:var(--gold);transform:rotate(45deg);display:inline-block;margin:0 6px}
 
+/* ── mobile guide nav (ใน toc drawer) ── */
+.toc-guides{display:none}
+.toc-guides .tl{font-size:10.5px;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);font-weight:700;margin-bottom:12px;padding-left:13px}
+.toc-guides a{display:block;color:var(--ink-dim);text-decoration:none;padding:7px 13px;border-left:2px solid var(--line-soft);font-size:13.5px;font-family:var(--serif);transition:color .15s,border-color .15s}
+.toc-guides a:hover{color:var(--ink)}
+.toc-guides a.cur{color:var(--gold-bright);border-left-color:var(--gold)}
+
+/* ── landing (หน้าแรก) ── */
+.landing-wrap{max-width:1000px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
+.landing{padding:0 0 60px}
+.hero{text-align:center;padding:58px 12px 44px;border-bottom:1px solid var(--line);margin-bottom:38px}
+.hero .kicker{margin-bottom:14px}
+.hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(40px,8vw,74px);line-height:1.02;color:var(--ink);margin:4px 0 16px;letter-spacing:.5px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero .lead{color:var(--ink-dim);font-size:clamp(15px,2.2vw,18px);max-width:640px;margin:0 auto;line-height:1.7}
+.gsec{margin-bottom:36px}
+.gsec-h{font-family:var(--serif);font-weight:700;font-size:20px;color:var(--gold-bright);margin-bottom:16px;display:flex;align-items:center;gap:11px}
+.gsec-h .di{color:var(--gold);transform:rotate(45deg);display:inline-block;font-size:11px}
+.gsec-h::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line-bright),transparent)}
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:15px}
+.gcard{background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:19px 20px 17px;text-decoration:none;display:flex;flex-direction:column;gap:7px;position:relative;overflow:hidden;transition:border-color .2s,transform .2s,box-shadow .2s;animation:rise .5s ease both}
+.gcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold);opacity:0;transition:opacity .2s}
+.gcard:hover{border-color:var(--line-bright);transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,0,0,.34)}
+.gcard:hover::before{opacity:1}
+.gcard .gc-n{font-family:var(--serif);font-size:19px;font-weight:700;color:var(--ink);line-height:1.15}
+.gcard .gc-d{font-size:13.5px;color:var(--ink-dim);line-height:1.55;flex:1}
+.gcard .gc-go{font-size:12.5px;color:var(--gold-bright);font-weight:700;margin-top:3px}
+.gcard.feat{background:var(--raised);border-color:var(--line-bright)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
 /* ── responsive ── */
 @media(max-width:900px){
   .shell{grid-template-columns:1fr;gap:0}
@@ -132,6 +162,7 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
   .menu-btn{display:flex;align-items:center;justify-content:center}
   main{padding:26px 0 60px}
   .nav .links{display:none}
+  .toc-guides{display:block}
   .scrim{position:fixed;inset:var(--nav-h) 0 0;background:rgba(8,6,4,.6);z-index:54;display:none}
   .scrim.show{display:block}
 }
@@ -140,107 +171,15 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 <script>try{var _t=localStorage.getItem('mc-theme');if(_t)document.documentElement.dataset.theme=_t}catch(e){}</script>
 </head><body>
 <nav class="nav">
-<button class="menu-btn" aria-label="menu">☰</button>
 <a class="brand" href="index.html"><span class="di">◆</span> ตำรา <em>Minecraft</em></a>
 <div class="links"><a class="nl" href="choose-origin.html">เลือกเผ่า</a><a class="nl" href="getting-started.html">เริ่มเล่น</a><a class="nl" href="keybinds.html">ปุ่มพลัง</a><a class="nl" href="origins-codex.html">คู่มือเผ่า 27</a><a class="nl" href="join-server.html">เข้าเซิร์ฟเพื่อน</a><a class="nl" href="mods-2612.html">มอดใหม่ 26.1.2</a></div>
 <button class="theme-btn" aria-label="สลับโหมดสว่าง/มืด">☀</button>
 <a class="gh" href="https://github.com/tayakorn221/minecraft-guide" target="_blank" rel="noopener">GitHub ↗</a>
 </nav>
 <div class="scrim"></div>
-<div class="shell">
-<aside class="toc"><div class="tl">ในหน้านี้</div><a class="" href="#ชุด-rpg-origins-mc-1-21-1-prism-launcher-เล่นคนเดียว">🧙 ชุด RPG Origins (MC 1.21.1 · Prism Launcher · เล่นคนเดียว)</a><a class="" href="#ชุดเซิร์ฟเพื่อน-mc-26-1-2-fabric-เล่นกับเพื่อน">👥 ชุดเซิร์ฟเพื่อน (MC 26.1.2 · Fabric · เล่นกับเพื่อน)</a><a class="" href="#ไฟล์อื่นในโฟลเดอร์แม่">🗂️ ไฟล์อื่นในโฟลเดอร์แม่</a></aside>
-<main><h1>📚 สารบัญคู่มือ Minecraft (docs)</h1>
-<blockquote class="tip">
-<p>รวมคู่มือทั้งหมดในโฟลเดอร์นี้ จัดกลุ่มตาม 2 setup ที่เล่นอยู่ · อัปเดต 2026-06-29
-ทุกไฟล์เป็น <code>.md</code> เนื้อหาดึงจากไฟล์มอดจริง (เฟสถัดไป: แปลงเป็น HTML)</p>
-</blockquote>
-<hr />
-<h2 id="ชุด-rpg-origins-mc-1-21-1-prism-launcher-เล่นคนเดียว">🧙 ชุด RPG Origins (MC 1.21.1 · Prism Launcher · เล่นคนเดียว)</h2>
-<p>โมดแพ็ค overhaul 262 มอด เน้นระบบเผ่า (Origins) + คาถา (Spell Engine) — เริ่มอ่านตามลำดับนี้:</p>
-<div class="tw"><table>
-<thead>
-<tr>
-<th>#</th>
-<th>ไฟล์</th>
-<th>คือ</th>
-<th>อ่านเมื่อ</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td><strong><a href="choose-origin.html">เลือกเผ่า-guide.md</a></strong></td>
-<td>ช่วยตัดสินใจเลือก 1 ใน 27 เผ่าใน 2 นาที (decision flow + ตารางตามสไตล์ + "เลี่ยงถ้า...")</td>
-<td><strong>ก่อนสร้างโลก</strong></td>
-</tr>
-<tr>
-<td>2</td>
-<td><strong><a href="getting-started.html">rpg-origins-เริ่มเล่น.md</a></strong></td>
-<td>Getting Started — 10 นาทีแรก, เช็คลิสต์ 3 ชม., ระบบ RPG/คาถา/คอมแบทของแพ็คนี้</td>
-<td>เปิดเกมครั้งแรก</td>
-</tr>
-<tr>
-<td>3</td>
-<td><strong><a href="keybinds.html">origin-keybinds.md</a></strong></td>
-<td>ปุ่มพลัง active ของทุกเผ่า (<code>G</code>/<code>V</code>/<code>O</code>/<code>K</code>) + คูลดาวน์จริง + ปุ่มที่ต้องตั้งเอง</td>
-<td>จะกดพลังให้เป็น</td>
-</tr>
-<tr>
-<td>4</td>
-<td><strong><a href="origins-codex.html">RPG-Origins-คู่มือเผ่า.md</a></strong></td>
-<td>คู่มือเผ่าครบ 27 ตัว — พลัง/จุดอ่อนทุกข้อ (อ้างอิงละเอียด)</td>
-<td>อยากรู้ลึกรายเผ่า</td>
-</tr>
-<tr>
-<td>✨</td>
-<td><strong><a href="origin-selector.html">origin-selector.html</a></strong></td>
-<td>หน้าเว็บเลือกเผ่า interactive (ฟิลเตอร์ + เทียบ + dark mode)</td>
-<td>เปิดในเบราว์เซอร์</td>
-</tr>
-</tbody>
-</table></div>
-<blockquote class="goal">
-<p>🎯 <strong>สายหลัก "สำรวจ + สร้าง"</strong> → เริ่มที่ไฟล์ 1 (สรุป: มือใหม่เลือก Avian/Arachnid เขียว, อยากแรงเลือก Fae แดง)</p>
-</blockquote>
-<hr />
-<h2 id="ชุดเซิร์ฟเพื่อน-mc-26-1-2-fabric-เล่นกับเพื่อน">👥 ชุดเซิร์ฟเพื่อน (MC 26.1.2 · Fabric · เล่นกับเพื่อน)</h2>
-<p>เซิร์ฟ vanilla+ ของ tayakorn221 — มอดเน้น QoL/บอส:</p>
-<div class="tw"><table>
-<thead>
-<tr>
-<th>#</th>
-<th>ไฟล์</th>
-<th>คือ</th>
-<th>อ่านเมื่อ</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>5</td>
-<td><strong><a href="join-server.html">เซิร์ฟเพื่อน-วิธีเข้า.md</a></strong></td>
-<td>onboarding เพื่อนที่ไม่เคยลงมอด — ลง Fabric+มอดทีละสเต็ป (Win/Mac) + Troubleshoot</td>
-<td>ส่งให้เพื่อนใหม่</td>
-</tr>
-<tr>
-<td>6</td>
-<td><strong><a href="mods-2612.html">มอดใหม่-26.1.2-วิธีใช้.md</a></strong></td>
-<td>วิธีใช้มอดชุดใหม่ (VeinMiner, Waystones, Backpack, Combatify, MutantMonsters ฯลฯ) + สูตรคราฟต์</td>
-<td>หลังเข้าเซิร์ฟได้</td>
-</tr>
-</tbody>
-</table></div>
-<blockquote class="warn">
-<p>⚠️ มอดชุดใหม่ 2026 บางตัว client ต้องมีด้วย — เพื่อนต้องได้มอดครบตรงกับ host ไม่งั้นเด้ง (ดูไฟล์ 5)</p>
-</blockquote>
-<hr />
-<h2 id="ไฟล์อื่นในโฟลเดอร์แม่">🗂️ ไฟล์อื่นในโฟลเดอร์แม่</h2>
-<ul>
-<li><code>..\README.md</code> — ภาพรวมโฟลเดอร์ + 2 setup</li>
-<li><code>..\modpacks\</code> — <code>.mrpack</code> สำรอง (RPG Origins)</li>
-<li><code>..\backups\</code> — สำรอง mods 26.1.2 (zip ย้อนกลับได้)</li>
-</ul><div class="foot"><a href="index.html"><div class="fl">⌂ กลับ</div><div class="ft">หน้าแรก</div></a></div>
-<div class="credit"><span class="di">◆</span> ตำรา Minecraft · RPG Origins + เซิร์ฟเพื่อน 26.1.2 <span class="di">◆</span><br>เนื้อหาตรวจกับไฟล์มอดจริง · เฟส HTML</div>
-</main></div>
+<div class="landing-wrap"><main class="landing"><div class="hero"><div class="kicker">คู่มือเล่นภาษาไทย · ทุกตัวเลขตรวจกับไฟล์มอดจริง</div><h1>ตำรา <em>Minecraft</em></h1><p class="lead">RPG Origins (1.21.1) + เซิร์ฟเพื่อน (26.1.2) — เลือกเผ่า · ปุ่มพลัง · เริ่มเล่น · เข้าเซิร์ฟ · วิธีใช้มอด</p></div><div class="gsec"><div class="gsec-h"><span class="di">◆</span> RPG Origins · 1.21.1</div><div class="guide-grid"><a class="gcard" href="choose-origin.html"><div class="gc-n">เลือกเผ่า</div><div class="gc-d">ตัดสินใจเลือก 1 ใน 27 เผ่าใน 2 นาที — decision flow + ตารางตามสไตล์ + "เลี่ยงถ้า…"</div><div class="gc-go">เปิดอ่าน →</div></a><a class="gcard" href="getting-started.html"><div class="gc-n">เริ่มเล่น</div><div class="gc-d">เปิดเกมครั้งแรกทำอะไรก่อน + ระบบ RPG/คาถา/คอมแบทของแพ็คนี้ทำงานยังไง</div><div class="gc-go">เปิดอ่าน →</div></a><a class="gcard" href="keybinds.html"><div class="gc-n">ปุ่มพลัง</div><div class="gc-d">ปุ่มพลัง active ทุกเผ่า + คูลดาวน์จริง + ปุ่มเดียวที่ต้องตั้งเอง</div><div class="gc-go">เปิดอ่าน →</div></a><a class="gcard" href="origins-codex.html"><div class="gc-n">คู่มือเผ่า 27</div><div class="gc-d">คู่มือเผ่าครบ 27 ตัว — พลัง/จุดอ่อนทุกข้อ (อ้างอิงละเอียด)</div><div class="gc-go">เปิดอ่าน →</div></a><a class="gcard feat" href="origin-selector.html"><div class="gc-n">เลือกเผ่า (interactive)</div><div class="gc-d">หน้าเว็บเลือกเผ่า interactive — ฟิลเตอร์ตาม tier/สไตล์ + เทียบเผ่า</div><div class="gc-go">เปิดเครื่องมือ →</div></a></div></div><div class="gsec"><div class="gsec-h"><span class="di">◆</span> เซิร์ฟเพื่อน · 26.1.2</div><div class="guide-grid"><a class="gcard" href="join-server.html"><div class="gc-n">เข้าเซิร์ฟเพื่อน</div><div class="gc-d">เพื่อนไม่เคยลงมอด อ่านแล้วเข้าเซิร์ฟได้เองทีละสเต็ป + Troubleshoot</div><div class="gc-go">เปิดอ่าน →</div></a><a class="gcard" href="mods-2612.html"><div class="gc-n">มอดใหม่ 26.1.2</div><div class="gc-d">VeinMiner/Waystones/Backpack/Combatify ใช้ยังไง กดอะไร คราฟต์อะไร</div><div class="gc-go">เปิดอ่าน →</div></a></div></div></main>
+<div class="credit"><span class="di">◆</span> เนื้อหาตรวจกับไฟล์มอดจริง (jar) · ภาษาไทย <span class="di">◆</span></div>
+</div>
 <script>
 const mb=document.querySelector('.menu-btn'),toc=document.querySelector('.toc'),scrim=document.querySelector('.scrim');
 if(mb){mb.onclick=()=>{toc.classList.toggle('open');scrim.classList.toggle('show')};
