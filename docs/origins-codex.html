@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="th"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>คู่มือเผ่า 27 · ตำรา RPG Origins</title>
+<style>
+:root{
+  --bg:#14110c;--surface:#1c1812;--raised:#242019;--raised-2:#2b2619;
+  --line:#3a3225;--line-soft:#2c2519;--line-bright:#4d4231;
+  --ink:#f3ecdd;--ink-dim:#d2c6ad;--ink-mute:#a1957c;
+  --gold:#c9a24b;--gold-bright:#e2bf6e;
+  --t1:#7aa45c;--t2:#c89a45;--t3:#bd5651;--t0:#8f8975;
+  --good:#86a85f;--bad:#c4625b;
+  --serif:"Georgia","Iowan Old Style","Palatino Linotype","Times New Roman",serif;
+  --sans:"Leelawadee UI","Segoe UI","Noto Sans Thai",Tahoma,sans-serif;
+  --nav-h:58px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+::selection{background:rgba(201,162,75,.28);color:#fff}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:var(--surface)}
+::-webkit-scrollbar-thumb{background:#3c3324;border:3px solid var(--surface);border-radius:8px}
+::-webkit-scrollbar-thumb:hover{background:#4d4231}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;position:relative;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ── top nav ── */
+.nav{position:sticky;top:0;z-index:60;height:var(--nav-h);background:rgba(20,17,12,.95);border-bottom:1px solid var(--line);backdrop-filter:blur(8px);display:flex;align-items:center;gap:18px;padding:0 20px}
+.nav .brand{font-family:var(--serif);font-weight:700;font-size:17px;color:var(--ink);display:flex;align-items:center;gap:9px;white-space:nowrap;text-decoration:none}
+.nav .brand .di{color:var(--gold);transform:rotate(45deg);display:inline-block;font-size:11px}
+.nav .brand em{font-style:italic;color:var(--gold)}
+.nav .links{display:flex;gap:3px;flex:1;overflow-x:auto;scrollbar-width:none}
+.nav .links::-webkit-scrollbar{display:none}
+.nav a.nl{font-size:13px;color:var(--ink-mute);text-decoration:none;padding:7px 12px;border-radius:3px;white-space:nowrap;transition:color .15s,background .15s;border:1px solid transparent}
+.nav a.nl:hover{color:var(--ink);background:var(--surface)}
+.nav a.nl.active{color:var(--gold-bright);border-color:var(--line-bright);background:var(--surface)}
+.nav .gh{color:var(--ink-mute);text-decoration:none;font-size:13px;border:1px solid var(--line-bright);padding:6px 12px;border-radius:3px;white-space:nowrap;transition:all .15s}
+.nav .gh:hover{color:var(--ink);border-color:var(--gold)}
+.menu-btn{display:none;background:var(--surface);border:1px solid var(--line-bright);color:var(--ink);width:38px;height:38px;border-radius:3px;font-size:18px;cursor:pointer}
+
+/* ── layout ── */
+.shell{max-width:1180px;margin:0 auto;padding:0 22px;display:grid;grid-template-columns:232px 1fr;gap:40px;position:relative;z-index:1}
+.toc{position:sticky;top:calc(var(--nav-h) + 24px);align-self:start;height:calc(100vh - var(--nav-h) - 48px);overflow-y:auto;padding:28px 0 40px;font-size:13px}
+.toc .tl{font-size:10.5px;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);font-weight:700;margin-bottom:14px;padding-left:13px}
+.toc a{display:block;color:var(--ink-mute);text-decoration:none;padding:5px 13px;border-left:2px solid var(--line-soft);line-height:1.45;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--ink-dim)}
+.toc a.h3{padding-left:26px;font-size:12.5px}
+.toc a.on{color:var(--gold-bright);border-left-color:var(--gold)}
+main{min-width:0;padding:38px 0 80px;max-width:820px}
+
+/* ── prose ── */
+.kicker{font:700 11.5px/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+main h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,5vw,46px);line-height:1.08;letter-spacing:.4px;color:var(--ink);margin:0 0 10px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+main h1 em{font-style:italic;color:var(--gold)}
+main h2{font-family:var(--serif);font-weight:700;font-size:clamp(22px,3vw,28px);color:var(--ink);margin:46px 0 16px;padding-top:10px;display:flex;align-items:center;gap:13px;scroll-margin-top:calc(var(--nav-h) + 16px)}
+main h2::before{content:"◆";color:var(--gold);font-size:14px;flex-shrink:0}
+main h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line-bright),transparent)}
+main h3{font-family:var(--serif);font-weight:700;font-size:19px;color:var(--gold-bright);margin:30px 0 12px;letter-spacing:.2px;scroll-margin-top:calc(var(--nav-h) + 16px)}
+main h4{font-family:var(--sans);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-dim);margin:22px 0 10px}
+main p{color:var(--ink-dim);margin:13px 0}
+main a{color:var(--gold-bright);text-decoration:none;border-bottom:1px solid rgba(201,162,75,.32);transition:border-color .15s}
+main a:hover{border-bottom-color:var(--gold-bright)}
+main strong{color:var(--ink);font-weight:700}
+main em{color:var(--ink-dim)}
+main ul,main ol{margin:13px 0 13px 4px;padding-left:22px}
+main li{color:var(--ink-dim);margin:7px 0;padding-left:6px}
+main ul li::marker{color:var(--gold);content:"◆  ";font-size:.8em}
+main ol li::marker{color:var(--gold);font-family:var(--serif);font-weight:700}
+main li>ul,main li>ol{margin:7px 0}
+main hr{border:none;height:34px;position:relative;margin:30px 0}
+main hr::before{content:"◆";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:var(--gold);font-size:12px;background:var(--bg);padding:0 14px}
+main hr::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,transparent,var(--line-bright),transparent)}
+
+/* code */
+main code{font-family:"Consolas","SF Mono",monospace;font-size:.86em;background:var(--raised-2);color:var(--gold-bright);border:1px solid var(--line);border-radius:3px;padding:2px 7px;white-space:nowrap}
+main pre{background:#100d08;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px;padding:16px 18px;overflow-x:auto;margin:16px 0}
+main pre code{background:none;border:none;color:var(--ink-dim);padding:0;white-space:pre;font-size:13.5px;line-height:1.6}
+
+/* tables — ledger style */
+.tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:5px}
+main table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:480px}
+main thead th{background:var(--raised-2);color:var(--gold-bright);font-family:var(--serif);font-weight:700;text-align:left;padding:11px 15px;border-bottom:1px solid var(--line-bright);letter-spacing:.2px;white-space:nowrap}
+main tbody td{padding:10px 15px;border-bottom:1px solid var(--line-soft);color:var(--ink-dim);vertical-align:top}
+main tbody tr:nth-child(even){background:rgba(255,255,255,.012)}
+main tbody tr:hover{background:rgba(201,162,75,.05)}
+main tbody tr:last-child td{border-bottom:none}
+main td strong{color:var(--ink)}
+
+/* blockquote → callout */
+main blockquote{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:3px;padding:13px 18px;margin:16px 0;color:var(--ink-dim);font-size:14px}
+main blockquote p{margin:6px 0;color:var(--ink-dim)}
+main blockquote p:first-child{margin-top:0}main blockquote p:last-child{margin-bottom:0}
+main blockquote.warn{border-left-color:var(--t3);background:linear-gradient(90deg,rgba(189,86,81,.07),var(--surface) 60%)}
+main blockquote.tip{border-left-color:var(--gold)}
+main blockquote.goal{border-left-color:var(--t1);background:linear-gradient(90deg,rgba(122,164,92,.06),var(--surface) 60%)}
+
+/* task list checkboxes */
+main .task{list-style:none;padding-left:0;position:relative}
+main .task::marker{content:""}
+main .cb{display:inline-flex;width:17px;height:17px;border:1px solid var(--line-bright);border-radius:3px;margin-right:9px;vertical-align:-3px;align-items:center;justify-content:center;font-size:11px;color:var(--gold);flex-shrink:0}
+main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
+
+/* footer nav */
+.foot{border-top:1px solid var(--line);margin-top:50px;padding-top:26px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.foot a{flex:1;min-width:200px;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:14px 18px;text-decoration:none;transition:border-color .18s,transform .15s;display:block}
+.foot a:hover{border-color:var(--gold);transform:translateY(-2px)}
+.foot .fl{font-size:11px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.14em}
+.foot .ft{font-family:var(--serif);font-size:16px;color:var(--gold-bright);font-weight:700;margin-top:3px}
+.foot a.nx{text-align:right}
+.credit{text-align:center;color:var(--ink-mute);font-size:12px;padding:36px 0 10px;line-height:1.8}
+.credit .di{color:var(--gold);transform:rotate(45deg);display:inline-block;margin:0 6px}
+
+/* ── responsive ── */
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr;gap:0}
+  .toc{position:fixed;top:var(--nav-h);left:0;bottom:0;width:262px;height:auto;background:var(--surface);border-right:1px solid var(--line);padding:24px 14px 40px;transform:translateX(-105%);transition:transform .26s ease;z-index:55}
+  .toc.open{transform:none;box-shadow:18px 0 40px rgba(0,0,0,.5)}
+  .menu-btn{display:flex;align-items:center;justify-content:center}
+  main{padding:26px 0 60px}
+  .nav .links{display:none}
+  .scrim{position:fixed;inset:var(--nav-h) 0 0;background:rgba(8,6,4,.6);z-index:54;display:none}
+  .scrim.show{display:block}
+}
+@media(min-width:901px){.menu-btn,.scrim{display:none}}
+</style></head><body>
+<nav class="nav">
+<button class="menu-btn" aria-label="menu">☰</button>
+<a class="brand" href="index.html"><span class="di">◆</span> ตำรา <em>Minecraft</em></a>
+<div class="links"><a class="nl" href="choose-origin.html">เลือกเผ่า</a><a class="nl" href="getting-started.html">เริ่มเล่น</a><a class="nl" href="keybinds.html">ปุ่มพลัง</a><a class="nl active" href="origins-codex.html">คู่มือเผ่า 27</a><a class="nl" href="join-server.html">เข้าเซิร์ฟเพื่อน</a><a class="nl" href="mods-2612.html">มอดใหม่ 26.1.2</a></div>
+<a class="gh" href="https://github.com/tayakorn221/minecraft-guide" target="_blank" rel="noopener">GitHub ↗</a>
+</nav>
+<div class="scrim"></div>
+<div class="shell">
+<aside class="toc"><div class="tl">ในหน้านี้</div><a class="" href="#ข้อมูล-instance">📦 ข้อมูล Instance</a><a class="" href="#อ่านจุดสี-impact-ยังไง">🔵 อ่านจุดสี (impact) ยังไง</a><a class="" href="#แนะนำสำหรับสาย-สำรวจ-สร้าง">🎯 แนะนำสำหรับสาย "สำรวจ + สร้าง"</a><a class="" href="#แดง-impact-3-พลังแรง-จุดอ่อนหนัก">🔴 แดง — impact 3 (พลังแรง จุดอ่อนหนัก)</a><a class="h3" href="#banshee">Banshee</a><a class="h3" href="#blazeborn">Blazeborn</a><a class="h3" href="#fae">Fae</a><a class="h3" href="#gorgon">Gorgon</a><a class="h3" href="#merling">Merling</a><a class="h3" href="#moon-elf">Moon Elf</a><a class="h3" href="#ogre">Ogre</a><a class="h3" href="#phantom">Phantom</a><a class="h3" href="#plague-victim">Plague Victim</a><a class="h3" href="#revenant">Revenant</a><a class="" href="#เหลือง-impact-2-กลางๆ">🟡 เหลือง — impact 2 (กลางๆ)</a><a class="h3" href="#arachnae">Arachnae</a><a class="h3" href="#dwarf">Dwarf</a><a class="h3" href="#enderian">Enderian</a><a class="h3" href="#feline">Feline</a><a class="h3" href="#high-elf">High Elf</a><a class="h3" href="#incubus">Incubus</a><a class="h3" href="#pixie">Pixie</a><a class="h3" href="#siren">Siren</a><a class="h3" href="#valkyrie">Valkyrie</a><a class="" href="#เขียว-impact-1-เล่นง่าย">🟢 เขียว — impact 1 (เล่นง่าย)</a><a class="h3" href="#alfiq">Alfiq</a><a class="h3" href="#arachnid">Arachnid</a><a class="h3" href="#avian">Avian</a><a class="h3" href="#elytrian">Elytrian</a><a class="h3" href="#goblin">Goblin</a><a class="h3" href="#shulk">Shulk</a><a class="h3" href="#wood-elf">Wood Elf</a><a class="" href="#impact-0">⚪ impact 0</a><a class="h3" href="#human">Human</a></aside>
+<main><p>﻿# 🎮 RPG Origins - คู่มือเผ่าทั้งหมด (Origins Guide)</p>
+<blockquote class="tip">
+<p>ดึงจากไฟล์มอดจริงในเครื่อง (Origins 1.13.0 + Medieval Origins 7.0.4) — อัปเดต 2026-06-29</p>
+</blockquote>
+<h2 id="ข้อมูล-instance">📦 ข้อมูล Instance</h2>
+<ul>
+<li><strong>Launcher:</strong> Prism Launcher 11.0.2</li>
+<li><strong>Modpack:</strong> RPG Origins - Rise of Power v13.7.0 (MC 1.21.1 Fabric)</li>
+<li><strong>Instance path:</strong> <code>C:\Users\User\AppData\Roaming\PrismLauncher\instances\RPG Origins 13.7.0\</code></li>
+<li><strong>RAM ที่ตั้ง:</strong> 6144 MB (6GB) — เครื่องมี 16GB</li>
+<li><strong>แยกจาก</strong> เซ็ต MC 26.1.2 ที่เล่นกับเพื่อน (คนละ launcher คนละโลก)</li>
+</ul>
+<h2 id="อ่านจุดสี-impact-ยังไง">🔵 อ่านจุดสี (impact) ยังไง</h2>
+<ul>
+<li>🟢 <strong>impact 1 (เขียว)</strong> = สมดุล เล่นง่าย พลังเบา จุดอ่อนเบา</li>
+<li>🟡 <strong>impact 2 (เหลือง)</strong> = กลางๆ พลังเด่นขึ้น จุดอ่อนชัดขึ้น</li>
+<li>🔴 <strong>impact 3 (แดง/ชมพู)</strong> = พลังแรงสุด <strong>แต่จุดอ่อนหนัก เล่นยาก</strong></li>
+<li>⚪ <strong>impact 0</strong> = Human (วานิลลา ไม่มีพลังไม่มีจุดอ่อน)</li>
+</ul>
+<h2 id="แนะนำสำหรับสาย-สำรวจ-สร้าง">🎯 แนะนำสำหรับสาย "สำรวจ + สร้าง"</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>เผ่าแนะนำ</th>
+<th>เพราะ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢 เขียว</td>
+<td><strong>Arachnid</strong> (ปีนกำแพง) / <strong>Elytrian</strong> (ปีกบิน) / <strong>Avian</strong> (ตกไม่เจ็บ)</td>
+<td>สำรวจ+สร้างคล่อง จุดอ่อนเบา เริ่มง่าย</td>
+</tr>
+<tr>
+<td>🟡 เหลือง</td>
+<td><strong>Enderian</strong> (วาร์ป+ตัวสูงเอื้อมไกล)</td>
+<td>เดินทางไว สร้างสูงสะดวก (กลัวน้ำนิดหน่อย)</td>
+</tr>
+<tr>
+<td>🔴 แดง</td>
+<td><strong>Fae</strong> (ลอยบินได้ + เร่งโตพืช)</td>
+<td>บินสำรวจ + ฟาร์มไว <strong>ไม่กลัวแดด/น้ำ สร้างกลางวันได้</strong> — ดีสุดในโซนแดง</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="warn">
+<p>⚠️ ในโซนแดงเลี่ยง: <strong>Ogre</strong> (ลอดประตูไม่ได้), <strong>Revenant/Plague Victim</strong> (เก็บพืชไม่ได้/ชาวบ้านไม่เทรด), <strong>Phantom/Gorgon</strong> (กลางวันมีปัญหา) — ไม่เข้าสายสร้างของ</p>
+<p>💡 เปลี่ยนเผ่าทีหลังได้ด้วยไอเทม <strong>Orb of Origin</strong></p>
+</blockquote>
+<hr />
+<h2 id="แดง-impact-3-พลังแรง-จุดอ่อนหนัก">🔴 แดง — impact 3 (พลังแรง จุดอ่อนหนัก)</h2>
+<h3 id="banshee">Banshee</h3>
+<p><em>Overview:  + Flight, Support, Phasing • Undead - Defense - Extreme changes, read first! Banshees are anguished spirits whose cries can shatter glass and drive people to madness. In myth, their presence is often considered an omen of death.</em></p>
+<ul>
+<li><strong>Spectral</strong> — Banshees possess the ability to become intangible, moving freely throughout the physical realm while being unable to interact with it. This uses tremendous energy and can not be activated while low on hunger.</li>
+<li><strong>Preemptive Elegy</strong> — Banshee's shrieks forewarn death. They can unleash an earsplitting wail, pushing back nearby entities and summoning a small protective circle. Targets hit directly by the shriek will be disoriented</li>
+<li><strong>Lunar Nexus</strong> — Banshees restore no hunger from food - their energy is only restored by direct moonlight, however, they cannot starve.</li>
+<li><strong>Dimeritium Shackles</strong> — Magically suppressive metals, such as iron or silver, are completely intolerable to banshees.</li>
+<li><strong>Hexed</strong> — Banshees are shrouded in curses. Every time they are hit, there is a small chance that the attacker will be consigned to a fate of slow, agonising death.</li>
+<li><strong>Immaterial</strong> — Banshees have half the health a living person would have.</li>
+<li><strong>Cursed Sigil</strong> — You deal increased damage when wielding a cursed weapon.</li>
+<li><strong>Cursed Ward</strong> — You resist additional damage for each piece of cursed armor worn.</li>
+</ul>
+<h3 id="blazeborn">Blazeborn</h3>
+<p><em>Late descendants of the Blaze, the Blazeborn are naturally immune to the perils of the Nether.</em></p>
+<ul>
+<li><strong>Fire Immunity</strong> — You are immune to all types of fire damage.</li>
+<li><strong>Nether Inhabitant</strong> — Your natural spawn will be in the Nether.</li>
+<li><strong>Burning Wrath</strong> — When on fire, you deal additional damage with your attacks.</li>
+<li><strong>Hotblooded</strong> — Due to your hot body, venoms burn up, making you immune to poison and hunger status effects.</li>
+<li><strong>Hydrophobia</strong> — You receive damage over time while in contact with water.</li>
+</ul>
+<h3 id="fae">Fae</h3>
+<p><em>Overview:  + Hovering, Magic • Short: 122cm.4'0" - Loved by Mobs Fae are magical woodland creatures of elegance, infused with natural magic and deeply connected to the forests from which they hail.</em></p>
+<ul>
+<li><strong>Wings</strong> — Fae are light, winged creatures who can float effortlessly on the air.</li>
+<li><strong>Nature's Blessing</strong> — Channel potent life energies for a short duration. While active, spread seeds onto stepped-on farmland and pulse healing and cleansing energy to nearby allies.</li>
+<li><strong>Nourishment</strong> — Spread a burst of vital life energy, instantly fertilizing plants in an area around you.</li>
+<li><strong>Forest Kin</strong> — While you are within the embrace of a forest, your wounds mend faster.</li>
+<li><strong>Nature's Ward</strong> — You are bound to nature, granting you immunity to poison and nausea, and resistance against magical attacks.</li>
+<li><strong>Allure</strong> — Fae are naturally alluring. Mobs will pursue them from much further away than they would other creatures.</li>
+<li><strong>Diminutive</strong> — Fae are fairly short, most barely being taller than the average goblin.</li>
+<li><strong>Magical Suppression</strong> — Iron and silver inhibit fae powers. It is unbearable for them to wear it.</li>
+<li><strong>Fragile Frame</strong> — Fae are delicate creatures with less health than a human.</li>
+</ul>
+<h3 id="gorgon">Gorgon</h3>
+<p><em>Overview:  + Poison Damage, Immunity + Crowd Control - Hydrophobe  - Unique weaknesses Gorgons are cursed creatures who were once human, with hair made of writhing snakes and a haunting visage said to petrify those who witness it.</em></p>
+<ul>
+<li><strong>Petrifying Gaze</strong> — Meet the eyes of any mob facing you, turning them to stone briefly. Does not work on bosses.</li>
+<li><strong>Revenge</strong> — Gorgons deal signifcantly increased damage at low health.</li>
+<li><strong>Hydrophobe</strong> — Gorgons can not tolerate the purity of water and take damage from it.</li>
+<li><strong>To Stone</strong> — Gorgons were doomed to stay bound in dark caves and old dungeons. Being outside in daylight causes them to become petrified until night. Can be negated by wearing a helmet.</li>
+<li><strong>Silver Aversion</strong> — Gorgons are weak to the purity of silver - they can not stand to wear it and take damage when wielding it. (Iron is also counted as silver)</li>
+<li><strong>Poisoned Blood</strong> — Gorgons are immune to poison, and have a chance to spill their toxic blood onto nearby enemies when hit, poisoning them.</li>
+</ul>
+<h3 id="merling">Merling</h3>
+<p><em>These natural inhabitants of the ocean are not used to being out of the water for too long.</em></p>
+<ul>
+<li><strong>Gills</strong> — You can breathe underwater, but not on land.</li>
+<li><strong>Wet Eyes</strong> — Your vision underwater is perfect.</li>
+<li><strong>Aqua Affinity</strong> — You may break blocks underwater as others do on land.</li>
+<li><strong>Fins</strong> — Your underwater speed is increased.</li>
+<li><strong>Like Water</strong> — When underwater, you do not sink to the ground unless you want to.</li>
+</ul>
+<h3 id="moon-elf">Moon Elf</h3>
+<p><em>Overview:  + Dagger Damage + Dextrous • Stealthy, Doesn't Sleep - Defense Mysterious, ethereal beings not of this world. Moon elves are named not for their homeland, but for the only thing their victims can see before their end.</em></p>
+<ul>
+<li><strong>Moonlight Rogue</strong> — Moon Elves are most efficient wielding a light and easy to conceal weapon. They deal more damage with daggers and knives.</li>
+<li><strong>To the Shadows</strong> — In the dark, Moon Elves can turn invisible by sneaking, and move a short distance while stealthed. When attacking from stealth, their first attack deals bonus damage and ends the invisibility. This deals extra damage if wielding a dagger.</li>
+<li><strong>Ethereal</strong> — Moon elves are thin and even slightly translucent, and their skin has a peculiar blue hue.</li>
+<li><strong>Foreign World</strong> — Try as they might, Moon Elves can not sleep in the overworld.</li>
+<li><strong>Elegant</strong> — Moon Elves are slowed by wearing heavy armor. This can be prevented with an enchantment.</li>
+<li><strong>Nimble</strong> — With their quick reflexes, Moon Elves have a small chance to dodge any attack.</li>
+<li><strong>Fragile</strong> — Moon Elves have reduced health and take increased physical damage.</li>
+<li><strong>Towering</strong> — Moon Elves are about the same height as their distant relatives of the forest, making them slightly taller than humans.</li>
+</ul>
+<h3 id="ogre">Ogre</h3>
+<p><em>Overview:  + Axe Bonuses, Defense  • Massive: 268cm.9'5" - Hunger, Speed  Ogres are a large, short-tempered, and brutish subspecies of Orc. Their lumbering size and limited intelligence are made up for by their raw strength.</em></p>
+<ul>
+<li><strong>Gargantuan</strong> — Ogres are massive, and can't fit through doors or even in many small structures.</li>
+<li><strong>Bloodlust</strong> — Ogres are known to unpredictably fly into a blinding rage, where they can stomp through a horde of foes quickly but can barely make out what's happening around them.</li>
+<li><strong>Ravager</strong> — Axes feel right in an Ogre's hand; this comfort allows them to swing with much more force.</li>
+<li><strong>Lead Belly</strong> — Ogres care little for what they eat. Food is food. They do not experience poison or hunger.</li>
+<li><strong>Stocky</strong> — Ogres' thick skin and dense bones make them able to tank many more hits than others.</li>
+<li><strong>Ravenous</strong> — Ogres are almost never full; they need to eat near constantly to stay satisfied.'</li>
+<li><strong>Sluggish</strong> — Ogres are slower than most, to conserve some of their energy despite their massive size.</li>
+</ul>
+<h3 id="phantom">Phantom</h3>
+<p><em>As half-human and half-phantom beings, these creatures can switch between a Phantom and a normal form.</em></p>
+<ul>
+<li><strong>Phantom Form</strong> — You can switch between human and phantom form at will, but only while you are saturated enough to sprint.</li>
+<li><strong>Translucent</strong> — Your skin is translucent.</li>
+<li><strong>Phasing</strong> — While phantomized, you can walk through solid material, except Obsidian.</li>
+<li><strong>Invisibility</strong> — While phantomized, you are invisible.</li>
+<li><strong>Photoallergic</strong> — You begin to burn in daylight if you are not invisible.</li>
+<li><strong>Fast Metabolism</strong> — Being phantomized causes you to become hungry.</li>
+<li><strong>Fragile</strong> — You have 3 less hearts of health than humans.</li>
+</ul>
+<h3 id="plague-victim">Plague Victim</h3>
+<p><em>Overview:  + Withering  • Unique playstyle  • Undead  - Defense, Reputation  - Difficult Disease-ridden half-dead creatures who can no longer be called human, cursed and trapped in eternal suffering as a result of a strange magical illness.</em></p>
+<ul>
+<li><strong>Foul Aura</strong> — A horrifying magic swarms the victim, and slowly consumes the life of any living nearby.</li>
+<li><strong>Plague Immunity</strong> — Though the immense pain never ends, there is only so much tissue that can die. Carriers are immune to poison and wither.</li>
+<li><strong>Contagious Hex</strong> — Every time you strike, there is a chance to spread the infection.</li>
+<li><strong>Contagious</strong> — The Plagued are a horrifying sight. Villagers will refuse to trade with them out of fear.</li>
+<li><strong>Insomniac</strong> — Sleep is impossible for the Plagued, due to their unending agony.</li>
+<li><strong>Sensitive Skin</strong> — The Plagued are covered in welts and lesions upon the skin, tender and painful to touch. Its victims cannot wear armor for the pain it causes.</li>
+<li><strong>Skin and Bones</strong> — This illness drains the spirit, resulting in reduced health and speed.</li>
+<li><strong>Eternal Suffering</strong> — Once every 5 minutes, upon death, the Plagued are instead forcefully kept alive to prolong their torment.</li>
+</ul>
+<h3 id="revenant">Revenant</h3>
+<p><em>Overview:  + Summons  + Illager Friendly  • Undead, Complex  - Reputation - Living interactions  Revenants are misfortunate souls who died gruesome and painful deaths, but inexplicably returned to life. As a result, they become obsessed with manipulating life and death in other creatures.</em></p>
+<ul>
+<li><strong>Revenance</strong> — Revenants can reconstruct creatures of the night modified to do their own bidding. These act as pets, will follow and teleport, and can be equipped with weapons or armor. Zombies can not use bows. Hover the badges for details.</li>
+<li><strong>Command Undead</strong> — Command your summoned combat undead (not horses) to follow, sit, or teleport to you.</li>
+<li><strong>Putrid Communion</strong> — Through the unsettling act of consuming the flesh or bones of the undead, a revenant can empower their next summon of the same type.  For combat creatures, extend their duration, making them permanent at max power. For undead steeds, enhance their attributes at max power.</li>
+<li><strong>Reaper's Ward</strong> — At will, a revenant can raise a circle of inert skeletons, acting as a temporary shield to protect them from danger and damage nearby enemies.</li>
+<li><strong>Essence Extraction</strong> — When hit, revenants slowly build up a power which allows them to siphon life from their enemies. This affects all creatures for better or worse, except summoned dead.</li>
+<li><strong>Necrotic Curse</strong> — Revenants are immune to wither, and, like undead, they take extra damage from smite, receive inverted effects from harming and healing effects, and are immune to poison and regeneration effects.</li>
+<li><strong>Chaotic Ally</strong> — Villagers will refuse to trade with revenants and iron golems will attack them on sight. However, they are tolerated (tenuously) by Pillagers.</li>
+<li><strong>Black Thumb</strong> — A Revenant can not harvest any crops; they wilt at their deathly touch.</li>
+<li><strong>Disturbed</strong> — Experimenting in the forbidden warps the mind. Revenants cannot sleep, too scared to dream of what they wish they did not know.</li>
+<li><strong>Unguarded</strong> — Obsessing over the spirit realm leaves revenants more open to attack in the physical realm. Most mobs deal more damage to them.</li>
+</ul>
+<h2 id="เหลือง-impact-2-กลางๆ">🟡 เหลือง — impact 2 (กลางๆ)</h2>
+<h3 id="arachnae">Arachnae</h3>
+<p><em>Overview:  + Poison, Crowd Control + Wall Climbing • Carnivore - Hunger, Armor A grotesque amalgamation of spider and human, with venomous fangs and bristled feet yet the ability to walk upright and wield weaponry.</em></p>
+<ul>
+<li><strong>Climber</strong> — The fine bristles on the Arachnae's legs allow them to climb up walls.</li>
+<li><strong>Many Eyes</strong> — The Arachnae's eight eyes are all adpated to darkness, and allow them to see clearly even with very little light.</li>
+<li><strong>Venomous Bite</strong> — Arachnae's fangs contain venom, and every attack has a chance to inflict poison.</li>
+<li><strong>Bottomless Stomach</strong> — Arachnae require a larger quantity of food to stay alive.</li>
+<li><strong>Brittle</strong> — The Arachnae's chitinous exoskeleton makes it difficult to move if wearing armor heavier than iron. This can be prevented with an enchantment.</li>
+<li><strong>Fragile</strong> — The Arachnae's exoskeleton is more vulnerable to damage. They have slightly less health than a regular human.</li>
+</ul>
+<h3 id="dwarf">Dwarf</h3>
+<p><em>Overview:  + Mining, Caving • Short: 102cm.3'7" - Sun sensitive  - Can't swim Dwarves are practical, stocky, and prideful. They excel at mining and living underground, but struggle with the daylight. Rock and stone, brother.</em></p>
+<ul>
+<li><strong>Dwarven Tech</strong> — Dwarves are capable of mining stone without a pickaxe, and mine anything faster than others.</li>
+<li><strong>Stocky</strong> — Dwarves are just short enough to fit into a 1 meter tall tunnel (and almost as wide as one).</li>
+<li><strong>Nocturnal Eyes</strong> — Dwarves can focus to see clearly without needing any light source.</li>
+<li><strong>Darkness Dweller</strong> — Direct sunlight will burn dwarven eyes, blinding them temporarily. Preventable with an enchantment or a gold helmet.</li>
+<li><strong>Dense</strong> — Dwarves are extremely heavy for their size; they sink rapidly in water.</li>
+<li><strong>Potent Brew</strong> — Dwarves are notorious for their powerful drinks which would knock out someone twice their size. Activate to take a swig and fully restore health.</li>
+</ul>
+<h3 id="enderian">Enderian</h3>
+<p><em>Born as children of the Ender Dragon, Enderians are capable of teleporting but are vulnerable to water.</em></p>
+<ul>
+<li><strong>Teleportation</strong> — Whenever you want, you may throw an ender pearl which deals no damage, allowing you to teleport.</li>
+<li><strong>Hydrophobia</strong> — You receive damage over time while in contact with water.</li>
+<li><strong>Scared of Gourds</strong> — You are afraid of pumpkins. For a good reason.</li>
+<li><strong>Slender Body</strong> — You can reach blocks and entities further away.</li>
+</ul>
+<h3 id="feline">Feline</h3>
+<p><em>With their cat-like appearance, the Feline scare creepers away. With the dexterity of cats, they always land safely on their feet.</em></p>
+<ul>
+<li><strong>Acrobatics</strong> — You never take fall damage, no matter from which height you fall.</li>
+<li><strong>Strong Ankles</strong> — You are able to jump higher by jumping while sprinting.</li>
+<li><strong>Velvet Paws</strong> — Your footsteps don't cause any vibrations which could otherwise be picked up by nearby lifeforms.</li>
+<li><strong>Nine Lives</strong> — You have 1 less heart of health than humans.</li>
+<li><strong>Weak Arms</strong> — When not under the effect of a strength potion, you can only mine natural stone if there are at most 2 other natural stone blocks adjacent to it.</li>
+<li><strong>Catlike Appearance</strong> — Creepers are scared of you and will only explode if you attack them first.</li>
+<li><strong>Nocturnal</strong> — You can slightly see in the dark when not in water.</li>
+</ul>
+<h3 id="high-elf">High Elf</h3>
+<p><em>Overview:  + Magic, Unique Abilities - Physical Damage - Defense High Elves are notoriously arrogant, though undeniably talented; elemental magics course strongly through their blood, though they are weaker with weaponry.</em></p>
+<ul>
+<li><strong>Draw Essence</strong> — By holding different items, high elves can channel the object's energy to unleash various magics. Hover over each box to see details.</li>
+<li><strong>Mystic Affinity</strong> — High Elves are powerful and clever manipulators of arcane energy - they deal more magic damage and take less magic damage than other races.</li>
+<li><strong>Fragile</strong> — A High Elf is not built for hand to hand combat. They are much more susceptible to physical damage, and have less health.</li>
+<li><strong>Highborne</strong> — High Elves naturally have more mana than other races, and can channel the power of their elders to regenerate mana quickly.</li>
+<li><strong>Highborne</strong> — High Elves naturally have more mana than other races, and can channel the power of their elders to regenerate mana quickly.</li>
+<li><strong>Highborne</strong> — High Elves naturally have more mana than other races, and can channel the power of their elders to regenerate mana quickly.</li>
+<li><strong>Highborne</strong> — High Elves naturally have more mana than other races, and can channel the power of their elders to regenerate mana quickly.</li>
+<li><strong>Towering</strong> — High Elves are slender and slightly taller than the average human.</li>
+<li><strong>Elegant</strong> — High Elves are slowed by wearing heavy armor (This can be prevented with an enchantment), and have less health.</li>
+</ul>
+<h3 id="incubus">Incubus</h3>
+<p><em>Overview:  + Nether Bonuses • Fire-based - Damaged by Water - Weak in Overworld Incubi are evil servants of a dark power. They are powerful in their own realm, but in exchange for this they have given up their soul, and are weak to pure sources.</em></p>
+<ul>
+<li><strong>Demon Fire</strong> — Incubi are innately more potent with all fire magics, and can release a burst of flame at will. Scales with Fire Spell Power.</li>
+<li><strong>Hellborne</strong> — Fire feels like home - it deals no damage to Incubi and satiates them.</li>
+<li><strong>Carnivore</strong> — An incubus' bloodlust is insatiable. If it isn't the flesh of an animal, its worthless.</li>
+<li><strong>Unholy Deal</strong> — An incubus can exchange some of their life force for raw power for a short time. Triggered with Primary Active key.</li>
+<li><strong>Hydrophobe</strong> — Water scalds Incubi, damaging them on contact.</li>
+<li><strong>Impure</strong> — Incubi take extra damage from Smite and reverted effects from healing and harming.</li>
+<li><strong>Realm Advantage</strong> — Incubi are not accustomed to dimensions where the sun shines and are weaker there, but they are considerably stronger in the Nether.</li>
+</ul>
+<h3 id="pixie">Pixie</h3>
+<p><em>Overview:  + Unique Flight, Odd • Tiny: 22cm.9"  - Defense, Reputation  Often considered harbingers of good fortune, but also tricky, untrustworthy agents of mischief. Pixies are whimsical and very, very small.</em></p>
+<ul>
+<li><strong>On the Dusts</strong> — Pixies can fly and propel themselves forward and upward. Read the boxes next to this power for instructions on how to fly.</li>
+<li><strong>Bitesize</strong> — Pixies are some of the smallest creatures to roam the land, rarely even reaching the average human's knee.</li>
+<li><strong>Feather Footed</strong> — Pixies are so light, it is impossible for them to take fall damage.</li>
+<li><strong>Shortcut</strong> — You can sit on top of another player's head by right clicking them with empty hands.</li>
+<li><strong>Good Fortunes</strong> — Although pixies can be troublesome, they are also associated with good luck. When mining, they will occasionally get something valubale from plain stone.</li>
+<li><strong>Troublemaker</strong> — Villagers know pixies by the legends of trouble they cause, and will refuse to trade with them.</li>
+</ul>
+<h3 id="siren">Siren</h3>
+<p><em>Overview:  + Water-Based, Utility  • Weaker on Land - Vulnerable to Fire Sirens are said to be a type of Merfolk. They have an ensnaring aura and their irresistible beauty is said to be the downfall of many a foolish sailor.</em></p>
+<ul>
+<li><strong>Amphibious</strong> — In water, sirens can breathe and interact normally, see perfectly clearly, and they swim with increased speed.</li>
+<li><strong>Sirens' Song</strong> — Activate to overwhelm enemies in a large area, preventing them from harming you for a short time. Does not work on bosses or players.</li>
+<li><strong>Holy Water</strong> — Sirens have much more quickly regenerating bodies, but only while fully submerged.</li>
+<li><strong>Out of Your Depth</strong> — While on land, Sirens can only heal or regenerate by using potions.</li>
+<li><strong>Flammable</strong> — Sirens and fire do not mix. Any contact with flame will result in near-instant death.</li>
+<li><strong>Captivating</strong> — Press the secondary active key to gain favor with a villager and receive better trades from them.</li>
+</ul>
+<h3 id="valkyrie">Valkyrie</h3>
+<p><em>Overview:  + Healing  • Feathered wings  - Weak to Undead Valkyrie are fearless winged warriors who decide the fate of those in battle; they were said to have carried the dead to Odin's Valhalla</em></p>
+<ul>
+<li><strong>Feathered</strong> — Valkyrie have massive white feathered wings, and can fly freely.</li>
+<li><strong>Divine Smite</strong> — Every third attack, smite nearby foes. Damage scales with healing spell power.</li>
+<li><strong>Corruption</strong> — Nearby undead mobs weaken and slow you, and their attacks deal more damage to you.</li>
+<li><strong>Vanquisher</strong> — Upon slaying an undead mob, trigger Divine Smite and slightly reduce the effects of Corruption for each slain. Lose half stacks on death.</li>
+<li><strong>Intervention</strong> — Leap upward into the air or dash forward if already flying, gaining fall immunity until you land.   Upon landing or after 10 seconds, strike the area with holy energy, cleansing negative effects from nearby allies and healing them, and pushing back non-allies. Heal scales with healing spell power.</li>
+<li><strong>Heavenly Implements</strong> — Valkyrie have innately more healing spell power and are more potent with lance or spear-like weapons.</li>
+</ul>
+<h2 id="เขียว-impact-1-เล่นง่าย">🟢 เขียว — impact 1 (เล่นง่าย)</h2>
+<h3 id="alfiq">Alfiq</h3>
+<p><em>Overview:  + Unarmed Bonus + Unique Movement • Carnivore - Defense Alfiq are a cunning species of anthropomorphic felines with sharp claws and excellent agility. Their roads often lead to warm sands.</em></p>
+<ul>
+<li><strong>Clawed</strong> — Alfiq have razor sharp retractable claws; they deal extra damage with empty paws, and can climb up and cling to steep surfaces (Can be toggled)</li>
+<li><strong>Poor Grip</strong> — Alfiq have reduced breaking speed with tools and reduced damage with handled weapons like swords and axes.</li>
+<li><strong>Agile Preference</strong> — Alfiq prefer to wear only light armors for ease of movement. Heavier armors can be worn without penalty with an enchantment.</li>
+<li><strong>On Your Feet</strong> — If, while landing, you are looking straight down, take no damage from the fall.</li>
+<li><strong>Crepuscular</strong> — Near sunset and sunrise, Alfiq will move and attack much more quickly. At other times, they are lethargic and slightly slower.</li>
+<li><strong>Pickpocket</strong> — Right click the back of a villager while crouching with empty paws for a chance to steal some emeralds. Or get caught. Rumor has it you may be able to steal from other players.</li>
+<li><strong>Pounce</strong> — After briefly crouching without moving to charge up, an Alfiq can leap forward a great distance. Striking an enemy during the pounce deals bonus damage.</li>
+<li><strong>Meow</strong> — </li>
+</ul>
+<h3 id="arachnid">Arachnid</h3>
+<p><em>Their climbing abilities and the ability to trap their foes in spiderweb make the Arachnid perfect hunters.</em></p>
+<ul>
+<li><strong>Climbing</strong> — You are able to climb up any kind of wall, not just ladders.</li>
+<li><strong>Master of Webs</strong> — You navigate cobweb perfectly, and are able to climb in them. When you hit an enemy in melee, they get stuck in cobweb for a while. Non-arthropods stuck in cobweb will be sensed by you. You are able to craft cobweb from string.</li>
+<li><strong>Carnivore</strong> — Your diet is restricted to meat, you can't eat vegetables.</li>
+<li><strong>Fragile</strong> — You have 3 less hearts of health than humans.</li>
+</ul>
+<h3 id="avian">Avian</h3>
+<p><em>The Avian race has lost their ability to fly a long time ago. Now these peaceful creatures can be seen gliding from one place to another.</em></p>
+<ul>
+<li><strong>Featherweight</strong> — You fall as gently to the ground as a feather would, unless you sneak.</li>
+<li><strong>Fresh Air</strong> — When sleeping, your bed needs to be at an altitude of at least 86 blocks, so you can breathe fresh air.</li>
+<li><strong>Like Air</strong> — Modifiers to your walking speed also apply while you're airborne.</li>
+<li><strong>Tailwind</strong> — You are a little bit quicker on foot than others.</li>
+<li><strong>Oviparous</strong> — Whenever you wake up in the morning, you will lay an egg.</li>
+<li><strong>Vegetarian</strong> — You can't digest any meat.</li>
+</ul>
+<h3 id="elytrian">Elytrian</h3>
+<p><em>Often flying around in the winds, Elytrians are uncomfortable when they don't have enough space above their head.</em></p>
+<ul>
+<li><strong>Winged</strong> — You have Elytra wings without needing to equip any.</li>
+<li><strong>Gift of the Winds</strong> — Every 30 seconds, you are able to launch about 20 blocks up into the air.</li>
+<li><strong>Aerial Combatant</strong> — You deal substantially more damage while in Elytra flight.</li>
+<li><strong>Need for Mobility</strong> — You can not wear any heavy armor (armor with protection values higher than chainmail).</li>
+<li><strong>Claustrophobia</strong> — Being somewhere with a low ceiling for too long will weaken you and make you slower.</li>
+<li><strong>Brittle Bones</strong> — You take more damage from falling and flying into blocks.</li>
+</ul>
+<h3 id="goblin">Goblin</h3>
+<p><em>Overview:  + Gold Gear Bonuses + Luck, Speed  • Small: 92cm.3'3"  - Health, Defense Goblins are obsessed with gold and treasure and tend to find a little more loot wherever they look, but their small size leaves them vulnerable in combat.</em></p>
+<ul>
+<li><strong>Greedy</strong> — Goblins have a special relationship with treasure - they gain extra bonuses when using or wearing golden gear.</li>
+<li><strong>Careful Hoarder</strong> — Gold in a goblin's hands lasts for much longer than most others who are careless with it.</li>
+<li><strong>Cunning</strong> — Goblins are clever creatures, and know where to find more rare loot most others would miss.</li>
+<li><strong>Nimble</strong> — Although short, goblins are quite fast, allowing them to outrun most stronger enemies instead of fighting.</li>
+<li><strong>Stunted</strong> — Goblins are very short, at less than half the height of a human.</li>
+<li><strong>Frail</strong> — Due to their small stature, goblins' have less health and are more prone to damage.</li>
+</ul>
+<h3 id="shulk">Shulk</h3>
+<p><em>Related to Shulkers, the bodies of the Shulk are outfitted with a protective shell-like skin.</em></p>
+<ul>
+<li><strong>Hoarder</strong> — You have access to an additional 9 slots of inventory, which keep the items on death.</li>
+<li><strong>Sturdy Skin</strong> — Even without wearing armor, your skin provides natural protection.</li>
+<li><strong>Strong Arms</strong> — You are strong enough to break natural stones without using a pickaxe.</li>
+<li><strong>Unwieldy</strong> — The way your hands are formed provide no way of holding a shield upright.</li>
+<li><strong>Large Appetite</strong> — You exhaust much quicker than others, thus requiring you to eat more.</li>
+</ul>
+<h3 id="wood-elf">Wood Elf</h3>
+<p><em>Overview:  + Ranged Bonuses, Speed • Stealthy, Vegetarian - Defense Wood Elves are a wise, long-lived race who live in harmony with the Earth. They are quick with a sword and bow and can outwit their enemies while among the trees.</em></p>
+<ul>
+<li><strong>Natural Archer</strong> — Wood Elves spend their whole lives training with bows - their arrows are always more deadly.</li>
+<li><strong>Forest Vision</strong> — While in tall shrubbery or leaves, wood elves can crouch to gain night vision and become undetectable to nearby mobs.</li>
+<li><strong>Focus</strong> — After charging a bow for a few seconds, release an arrow with increased velocity and precision to fly further and truer, and pierce through 2 enemies.</li>
+<li><strong>Eagle Eyed</strong> — Wood Elves can track an enemy for a short time after damaging them, even when they aren't in view.</li>
+<li><strong>Towering</strong> — Wood elves are slightly taller than the average human.</li>
+<li><strong>Steward</strong> — Wood elves live off of and in harmony the forest - They can not digest meat.</li>
+<li><strong>Elegant</strong> — Wood Elves have less health and are slowed by wearing heavy armor (This can be prevented with an enchantment).</li>
+<li><strong>Graceful</strong> — Wood elves are not as powerful, but they are quick. Your attacks deal reduced damage but are slightly faster.</li>
+</ul>
+<h2 id="impact-0">⚪ impact 0</h2>
+<h3 id="human">Human</h3>
+<p><em>A regular human. Your ordinary Minecraft experience awaits.</em></p><div class="foot"><a class="pv" href="keybinds.html"><div class="fl">← ก่อนหน้า</div><div class="ft">ปุ่มพลัง</div></a><a class="nx" href="join-server.html"><div class="fl">ถัดไป →</div><div class="ft">เข้าเซิร์ฟเพื่อน</div></a></div>
+<div class="credit"><span class="di">◆</span> ตำรา Minecraft · RPG Origins + เซิร์ฟเพื่อน 26.1.2 <span class="di">◆</span><br>เนื้อหาตรวจกับไฟล์มอดจริง · เฟส HTML</div>
+</main></div>
+<script>
+const mb=document.querySelector('.menu-btn'),toc=document.querySelector('.toc'),scrim=document.querySelector('.scrim');
+if(mb){mb.onclick=()=>{toc.classList.toggle('open');scrim.classList.toggle('show')};
+  scrim.onclick=()=>{toc.classList.remove('open');scrim.classList.remove('show')};
+  toc.querySelectorAll('a').forEach(a=>a.onclick=()=>{toc.classList.remove('open');scrim.classList.remove('show')});}
+const links=[...document.querySelectorAll('.toc a')],secs=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+const spy=()=>{let i=secs.length;while(--i>=0){if(secs[i]&&secs[i].getBoundingClientRect().top<120)break}
+  links.forEach(a=>a.classList.remove('on'));if(i>=0&&links[i])links[i].classList.add('on')};
+document.addEventListener('scroll',spy,{passive:true});spy();
+</script>
+</body></html>

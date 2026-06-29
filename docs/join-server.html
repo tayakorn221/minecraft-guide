@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="th"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>เข้าเซิร์ฟเพื่อน · ตำรา RPG Origins</title>
+<style>
+:root{
+  --bg:#14110c;--surface:#1c1812;--raised:#242019;--raised-2:#2b2619;
+  --line:#3a3225;--line-soft:#2c2519;--line-bright:#4d4231;
+  --ink:#f3ecdd;--ink-dim:#d2c6ad;--ink-mute:#a1957c;
+  --gold:#c9a24b;--gold-bright:#e2bf6e;
+  --t1:#7aa45c;--t2:#c89a45;--t3:#bd5651;--t0:#8f8975;
+  --good:#86a85f;--bad:#c4625b;
+  --serif:"Georgia","Iowan Old Style","Palatino Linotype","Times New Roman",serif;
+  --sans:"Leelawadee UI","Segoe UI","Noto Sans Thai",Tahoma,sans-serif;
+  --nav-h:58px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+::selection{background:rgba(201,162,75,.28);color:#fff}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:var(--surface)}
+::-webkit-scrollbar-thumb{background:#3c3324;border:3px solid var(--surface);border-radius:8px}
+::-webkit-scrollbar-thumb:hover{background:#4d4231}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;position:relative;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ── top nav ── */
+.nav{position:sticky;top:0;z-index:60;height:var(--nav-h);background:rgba(20,17,12,.95);border-bottom:1px solid var(--line);backdrop-filter:blur(8px);display:flex;align-items:center;gap:18px;padding:0 20px}
+.nav .brand{font-family:var(--serif);font-weight:700;font-size:17px;color:var(--ink);display:flex;align-items:center;gap:9px;white-space:nowrap;text-decoration:none}
+.nav .brand .di{color:var(--gold);transform:rotate(45deg);display:inline-block;font-size:11px}
+.nav .brand em{font-style:italic;color:var(--gold)}
+.nav .links{display:flex;gap:3px;flex:1;overflow-x:auto;scrollbar-width:none}
+.nav .links::-webkit-scrollbar{display:none}
+.nav a.nl{font-size:13px;color:var(--ink-mute);text-decoration:none;padding:7px 12px;border-radius:3px;white-space:nowrap;transition:color .15s,background .15s;border:1px solid transparent}
+.nav a.nl:hover{color:var(--ink);background:var(--surface)}
+.nav a.nl.active{color:var(--gold-bright);border-color:var(--line-bright);background:var(--surface)}
+.nav .gh{color:var(--ink-mute);text-decoration:none;font-size:13px;border:1px solid var(--line-bright);padding:6px 12px;border-radius:3px;white-space:nowrap;transition:all .15s}
+.nav .gh:hover{color:var(--ink);border-color:var(--gold)}
+.menu-btn{display:none;background:var(--surface);border:1px solid var(--line-bright);color:var(--ink);width:38px;height:38px;border-radius:3px;font-size:18px;cursor:pointer}
+
+/* ── layout ── */
+.shell{max-width:1180px;margin:0 auto;padding:0 22px;display:grid;grid-template-columns:232px 1fr;gap:40px;position:relative;z-index:1}
+.toc{position:sticky;top:calc(var(--nav-h) + 24px);align-self:start;height:calc(100vh - var(--nav-h) - 48px);overflow-y:auto;padding:28px 0 40px;font-size:13px}
+.toc .tl{font-size:10.5px;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);font-weight:700;margin-bottom:14px;padding-left:13px}
+.toc a{display:block;color:var(--ink-mute);text-decoration:none;padding:5px 13px;border-left:2px solid var(--line-soft);line-height:1.45;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--ink-dim)}
+.toc a.h3{padding-left:26px;font-size:12.5px}
+.toc a.on{color:var(--gold-bright);border-left-color:var(--gold)}
+main{min-width:0;padding:38px 0 80px;max-width:820px}
+
+/* ── prose ── */
+.kicker{font:700 11.5px/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+main h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,5vw,46px);line-height:1.08;letter-spacing:.4px;color:var(--ink);margin:0 0 10px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+main h1 em{font-style:italic;color:var(--gold)}
+main h2{font-family:var(--serif);font-weight:700;font-size:clamp(22px,3vw,28px);color:var(--ink);margin:46px 0 16px;padding-top:10px;display:flex;align-items:center;gap:13px;scroll-margin-top:calc(var(--nav-h) + 16px)}
+main h2::before{content:"◆";color:var(--gold);font-size:14px;flex-shrink:0}
+main h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line-bright),transparent)}
+main h3{font-family:var(--serif);font-weight:700;font-size:19px;color:var(--gold-bright);margin:30px 0 12px;letter-spacing:.2px;scroll-margin-top:calc(var(--nav-h) + 16px)}
+main h4{font-family:var(--sans);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-dim);margin:22px 0 10px}
+main p{color:var(--ink-dim);margin:13px 0}
+main a{color:var(--gold-bright);text-decoration:none;border-bottom:1px solid rgba(201,162,75,.32);transition:border-color .15s}
+main a:hover{border-bottom-color:var(--gold-bright)}
+main strong{color:var(--ink);font-weight:700}
+main em{color:var(--ink-dim)}
+main ul,main ol{margin:13px 0 13px 4px;padding-left:22px}
+main li{color:var(--ink-dim);margin:7px 0;padding-left:6px}
+main ul li::marker{color:var(--gold);content:"◆  ";font-size:.8em}
+main ol li::marker{color:var(--gold);font-family:var(--serif);font-weight:700}
+main li>ul,main li>ol{margin:7px 0}
+main hr{border:none;height:34px;position:relative;margin:30px 0}
+main hr::before{content:"◆";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:var(--gold);font-size:12px;background:var(--bg);padding:0 14px}
+main hr::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,transparent,var(--line-bright),transparent)}
+
+/* code */
+main code{font-family:"Consolas","SF Mono",monospace;font-size:.86em;background:var(--raised-2);color:var(--gold-bright);border:1px solid var(--line);border-radius:3px;padding:2px 7px;white-space:nowrap}
+main pre{background:#100d08;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px;padding:16px 18px;overflow-x:auto;margin:16px 0}
+main pre code{background:none;border:none;color:var(--ink-dim);padding:0;white-space:pre;font-size:13.5px;line-height:1.6}
+
+/* tables — ledger style */
+.tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:5px}
+main table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:480px}
+main thead th{background:var(--raised-2);color:var(--gold-bright);font-family:var(--serif);font-weight:700;text-align:left;padding:11px 15px;border-bottom:1px solid var(--line-bright);letter-spacing:.2px;white-space:nowrap}
+main tbody td{padding:10px 15px;border-bottom:1px solid var(--line-soft);color:var(--ink-dim);vertical-align:top}
+main tbody tr:nth-child(even){background:rgba(255,255,255,.012)}
+main tbody tr:hover{background:rgba(201,162,75,.05)}
+main tbody tr:last-child td{border-bottom:none}
+main td strong{color:var(--ink)}
+
+/* blockquote → callout */
+main blockquote{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:3px;padding:13px 18px;margin:16px 0;color:var(--ink-dim);font-size:14px}
+main blockquote p{margin:6px 0;color:var(--ink-dim)}
+main blockquote p:first-child{margin-top:0}main blockquote p:last-child{margin-bottom:0}
+main blockquote.warn{border-left-color:var(--t3);background:linear-gradient(90deg,rgba(189,86,81,.07),var(--surface) 60%)}
+main blockquote.tip{border-left-color:var(--gold)}
+main blockquote.goal{border-left-color:var(--t1);background:linear-gradient(90deg,rgba(122,164,92,.06),var(--surface) 60%)}
+
+/* task list checkboxes */
+main .task{list-style:none;padding-left:0;position:relative}
+main .task::marker{content:""}
+main .cb{display:inline-flex;width:17px;height:17px;border:1px solid var(--line-bright);border-radius:3px;margin-right:9px;vertical-align:-3px;align-items:center;justify-content:center;font-size:11px;color:var(--gold);flex-shrink:0}
+main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
+
+/* footer nav */
+.foot{border-top:1px solid var(--line);margin-top:50px;padding-top:26px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.foot a{flex:1;min-width:200px;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:14px 18px;text-decoration:none;transition:border-color .18s,transform .15s;display:block}
+.foot a:hover{border-color:var(--gold);transform:translateY(-2px)}
+.foot .fl{font-size:11px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.14em}
+.foot .ft{font-family:var(--serif);font-size:16px;color:var(--gold-bright);font-weight:700;margin-top:3px}
+.foot a.nx{text-align:right}
+.credit{text-align:center;color:var(--ink-mute);font-size:12px;padding:36px 0 10px;line-height:1.8}
+.credit .di{color:var(--gold);transform:rotate(45deg);display:inline-block;margin:0 6px}
+
+/* ── responsive ── */
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr;gap:0}
+  .toc{position:fixed;top:var(--nav-h);left:0;bottom:0;width:262px;height:auto;background:var(--surface);border-right:1px solid var(--line);padding:24px 14px 40px;transform:translateX(-105%);transition:transform .26s ease;z-index:55}
+  .toc.open{transform:none;box-shadow:18px 0 40px rgba(0,0,0,.5)}
+  .menu-btn{display:flex;align-items:center;justify-content:center}
+  main{padding:26px 0 60px}
+  .nav .links{display:none}
+  .scrim{position:fixed;inset:var(--nav-h) 0 0;background:rgba(8,6,4,.6);z-index:54;display:none}
+  .scrim.show{display:block}
+}
+@media(min-width:901px){.menu-btn,.scrim{display:none}}
+</style></head><body>
+<nav class="nav">
+<button class="menu-btn" aria-label="menu">☰</button>
+<a class="brand" href="index.html"><span class="di">◆</span> ตำรา <em>Minecraft</em></a>
+<div class="links"><a class="nl" href="choose-origin.html">เลือกเผ่า</a><a class="nl" href="getting-started.html">เริ่มเล่น</a><a class="nl" href="keybinds.html">ปุ่มพลัง</a><a class="nl" href="origins-codex.html">คู่มือเผ่า 27</a><a class="nl active" href="join-server.html">เข้าเซิร์ฟเพื่อน</a><a class="nl" href="mods-2612.html">มอดใหม่ 26.1.2</a></div>
+<a class="gh" href="https://github.com/tayakorn221/minecraft-guide" target="_blank" rel="noopener">GitHub ↗</a>
+</nav>
+<div class="scrim"></div>
+<div class="shell">
+<aside class="toc"><div class="tl">ในหน้านี้</div><a class="" href="#tl-dr-อ่าน-30-วิ">TL;DR (อ่าน 30 วิ)</a><a class="" href="#1-เตรียมตัว-เวอร์ชันต้องตรงเป๊ะ">1. เตรียมตัว — เวอร์ชันต้องตรงเป๊ะ</a><a class="" href="#2-ลงทีละสเต็ป">2. ลงทีละสเต็ป</a><a class="h3" href="#ทางลัด-ถ้ามี-one-liner-จาก-repo">ทางลัด (ถ้ามี one-liner จาก repo)</a><a class="h3" href="#ทำมือ-windows">ทำมือ — Windows</a><a class="h3" href="#ทำมือ-macos">ทำมือ — macOS</a><a class="" href="#3-เอามอดมาจากไหน">3. เอามอดมาจากไหน</a><a class="" href="#4-เข้าเซิร์ฟ">4. เข้าเซิร์ฟ</a><a class="" href="#5-troubleshoot-เข้าไม่ติด-อ่านตารางนี้">5. Troubleshoot — เข้าไม่ติด (อ่านตารางนี้)</a><a class="h3" href="#จุดที่พังบ่อยสุด-เวอร์ชัน-มอดต้องตรงกับ-host-เป๊ะ">⚠️ จุดที่พังบ่อยสุด — เวอร์ชัน/มอดต้องตรงกับ host เป๊ะ</a><a class="" href="#เช็คลิสต์ก่อนกด-join-กลับมาดูเร็ว">เช็คลิสต์ก่อนกด Join (กลับมาดูเร็ว)</a></aside>
+<main><h1>เข้าเซิร์ฟเพื่อน — Fabric 26.1.2 (คู่มือมือใหม่ อ่านจบเข้าได้เลย)</h1>
+<blockquote class="tip">
+<p>สำหรับเพื่อนที่ <strong>ไม่เคยลงมอดมาก่อน</strong> — ทำตามทีละข้อ ไม่ต้องรู้อะไรล่วงหน้า</p>
+</blockquote>
+<hr />
+<h2 id="tl-dr-อ่าน-30-วิ">TL;DR (อ่าน 30 วิ)</h2>
+<p>ต้องมีครบ <strong>3 อย่าง</strong> ถึงจะเข้าได้:</p>
+<ol>
+<li><strong>Minecraft Java แท้ (premium)</strong> เวอร์ชัน <strong>26.1.2</strong> เป๊ะ — <em>ไม่ใช่</em> Bedrock/มือถือ</li>
+<li><strong>Fabric Loader 0.19.2</strong> ติดตั้งทับลงไป (ตัวรันมอด)</li>
+<li><strong>ชุดมอดเพื่อน</strong> จาก GitHub (19 ตัว) วางในโฟลเดอร์ <code>mods</code></li>
+</ol>
+<p>แล้วเข้าเกม → Multiplayer → Add Server → ใส่ address: <strong><code>supply-adjustment.gl.joinmc.link</code></strong> → Join</p>
+<blockquote class="warn">
+<p>⚠️ <strong>กฎข้อเดียวที่ห้ามพลาด:</strong> เวอร์ชันเกม + Loader + ชุดมอด ต้อง <strong>ตรงกับ host เป๊ะ</strong> ผิดตัวเดียว = เด้งออก ดูตาราง Troubleshoot ท้ายหน้า</p>
+</blockquote>
+<hr />
+<h2 id="1-เตรียมตัว-เวอร์ชันต้องตรงเป๊ะ">1. เตรียมตัว — เวอร์ชันต้องตรงเป๊ะ</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>สิ่งที่ต้องมี</th>
+<th>เวอร์ชัน</th>
+<th>หมายเหตุ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Minecraft Java Edition</td>
+<td><strong>26.1.2</strong></td>
+<td>ต้องเป็นบัญชี <strong>premium</strong> (ซื้อแท้) เท่านั้น</td>
+</tr>
+<tr>
+<td>Fabric Loader</td>
+<td><strong>0.19.2</strong></td>
+<td>ตัวโหลดมอด — ลงทับ Minecraft ปกติ</td>
+</tr>
+<tr>
+<td>Java</td>
+<td>มากับ launcher</td>
+<td>ปล่อยให้ launcher จัดการ ไม่ต้องลงเอง</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="tip">
+<p>💡 ยังไม่มี 26.1.2 ในเครื่อง? เปิด Minecraft Launcher → กดเล่น 26.1.2 หนึ่งครั้งให้ดาวน์โหลดไฟล์เกมก่อน แล้วค่อยลง Fabric</p>
+</blockquote>
+<hr />
+<h2 id="2-ลงทีละสเต็ป">2. ลงทีละสเต็ป</h2>
+<h3 id="ทางลัด-ถ้ามี-one-liner-จาก-repo">ทางลัด (ถ้ามี one-liner จาก repo)</h3>
+<p>repo เพื่อนมีสคริปต์ลงให้อัตโนมัติ (โหลด Fabric + ก๊อปมอดให้ครบในคำสั่งเดียว):</p>
+<ul>
+<li><strong>Windows</strong> → <code>install.ps1</code></li>
+<li><strong>macOS</strong> → <code>install.sh</code></li>
+</ul>
+<blockquote class="warn">
+<p>⚠️ คำสั่งเป๊ะๆ (URL ที่ต้อง copy ไปวาง) อยู่ใน <strong>README ของ repo</strong> — เปิดดูที่
+https://github.com/tayakorn221/mc-26.1.2-friends-pack
+วิธีรันสั้นๆ: Windows เปิด <strong>PowerShell</strong> แล้ววางคำสั่งจาก README · macOS เปิด <strong>Terminal</strong> แล้ววาง</p>
+<p>ไม่อยากใช้สคริปต์ก็ทำมือตามด้านล่างได้ ผลเหมือนกัน</p>
+</blockquote>
+<h3 id="ทำมือ-windows">ทำมือ — Windows</h3>
+<ol>
+<li>โหลด <strong>Fabric Installer</strong> จาก https://fabricmc.net/use → ได้ไฟล์ <code>.exe</code> กดเปิด</li>
+<li>แท็บ <strong>Client</strong>:
+   - Minecraft Version: เลือก <strong>26.1.2</strong>
+   - Loader Version: เลือก <strong>0.19.2</strong>
+   - ติ๊ก <em>Create profile</em> → กด <strong>Install</strong></li>
+<li>เปิด File Explorer พิมพ์ที่ช่อง address: <code>%appdata%\.minecraft</code> → Enter</li>
+<li>ถ้ายังไม่มีโฟลเดอร์ <code>mods</code> ให้สร้างขึ้นมา</li>
+<li>เอาไฟล์มอด (ดูข้อ 3) ทั้งหมด <strong>วางในโฟลเดอร์ <code>mods</code></strong></li>
+<li>เปิด Minecraft Launcher → เลือกโปรไฟล์ <strong>fabric-loader-26.1.2</strong> → Play</li>
+</ol>
+<h3 id="ทำมือ-macos">ทำมือ — macOS</h3>
+<ol>
+<li>โหลด <strong>Fabric Installer (.jar)</strong> จาก https://fabricmc.net/use → ดับเบิลคลิกเปิด
+   <em>(เปิดไม่ได้: คลิกขวา → Open → Open เพื่อข้าม Gatekeeper)</em></li>
+<li>แท็บ <strong>Client</strong>: Minecraft <strong>26.1.2</strong> + Loader <strong>0.19.2</strong> → <strong>Install</strong></li>
+<li>Finder → เมนู <strong>Go → Go to Folder…</strong> → วาง <code>~/Library/Application Support/minecraft</code></li>
+<li>สร้างโฟลเดอร์ <code>mods</code> ถ้ายังไม่มี → เอาไฟล์มอดทั้งหมดวางในนั้น</li>
+<li>เปิด Launcher → โปรไฟล์ <strong>fabric-loader-26.1.2</strong> → Play</li>
+</ol>
+<hr />
+<h2 id="3-เอามอดมาจากไหน">3. เอามอดมาจากไหน</h2>
+<p>โหลดจาก GitHub ของ host (public ใครก็โหลดได้):</p>
+<ul>
+<li><strong>Repo:</strong> https://github.com/tayakorn221/mc-26.1.2-friends-pack</li>
+<li><strong>ไฟล์:</strong> ไปที่แท็บ <strong>Releases → v1.0.0 → <code>friends-mods.zip</code></strong> (≈ 23 MB)</li>
+<li><strong>ในไฟล์มี:</strong> 19 มอด + readme — <strong>แตก zip แล้วเอา <code>.jar</code> ทั้งหมดวางในโฟลเดอร์ <code>mods</code></strong></li>
+</ul>
+<p>มอด 19 ตัวในแพ็ก (ทุกตัว client + ต้องตรงกับ server):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>กลุ่ม</th>
+<th>มอด</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ลื่น/ภาพ</td>
+<td>fabric-api, sodium, lithium, iris, ferritecore</td>
+</tr>
+<tr>
+<td>เมนู/HUD</td>
+<td>modmenu, reese's-sodium-options, mouse-tweaks, jade, appleskin</td>
+</tr>
+<tr>
+<td>แผนที่</td>
+<td>xaero's-minimap, xaero's-world-map</td>
+</tr>
+<tr>
+<td>เกมเพลย์</td>
+<td>fallingtree, rrv (ดูสูตรคราฟต์), farmers-delight</td>
+</tr>
+<tr>
+<td>โลก/เนื้อหา</td>
+<td>friends-and-foes, terralith + deps: resourceful-lib, lithostitched</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="warn">
+<p>⚠️ <strong>อย่าผสมมอดเอง</strong> ห้ามเพิ่ม/ลบตัวไหน นอกจาก host บอก — มอดในแพ็กต้อง <strong>ครบและตรงชุด</strong> กับ server</p>
+</blockquote>
+<hr />
+<h2 id="4-เข้าเซิร์ฟ">4. เข้าเซิร์ฟ</h2>
+<ol>
+<li>host ต้อง <strong>เปิด server ค้างไว้ก่อน</strong> (เซิร์ฟไม่เปิด = เข้าไม่ได้ทุกกรณี)</li>
+<li>ในเกม: <strong>Multiplayer → Add Server</strong></li>
+<li>ช่อง <em>Server Address</em> วาง:</li>
+</ol>
+<p><code>supply-adjustment.gl.joinmc.link</code></p>
+<blockquote class="tip">
+<p>ไม่ต้องใส่ <code>:25565</code> ต่อท้าย — address นี้ชี้พอร์ตให้แล้ว
+4. <strong>Done</strong> → ดับเบิลคลิกชื่อเซิร์ฟ → Join</p>
+<p>💡 address ตัวนี้เป็น <strong>playit.gg free tier</strong> อาจเปลี่ยนได้ถ้า host รีสตาร์ต tunnel — ถ้าเข้าไม่ได้ ถาม host ขอ address ล่าสุดก่อนเสมอ</p>
+</blockquote>
+<hr />
+<h2 id="5-troubleshoot-เข้าไม่ติด-อ่านตารางนี้">5. Troubleshoot — เข้าไม่ติด (อ่านตารางนี้)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>อาการที่เห็น</th>
+<th>สาเหตุจริง</th>
+<th>วิธีแก้</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>เด้งตอน join: <em>"…client/server… mods"</em> หรือชื่อมอด + Missing/Mismatch</td>
+<td><strong>มอดไม่ครบ / ไม่ตรงชุด</strong> กับ server</td>
+<td>โหลด <code>friends-mods.zip</code> ใหม่ ลบมอดเก่าใน <code>mods</code> ทิ้งให้หมด วางชุดใหม่ครบ 19 ตัว</td>
+</tr>
+<tr>
+<td><em>"Outdated client/server"</em> หรือเวอร์ชันไม่ตรง</td>
+<td><strong>เกมหรือ Loader ผิดเวอร์ชัน</strong></td>
+<td>เช็กว่าเล่นโปรไฟล์ <strong>fabric-loader-26.1.2</strong> จริง (ไม่ใช่ vanilla/เวอร์ชันอื่น) + Loader = 0.19.2</td>
+</tr>
+<tr>
+<td>เซิร์ฟขึ้นเทา / <em>Connection refused</em> / <em>timed out</em></td>
+<td><strong>server ปิดอยู่ หรือ address เปลี่ยน</strong></td>
+<td>บอก host เปิด server + ขอ address playit ล่าสุด แล้วลบเซิร์ฟเก่าใน list สร้างใหม่</td>
+</tr>
+<tr>
+<td><em>Failed to authenticate / Invalid session</em></td>
+<td><strong>บัญชีไม่ใช่ premium</strong> หรือ session ค้าง</td>
+<td>ต้องเป็น MC Java แท้ · ออกแล้ว login launcher ใหม่</td>
+</tr>
+<tr>
+<td>เกมเปิดไม่ขึ้น/crash ก่อนถึงเมนู</td>
+<td>มอดไม่ครบ dep หรือมีไฟล์แปลกปน</td>
+<td>ใน <code>mods</code> ต้องมีเฉพาะ <code>.jar</code> จากแพ็ก — ลบไฟล์อื่นทิ้ง โหลดแพ็กใหม่</td>
+</tr>
+<tr>
+<td>เห็นแต่ Bedrock / มือถือเข้าไม่ได้</td>
+<td>คนละเกม</td>
+<td>เซิร์ฟนี้ <strong>Java Edition เท่านั้น</strong> Bedrock เข้าไม่ได้</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="จุดที่พังบ่อยสุด-เวอร์ชัน-มอดต้องตรงกับ-host-เป๊ะ">⚠️ จุดที่พังบ่อยสุด — เวอร์ชัน/มอดต้องตรงกับ host เป๊ะ</h3>
+<p>Fabric เช็ก mod ตอน join แบบ <strong>ตัวต่อตัว</strong> ผิดแม้แต่ตัวเดียวก็เด้ง จำ 3 ข้อนี้:</p>
+<ol>
+<li><strong>เวอร์ชันเกม 26.1.2 เป๊ะ</strong> — 26.1.1 หรือ 26.1.3 ก็เข้าไม่ได้</li>
+<li><strong>Loader 0.19.2</strong> — ดูเลขตอนลง Fabric อย่ากดเวอร์ชันอื่น</li>
+<li><strong>ชุดมอด = ชุดเดียวกับ host</strong> — ครบ ไม่ขาด ไม่เกิน</li>
+</ol>
+<blockquote class="warn">
+<p>🔴 <strong>เรื่องที่ host ต้องรู้ (สำคัญมาก):</strong>
+ตอนนี้ server ถูกเพิ่ม <strong>ชุดมอดบอส/QoL ชุดใหม่ (2026)</strong> เข้าไปแล้ว (เช่น Mutant Monsters, Combatify, Waystones, Traveler's Backpack, Advanced Netherite ฯลฯ) — แต่ชุดนี้ <strong>ยังไม่ได้ใส่ใน <code>friends-mods.zip</code></strong></p>
+<p>มอดพวกนี้หลายตัวเป็นแบบ <em>client ต้องมีด้วย</em> ถ้า server รันอยู่แต่เพื่อนมีแค่ 19 ตัวเดิม <strong>เพื่อนจะโดนเด้งเพราะมอดไม่ตรง</strong></p>
+<p>ทางแก้ (host เลือกอย่างใดอย่างหนึ่ง):
+- <strong>ยังไม่อัปเดตแพ็ก</strong> → ปิด/ไม่รันมอดชุดใหม่บน server ชั่วคราว ให้เพื่อนเข้าด้วย 19 ตัวเดิมไปก่อน
+- <strong>อยากใช้ชุดใหม่</strong> → อัปเดต <code>friends-mods.zip</code> + ออก release ใหม่ ส่งให้เพื่อนลงเพิ่ม <strong>ทุกคน</strong> ก่อนเข้า</p>
+<p><em>(มอด client-only ล้วน เช่น Inventory Profiles Next / FastTrading / Highlighter ไม่กระทบการ join — ไม่ต้องตรงกับ server)</em></p>
+</blockquote>
+<hr />
+<h2 id="เช็คลิสต์ก่อนกด-join-กลับมาดูเร็ว">เช็คลิสต์ก่อนกด Join (กลับมาดูเร็ว)</h2>
+<ul>
+<li class="task"><span class="cb"></span>เล่น Minecraft <strong>Java premium</strong> (ไม่ใช่ Bedrock)</li>
+<li class="task"><span class="cb"></span>โปรไฟล์ที่เลือก = <strong>fabric-loader-26.1.2</strong> (Loader 0.19.2)</li>
+<li class="task"><span class="cb"></span>โฟลเดอร์ <code>mods</code> มี <code>.jar</code> ครบ <strong>19 ตัว</strong> จาก <code>friends-mods.zip</code> — ไม่มีไฟล์อื่นปน</li>
+<li class="task"><span class="cb"></span>host ยืนยันว่า <strong>server เปิดอยู่</strong></li>
+<li class="task"><span class="cb"></span>address = <code>supply-adjustment.gl.joinmc.link</code> (ถามว่าเปลี่ยนรึยัง)</li>
+<li class="task"><span class="cb"></span>ถ้า host เปิดมอดชุดใหม่ 2026 → ได้มอดเพิ่มจาก host ครบแล้ว</li>
+</ul>
+<p>เข้าไม่ได้หลังเช็กครบ → ส่ง <strong>ข้อความ error เต็มๆ</strong> ให้ host เทียบกับตาราง Troubleshoot ข้างบน</p><div class="foot"><a class="pv" href="origins-codex.html"><div class="fl">← ก่อนหน้า</div><div class="ft">คู่มือเผ่า 27</div></a><a class="nx" href="mods-2612.html"><div class="fl">ถัดไป →</div><div class="ft">มอดใหม่ 26.1.2</div></a></div>
+<div class="credit"><span class="di">◆</span> ตำรา Minecraft · RPG Origins + เซิร์ฟเพื่อน 26.1.2 <span class="di">◆</span><br>เนื้อหาตรวจกับไฟล์มอดจริง · เฟส HTML</div>
+</main></div>
+<script>
+const mb=document.querySelector('.menu-btn'),toc=document.querySelector('.toc'),scrim=document.querySelector('.scrim');
+if(mb){mb.onclick=()=>{toc.classList.toggle('open');scrim.classList.toggle('show')};
+  scrim.onclick=()=>{toc.classList.remove('open');scrim.classList.remove('show')};
+  toc.querySelectorAll('a').forEach(a=>a.onclick=()=>{toc.classList.remove('open');scrim.classList.remove('show')});}
+const links=[...document.querySelectorAll('.toc a')],secs=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+const spy=()=>{let i=secs.length;while(--i>=0){if(secs[i]&&secs[i].getBoundingClientRect().top<120)break}
+  links.forEach(a=>a.classList.remove('on'));if(i>=0&&links[i])links[i].classList.add('on')};
+document.addEventListener('scroll',spy,{passive:true});spy();
+</script>
+</body></html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="th"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>เริ่มเล่น · ตำรา RPG Origins</title>
+<style>
+:root{
+  --bg:#14110c;--surface:#1c1812;--raised:#242019;--raised-2:#2b2619;
+  --line:#3a3225;--line-soft:#2c2519;--line-bright:#4d4231;
+  --ink:#f3ecdd;--ink-dim:#d2c6ad;--ink-mute:#a1957c;
+  --gold:#c9a24b;--gold-bright:#e2bf6e;
+  --t1:#7aa45c;--t2:#c89a45;--t3:#bd5651;--t0:#8f8975;
+  --good:#86a85f;--bad:#c4625b;
+  --serif:"Georgia","Iowan Old Style","Palatino Linotype","Times New Roman",serif;
+  --sans:"Leelawadee UI","Segoe UI","Noto Sans Thai",Tahoma,sans-serif;
+  --nav-h:58px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+::selection{background:rgba(201,162,75,.28);color:#fff}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:var(--surface)}
+::-webkit-scrollbar-thumb{background:#3c3324;border:3px solid var(--surface);border-radius:8px}
+::-webkit-scrollbar-thumb:hover{background:#4d4231}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;position:relative;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ── top nav ── */
+.nav{position:sticky;top:0;z-index:60;height:var(--nav-h);background:rgba(20,17,12,.95);border-bottom:1px solid var(--line);backdrop-filter:blur(8px);display:flex;align-items:center;gap:18px;padding:0 20px}
+.nav .brand{font-family:var(--serif);font-weight:700;font-size:17px;color:var(--ink);display:flex;align-items:center;gap:9px;white-space:nowrap;text-decoration:none}
+.nav .brand .di{color:var(--gold);transform:rotate(45deg);display:inline-block;font-size:11px}
+.nav .brand em{font-style:italic;color:var(--gold)}
+.nav .links{display:flex;gap:3px;flex:1;overflow-x:auto;scrollbar-width:none}
+.nav .links::-webkit-scrollbar{display:none}
+.nav a.nl{font-size:13px;color:var(--ink-mute);text-decoration:none;padding:7px 12px;border-radius:3px;white-space:nowrap;transition:color .15s,background .15s;border:1px solid transparent}
+.nav a.nl:hover{color:var(--ink);background:var(--surface)}
+.nav a.nl.active{color:var(--gold-bright);border-color:var(--line-bright);background:var(--surface)}
+.nav .gh{color:var(--ink-mute);text-decoration:none;font-size:13px;border:1px solid var(--line-bright);padding:6px 12px;border-radius:3px;white-space:nowrap;transition:all .15s}
+.nav .gh:hover{color:var(--ink);border-color:var(--gold)}
+.menu-btn{display:none;background:var(--surface);border:1px solid var(--line-bright);color:var(--ink);width:38px;height:38px;border-radius:3px;font-size:18px;cursor:pointer}
+
+/* ── layout ── */
+.shell{max-width:1180px;margin:0 auto;padding:0 22px;display:grid;grid-template-columns:232px 1fr;gap:40px;position:relative;z-index:1}
+.toc{position:sticky;top:calc(var(--nav-h) + 24px);align-self:start;height:calc(100vh - var(--nav-h) - 48px);overflow-y:auto;padding:28px 0 40px;font-size:13px}
+.toc .tl{font-size:10.5px;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);font-weight:700;margin-bottom:14px;padding-left:13px}
+.toc a{display:block;color:var(--ink-mute);text-decoration:none;padding:5px 13px;border-left:2px solid var(--line-soft);line-height:1.45;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--ink-dim)}
+.toc a.h3{padding-left:26px;font-size:12.5px}
+.toc a.on{color:var(--gold-bright);border-left-color:var(--gold)}
+main{min-width:0;padding:38px 0 80px;max-width:820px}
+
+/* ── prose ── */
+.kicker{font:700 11.5px/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+main h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,5vw,46px);line-height:1.08;letter-spacing:.4px;color:var(--ink);margin:0 0 10px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+main h1 em{font-style:italic;color:var(--gold)}
+main h2{font-family:var(--serif);font-weight:700;font-size:clamp(22px,3vw,28px);color:var(--ink);margin:46px 0 16px;padding-top:10px;display:flex;align-items:center;gap:13px;scroll-margin-top:calc(var(--nav-h) + 16px)}
+main h2::before{content:"◆";color:var(--gold);font-size:14px;flex-shrink:0}
+main h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line-bright),transparent)}
+main h3{font-family:var(--serif);font-weight:700;font-size:19px;color:var(--gold-bright);margin:30px 0 12px;letter-spacing:.2px;scroll-margin-top:calc(var(--nav-h) + 16px)}
+main h4{font-family:var(--sans);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-dim);margin:22px 0 10px}
+main p{color:var(--ink-dim);margin:13px 0}
+main a{color:var(--gold-bright);text-decoration:none;border-bottom:1px solid rgba(201,162,75,.32);transition:border-color .15s}
+main a:hover{border-bottom-color:var(--gold-bright)}
+main strong{color:var(--ink);font-weight:700}
+main em{color:var(--ink-dim)}
+main ul,main ol{margin:13px 0 13px 4px;padding-left:22px}
+main li{color:var(--ink-dim);margin:7px 0;padding-left:6px}
+main ul li::marker{color:var(--gold);content:"◆  ";font-size:.8em}
+main ol li::marker{color:var(--gold);font-family:var(--serif);font-weight:700}
+main li>ul,main li>ol{margin:7px 0}
+main hr{border:none;height:34px;position:relative;margin:30px 0}
+main hr::before{content:"◆";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:var(--gold);font-size:12px;background:var(--bg);padding:0 14px}
+main hr::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,transparent,var(--line-bright),transparent)}
+
+/* code */
+main code{font-family:"Consolas","SF Mono",monospace;font-size:.86em;background:var(--raised-2);color:var(--gold-bright);border:1px solid var(--line);border-radius:3px;padding:2px 7px;white-space:nowrap}
+main pre{background:#100d08;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px;padding:16px 18px;overflow-x:auto;margin:16px 0}
+main pre code{background:none;border:none;color:var(--ink-dim);padding:0;white-space:pre;font-size:13.5px;line-height:1.6}
+
+/* tables — ledger style */
+.tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:5px}
+main table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:480px}
+main thead th{background:var(--raised-2);color:var(--gold-bright);font-family:var(--serif);font-weight:700;text-align:left;padding:11px 15px;border-bottom:1px solid var(--line-bright);letter-spacing:.2px;white-space:nowrap}
+main tbody td{padding:10px 15px;border-bottom:1px solid var(--line-soft);color:var(--ink-dim);vertical-align:top}
+main tbody tr:nth-child(even){background:rgba(255,255,255,.012)}
+main tbody tr:hover{background:rgba(201,162,75,.05)}
+main tbody tr:last-child td{border-bottom:none}
+main td strong{color:var(--ink)}
+
+/* blockquote → callout */
+main blockquote{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:3px;padding:13px 18px;margin:16px 0;color:var(--ink-dim);font-size:14px}
+main blockquote p{margin:6px 0;color:var(--ink-dim)}
+main blockquote p:first-child{margin-top:0}main blockquote p:last-child{margin-bottom:0}
+main blockquote.warn{border-left-color:var(--t3);background:linear-gradient(90deg,rgba(189,86,81,.07),var(--surface) 60%)}
+main blockquote.tip{border-left-color:var(--gold)}
+main blockquote.goal{border-left-color:var(--t1);background:linear-gradient(90deg,rgba(122,164,92,.06),var(--surface) 60%)}
+
+/* task list checkboxes */
+main .task{list-style:none;padding-left:0;position:relative}
+main .task::marker{content:""}
+main .cb{display:inline-flex;width:17px;height:17px;border:1px solid var(--line-bright);border-radius:3px;margin-right:9px;vertical-align:-3px;align-items:center;justify-content:center;font-size:11px;color:var(--gold);flex-shrink:0}
+main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
+
+/* footer nav */
+.foot{border-top:1px solid var(--line);margin-top:50px;padding-top:26px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.foot a{flex:1;min-width:200px;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:14px 18px;text-decoration:none;transition:border-color .18s,transform .15s;display:block}
+.foot a:hover{border-color:var(--gold);transform:translateY(-2px)}
+.foot .fl{font-size:11px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.14em}
+.foot .ft{font-family:var(--serif);font-size:16px;color:var(--gold-bright);font-weight:700;margin-top:3px}
+.foot a.nx{text-align:right}
+.credit{text-align:center;color:var(--ink-mute);font-size:12px;padding:36px 0 10px;line-height:1.8}
+.credit .di{color:var(--gold);transform:rotate(45deg);display:inline-block;margin:0 6px}
+
+/* ── responsive ── */
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr;gap:0}
+  .toc{position:fixed;top:var(--nav-h);left:0;bottom:0;width:262px;height:auto;background:var(--surface);border-right:1px solid var(--line);padding:24px 14px 40px;transform:translateX(-105%);transition:transform .26s ease;z-index:55}
+  .toc.open{transform:none;box-shadow:18px 0 40px rgba(0,0,0,.5)}
+  .menu-btn{display:flex;align-items:center;justify-content:center}
+  main{padding:26px 0 60px}
+  .nav .links{display:none}
+  .scrim{position:fixed;inset:var(--nav-h) 0 0;background:rgba(8,6,4,.6);z-index:54;display:none}
+  .scrim.show{display:block}
+}
+@media(min-width:901px){.menu-btn,.scrim{display:none}}
+</style></head><body>
+<nav class="nav">
+<button class="menu-btn" aria-label="menu">☰</button>
+<a class="brand" href="index.html"><span class="di">◆</span> ตำรา <em>Minecraft</em></a>
+<div class="links"><a class="nl" href="choose-origin.html">เลือกเผ่า</a><a class="nl active" href="getting-started.html">เริ่มเล่น</a><a class="nl" href="keybinds.html">ปุ่มพลัง</a><a class="nl" href="origins-codex.html">คู่มือเผ่า 27</a><a class="nl" href="join-server.html">เข้าเซิร์ฟเพื่อน</a><a class="nl" href="mods-2612.html">มอดใหม่ 26.1.2</a></div>
+<a class="gh" href="https://github.com/tayakorn221/minecraft-guide" target="_blank" rel="noopener">GitHub ↗</a>
+</nav>
+<div class="scrim"></div>
+<div class="shell">
+<aside class="toc"><div class="tl">ในหน้านี้</div><a class="" href="#tl-dr-5-อย่างแรกที่ต้องทำ">⚡ TL;DR — 5 อย่างแรกที่ต้องทำ</a><a class="" href="#1-ก่อนกดสร้างโลก-เลือก-สองชั้น">1) ก่อนกดสร้างโลก — เลือก "สองชั้น"</a><a class="" href="#2-10-นาทีแรก-ทำตามสเตป">2) 10 นาทีแรก — ทำตามสเตป</a><a class="" href="#3-3-ชั่วโมงแรก-เช็คลิสต์เป้าหมาย">3) 3 ชั่วโมงแรก — เช็คลิสต์เป้าหมาย</a><a class="" href="#4-ระบบ-rpg-ในแพ็คนี้ทำงานยังไง-หัวใจของแพ็ค">4) ⭐ ระบบ RPG ในแพ็คนี้ทำงานยังไง (หัวใจของแพ็ค)</a><a class="h3" href="#4-1-origins-เผ่าคือพลังติดตัว">4.1 Origins — เผ่าคือพลังติดตัว</a><a class="h3" href="#4-2-คลาสคาถา-ขับเคลื่อนด้วย-อาวุธ-ไม่ใช่เลือกคลาส">4.2 คลาสคาถา — ขับเคลื่อนด้วย "อาวุธ" ไม่ใช่เลือกคลาส</a><a class="h3" href="#4-3-spell-power-ค่าที่ทำให้คาถาแรงขึ้น">4.3 Spell Power — ค่าที่ทำให้คาถาแรงขึ้น</a><a class="h3" href="#4-4-better-combat-combat-roll-การต่อสู้เปลี่ยนไป">4.4 Better Combat + Combat Roll — การต่อสู้เปลี่ยนไป</a><a class="h3" href="#4-5-dungeon-difficulty-โลก-เลเวลอัปแทนตัวเรา">4.5 Dungeon Difficulty — "โลก" เลเวลอัปแทนตัวเรา</a><a class="" href="#5-มอดสำคัญต้องรู้-10-ตัว">5) มอดสำคัญต้องรู้ 10 ตัว</a><a class="" href="#6-กับดักมือใหม่มักพลาด">6) ⚠️ กับดักมือใหม่มักพลาด</a><a class="h3" href="#เส้นทางโต-early-mid-late">เส้นทางโต early → mid → late</a><a class="" href="#เช็คลิสต์-สรุปไว">✅ เช็คลิสต์/สรุปไว</a></aside>
+<main><h1>🌅 RPG Origins — คู่มือเริ่มเล่น (Getting Started)</h1>
+<blockquote class="tip">
+<p>สำหรับ <strong>RPG Origins — Rise of Power v13.7.0</strong> (MC 1.21.1 Fabric, Prism Launcher)
+มือใหม่เปิดเกมครั้งแรกอ่านอันนี้พอ — ปุ่ม/ระบบดึงจากไฟล์มอดจริง + <code>options.txt</code> จริงในเครื่อง</p>
+</blockquote>
+<hr />
+<h2 id="tl-dr-5-อย่างแรกที่ต้องทำ">⚡ TL;DR — 5 อย่างแรกที่ต้องทำ</h2>
+<ol>
+<li><strong>เลือกเผ่า (Origin) ให้ดีก่อนกดสร้างโลก</strong> — เปลี่ยนทีหลังต้องใช้ไอเทม <strong>Orb of Origin</strong> เท่านั้น → สายสำรวจ+สร้าง เริ่มที่ <strong>Arachnid / Avian / Elytrian</strong> (เขียว เล่นง่าย) ดูครบใน <a href="origins-codex.html">คู่มือเผ่า</a></li>
+<li><strong>จำปุ่มพลังเผ่า: <code>G</code> = ใช้พลังหลัก, <code>K</code> = ดูพลัง/ปุ่มของเผ่าตัวเอง</strong> — เผ่าส่วนใหญ่มีพลังกด ไม่กดก็ไม่รู้ว่ามี</li>
+<li><strong>กด <code>R</code> = กลิ้งหลบ (dodge)</strong> — มอนสเตอร์ในแพ็คนี้แรงขึ้นตามระยะห่างจากสปอน การหลบสำคัญกว่าวานิลลามาก</li>
+<li><strong>คืนแรกหาที่หลบให้ได้</strong> — ขุดเข้าเขา/ก่อกล่องดิน 2 ช่อง วางเตียง ผ่านคืนไป (มอนแพ็คนี้ตีเจ็บ)</li>
+<li><strong>ตั้งปุ่มที่ยังว่าง: สมุดเควส FTB Quests + ช่องร่ายคาถา</strong> ใน Options → Controls (ดูหัวข้อ "กับดักมือใหม่")</li>
+</ol>
+<blockquote class="goal">
+<p>🎯 หัวใจแพ็คนี้ = <strong>เผ่า (Origins) + คลาสคาถา (Spell Engine) + โลกที่เก่งขึ้นตามโซน (Dungeon Difficulty)</strong> ไม่ใช่วานิลลาธรรมดา — อ่านหัวข้อ "ระบบ RPG" ให้จบ</p>
+</blockquote>
+<hr />
+<h2 id="1-ก่อนกดสร้างโลก-เลือก-สองชั้น">1) ก่อนกดสร้างโลก — เลือก "สองชั้น"</h2>
+<p>ตอนสร้างตัวละครครั้งแรก เกมให้เลือก <strong>2 ชั้น (layer)</strong>:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ชั้น</th>
+<th>คือ</th>
+<th>ทางเลือก</th>
+<th>เปลี่ยนทีหลัง</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>เผ่า (Origin)</strong></td>
+<td>เผ่าพันธุ์ = พลัง+จุดอ่อนติดตัว</td>
+<td>27 เผ่า (Banshee, Fae, Enderian, Arachnid…)</td>
+<td>ต้องใช้ <strong>Orb of Origin</strong></td>
+</tr>
+<tr>
+<td><strong>อาชีพ (Class)</strong></td>
+<td>โบนัสเบา ๆ สายอาชีพ (impact 0 ไม่มีจุดอ่อน)</td>
+<td><strong>Wandering Trader / Baker / Butcher</strong></td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="warn">
+<p>🧑‍🍳 <strong>คลาสคืออะไร</strong> (มอด <code>extraclasses</code> — เลือกได้อิสระ ไม่กระทบเผ่า): <strong>Baker</strong> อบขนมปัง/เค้กได้ saturation มากขึ้น + คราฟต์ขนมปัง 2 จากข้าวสาลี 3 · <strong>Butcher</strong> จัดการเนื้อ/หนังเก่ง · <strong>Wandering Trader</strong> สายพ่อค้า เน้นเทรด/XP — เลือกตามของที่อยากทำบ่อย ไม่ใช่ตัวตัดสินเกม</p>
+<p>⚠️ <strong>เผ่าคือตัวตัดสินสไตล์เล่นทั้งเกม</strong> เลือกจาก <a href="origins-codex.html">คู่มือเผ่า 27 ตัว</a> — สรุปสำหรับมือใหม่สาย "สำรวจ + สร้าง":</p>
+</blockquote>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>สี (ความยาก)</th>
+<th>เผ่าแนะนำ</th>
+<th>จุดเด่น</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢 ง่าย</td>
+<td><strong>Arachnid</strong> ปีนกำแพง · <strong>Avian</strong> ตกไม่เจ็บ/เดินเร็ว · <strong>Elytrian</strong> มีปีก Elytra</td>
+<td>จุดอ่อนเบา พลาดได้</td>
+</tr>
+<tr>
+<td>🟡 กลาง</td>
+<td><strong>Enderian</strong> วาร์ปด้วยเพิร์ล + เอื้อมไกล</td>
+<td>เดินทาง/สร้างไว (กลัวน้ำ)</td>
+</tr>
+<tr>
+<td>🔴 ยาก</td>
+<td><strong>Fae</strong> ลอยบิน + เร่งโตพืช ไม่กลัวแดด/น้ำ</td>
+<td>แรงสุดในสายสร้าง แต่เลือดน้อย ใส่เหล็กไม่ได้</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="warn">
+<p>💡 <strong>มือใหม่จริง ๆ เริ่มที่เขียวก่อน</strong> — เก็บ Fae (แดง) ไว้รอบสองตอนเข้าใจระบบแล้ว
+⚠️ เลี่ยงตอนเริ่ม: <strong>Ogre</strong> (ลอดประตูไม่ได้), <strong>Revenant/Plague Victim</strong> (เก็บพืชไม่ได้/ชาวบ้านไม่เทรด), <strong>Phantom/Gorgon</strong> (กลางวันมีปัญหา)</p>
+</blockquote>
+<hr />
+<h2 id="2-10-นาทีแรก-ทำตามสเตป">2) 10 นาทีแรก — ทำตามสเตป</h2>
+<p><strong>0–2 นาที | เกิดมาแล้วทำอะไรก่อน</strong>
+1. กด <strong><code>K</code></strong> ดูพลังเผ่าตัวเอง — จำว่าพลัง Active กดปุ่มไหน (หลัก = <code>G</code>)
+2. กด <strong><code>J</code></strong> เปิดแผนที่เต็มจอ / <strong><code>M</code></strong> เปิด-ปิดมินิแมพ — กันหลง
+3. เช็คช่องเก็บของ (<code>E</code>) เผื่อแพ็คให้ไอเทมเริ่มต้น</p>
+<p><strong>2–6 นาที | เก็บของพื้นฐาน</strong>
+1. ต่อยไม้ → ทำ <strong>โต๊ะคราฟต์ + ขวานหิน + จอบ</strong> (ไม่รู้สูตร? ชี้เมาส์ที่ไอเทมในช่อง JEI ขวาจอ กด <strong><code>U</code></strong> ดูวิธีได้มา / <strong><code>R</code></strong> ดูสูตรคราฟต์)
+2. ขุดหิน 20+ ก้อน ทำ <strong>เครื่องมือหิน + เตาเผา</strong>
+3. ฆ่าสัตว์/เก็บพืชหาอาหาร — ⚠️ <strong>เช็คข้อจำกัดอาหารของเผ่า</strong>: Avian/Wood Elf กินเนื้อไม่ได้, Arachnid กินผักไม่ได้</p>
+<p><strong>6–10 นาที | ที่หลบคืนแรก</strong>
+1. หาผาขุดเข้าไป หรือก่อกล่องดิน/หิน 2 บล็อกสูง
+2. วาง <strong>คบไฟ</strong> กันมอนเกิด + วาง <strong>เตียง</strong>
+3. นอนผ่านคืน — ⚠️ บางเผ่านอนไม่ได้ (Moon Elf, Plague Victim, Revenant, Avian ต้องนอนสูง ≥86) ถ้านอนไม่ได้ให้ปิดประตูรอจนสว่าง</p>
+<blockquote class="tip">
+<p>🛡️ <strong>โดนรุมเมื่อไหร่กด <code>R</code> กลิ้งหลบ</strong> แล้วค่อยตอบโต้ — อย่ายืนตีแลก</p>
+</blockquote>
+<hr />
+<h2 id="3-3-ชั่วโมงแรก-เช็คลิสต์เป้าหมาย">3) 3 ชั่วโมงแรก — เช็คลิสต์เป้าหมาย</h2>
+<ul>
+<li class="task"><span class="cb"></span><strong>เกราะเหล็ก + ดาบ/อาวุธเหล็กครบเซ็ต</strong> ⚠️ เผ่าเวทย์ (Fae/Banshee/Gorgon) <strong>ใส่เหล็กไม่ได้</strong> — ใช้หนัง/ทอง/โซ่แทน</li>
+<li class="task"><span class="cb"></span>ตั้ง <strong>บ้านฐาน</strong> + หีบเก็บของ + เตาหลายตัว</li>
+<li class="task"><span class="cb"></span>หา/วาง <strong>Waystone</strong> อันแรก (เสาวาร์ป) ที่บ้าน — ปลดล็อกแล้ววาร์ปกลับได้ทุกที่</li>
+<li class="task"><span class="cb"></span>ขุดลงหา <strong>เพชร</strong> → ทำโต๊ะร่ายมนตร์ (Enchanting Table) + ชั้นหนังสือ</li>
+<li class="task"><span class="cb"></span>เปิด <strong>สมุดเควส (FTB Quests)</strong> ดูเป้าหมายที่แพ็ควางไว้ — <em>ต้องตั้งปุ่มเองก่อน</em> (Options → Controls)</li>
+<li class="task"><span class="cb"></span>เลือกแนวคลาสคาถา: ได้ <strong>ไม้เท้า/คันธนู/มีดคู่</strong> ของสาย Wizard/Archer/Rogue มาลองร่ายสกิล</li>
+<li class="task"><span class="cb"></span>หา <strong>กระเป๋าเป้ (Travelers Backpack)</strong> เพิ่มช่องเก็บของ (เปิดด้วย <code>B</code>)</li>
+</ul>
+<hr />
+<h2 id="4-ระบบ-rpg-ในแพ็คนี้ทำงานยังไง-หัวใจของแพ็ค">4) ⭐ ระบบ RPG ในแพ็คนี้ทำงานยังไง (หัวใจของแพ็ค)</h2>
+<p>แพ็คนี้ไม่มี "เลเวลตัวละคร + แต้มสกิล" แบบเกม RPG ทั่วไป — <strong>ความแข็งแกร่งมาจาก 3 เสา</strong>: เผ่า, อาวุธ/คาถา, และเกียร์ที่เก่งขึ้นตามโซน</p>
+<h3 id="4-1-origins-เผ่าคือพลังติดตัว">4.1 Origins — เผ่าคือพลังติดตัว</h3>
+<p>มอด <strong>Origins (1.13.0) + Medieval Origins (7.0.4)</strong> ให้พลัง+จุดอ่อนถาวรตามเผ่า</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ปุ่ม (ตั้งไว้ในเครื่องนี้)</th>
+<th>ทำอะไร</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>G</code></strong></td>
+<td>พลัง Active <strong>หลัก</strong> (เช่น Enderian ขว้างเพิร์ลวาร์ป, Fae ลอยบิน, Ogre คลั่ง)</td>
+</tr>
+<tr>
+<td><code>K</code></td>
+<td>โชว์พลัง+ปุ่มของเผ่าตัวเอง (ตัวช่วยจำ) · <code>O</code> = เปิดหน้า Origin</td>
+</tr>
+<tr>
+<td><code>V</code></td>
+<td>พลัง Active <strong>ตัวที่สาม</strong> (Medieval — Fae ออร่าธรรมชาติ, Revenant สั่งอันเดด)</td>
+</tr>
+<tr>
+<td><em>(ยังไม่ตั้ง)</em></td>
+<td>พลัง Active <strong>รอง</strong> — ต้องตั้งเองใน Controls (ดู <a href="keybinds.html">origin-keybinds</a>)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="4-2-คลาสคาถา-ขับเคลื่อนด้วย-อาวุธ-ไม่ใช่เลือกคลาส">4.2 คลาสคาถา — ขับเคลื่อนด้วย "อาวุธ" ไม่ใช่เลือกคลาส</h3>
+<p>แกนคือ <strong>Spell Engine</strong> + ชุดคลาส <strong>RPG Series</strong>:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>มอดคลาส</th>
+<th>แนวเล่น</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Wizards</strong></td>
+<td>เวทย์ Arcane / Fire / Frost</td>
+</tr>
+<tr>
+<td><strong>Elemental Wizards</strong></td>
+<td>เวทย์ธาตุเสริม (Add-on ของ Spell Engine)</td>
+</tr>
+<tr>
+<td><strong>Paladins &amp; Priests</strong></td>
+<td>บัฟ/ฮีล/ปกป้องเพื่อน</td>
+</tr>
+<tr>
+<td><strong>Rogues &amp; Warriors</strong></td>
+<td>สกิลประชิด มีดเงียบ ดาเมจหนัก</td>
+</tr>
+<tr>
+<td><strong>Archers</strong></td>
+<td>สายธนู เล็งแม่น เจาะทะลุ</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>กลไกร่ายสกิล (สำคัญ):</strong>
+1. <strong>ถืออาวุธคาถา</strong> (ไม้เท้า/คทา/ธนูคลาส) → แถบสกิลพิเศษจะโผล่
+2. <strong>เลือกสกิลด้วยเลข <code>1</code>–<code>9</code></strong> (สลับเหมือนช่องไอเทมปกติ ตอนถืออาวุธนั้น)
+3. <strong>คลิกขวา (Use) = ร่าย</strong> · กดค้าง = ชาร์จ
+4. กด <strong><code>Left Alt</code></strong> = ใช้ไอเทมแบบปกติ (bypass แถบคาถาชั่วคราว)</p>
+<blockquote class="warn">
+<p>⚠️ ช่องร่าย "Spell Hotbar Slot 1–9" เป็นปุ่มเสริม <strong>ยังไม่ตั้งค่าจากโรงงาน</strong> — เล่นได้ด้วยเลข+คลิกขวาตามด้านบนก่อน ถ้าจะร่ายไว ค่อยไปผูกปุ่มทีหลัง</p>
+</blockquote>
+<h3 id="4-3-spell-power-ค่าที่ทำให้คาถาแรงขึ้น">4.3 Spell Power — ค่าที่ทำให้คาถาแรงขึ้น</h3>
+<p>มอด <strong>Spell Power</strong> เพิ่มแอตทริบิวต์ เช่น <em>Arcane / Fire / Frost / Healing Power</em> — <strong>ได้จากเกียร์ เครื่องประดับ (Jewelry/Trinkets/Relics) และเอนแชนต์</strong> ยิ่งสะสมมาก คาถายิ่งแรง = นี่คือ "การเลเวลอัป" ของสายเวทย์</p>
+<h3 id="4-4-better-combat-combat-roll-การต่อสู้เปลี่ยนไป">4.4 Better Combat + Combat Roll — การต่อสู้เปลี่ยนไป</h3>
+<ul>
+<li><strong>Better Combat:</strong> คลิกซ้ายตีเป็น <strong>คอมโบมีจังหวะ + ระยะเอื้อมจริงตามอาวุธ</strong> (ดาบกวาดโดนหลายตัว, หอกแทงไกล) — ไม่ใช่จิ้มรัวแบบเดิม</li>
+<li><strong>Combat Roll:</strong> <strong><code>R</code></strong> = กลิ้งหลบ มีเฟรมอมตะสั้น ๆ — ทักษะเอาตัวรอดหลักของแพ็ค</li>
+</ul>
+<h3 id="4-5-dungeon-difficulty-โลก-เลเวลอัปแทนตัวเรา">4.5 Dungeon Difficulty — "โลก" เลเวลอัปแทนตัวเรา</h3>
+<p>มอด <strong>Dungeon Difficulty</strong> ทำให้ <strong>ยิ่งไกลสปอน/ยิ่งลึกในดันเจี้ยน มอนยิ่งแกร่ง แต่ของดรอปยิ่งดี</strong> ของจะมีค่า <strong>Power Level</strong> ติดมา โซนไล่จากง่ายไปยาก:</p>
+<p><code>Normal → 🗺️ Adventure → ⚔️ Dungeon → 💀 Apocalypse</code> และบอส: <code>Boss → Heroic → Mythic</code></p>
+<blockquote class="goal">
+<p>🎯 แปลว่า: <strong>อย่าเพิ่งวิ่งไกล/มุดดันเจี้ยนลึกตั้งแต่ยังถือเครื่องมือหิน</strong> — ของจะหลุดเลเวล โดนตบร่วง ค่อย ๆ ขยับออกเมื่อเกียร์พร้อม</p>
+</blockquote>
+<hr />
+<h2 id="5-มอดสำคัญต้องรู้-10-ตัว">5) มอดสำคัญต้องรู้ 10 ตัว</h2>
+<blockquote class="tip">
+<p>เลือกจากมอดที่ลงจริง — ตัวที่ "มือใหม่ได้ใช้ทุกวัน"</p>
+</blockquote>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>มอด</th>
+<th>ทำให้ชีวิตง่ายขึ้นยังไง</th>
+<th>ปุ่ม/วิธีใช้</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>JourneyMap</strong></td>
+<td>แผนที่ + มินิแมพ + ปักหมุด ไม่หลง</td>
+<td><code>J</code> เต็มจอ · <code>M</code> มินิแมพ · <code>B</code> ปักหมุด</td>
+</tr>
+<tr>
+<td><strong>JEI</strong> (Just Enough Items)</td>
+<td>ค้นสูตรคราฟต์/วิธีได้มาของทุกอย่าง</td>
+<td>ชี้ไอเทม → <code>R</code> ดูสูตร · <code>U</code> ดูที่ใช้ · <code>F</code> ช่องค้นหา</td>
+</tr>
+<tr>
+<td><strong>Jade</strong></td>
+<td>จ้องบล็อก/มอนแล้วเห็นชื่อ-เลือด-ใช้เครื่องมืออะไร</td>
+<td>โชว์อัตโนมัติบนจอ</td>
+</tr>
+<tr>
+<td><strong>FTB Quests</strong></td>
+<td>สมุดเควสไกด์เป้าหมายแพ็ค</td>
+<td>⚠️ ตั้งปุ่มเองก่อน (Controls)</td>
+</tr>
+<tr>
+<td><strong>Waystones</strong></td>
+<td>เสาวาร์ป เดินทางไกลข้ามแมพ</td>
+<td>ขวาคลิกเสาที่เจอ/วางเอง</td>
+</tr>
+<tr>
+<td><strong>Travelers Backpack</strong></td>
+<td>กระเป๋าเป้พกพา เพิ่มช่องเยอะ</td>
+<td><code>B</code> เปิด</td>
+</tr>
+<tr>
+<td><strong>Carry On</strong></td>
+<td>ยกหีบ/เตา/มอบทั้งใบไปวางที่อื่น ไม่ต้องทุบ</td>
+<td>ย่อ (Shift) + คลิกขวา</td>
+</tr>
+<tr>
+<td><strong>Combat Roll</strong></td>
+<td>กลิ้งหลบ เอาตัวรอดจากมอนที่สเกลแรง</td>
+<td><code>R</code></td>
+</tr>
+<tr>
+<td><strong>AppleSkin</strong></td>
+<td>เห็นค่าอิ่ม/saturation จริง (สำคัญกับเผ่ากินจุ)</td>
+<td>โชว์ใต้แถบอาหาร</td>
+</tr>
+<tr>
+<td><strong>Explorer's / Nature's Compass</strong></td>
+<td>หาโครงสร้าง/ไบโอมที่อยากไป</td>
+<td>คราฟต์เข็มทิศ → เปิด GUI เลือกเป้า</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="tip">
+<p>🔎 มีให้สำรวจอีกเพียบ: <strong>Dungeons Arise, YUNG's (ดันเจี้ยน/ป้อม/เหมือง), Deeper Darker, Bosses of Mass Destruction, Illager Invasion</strong> + ไบโอมจาก <strong>Biomes O Plenty / Regions Unexplored</strong></p>
+</blockquote>
+<hr />
+<h2 id="6-กับดักมือใหม่มักพลาด">6) ⚠️ กับดักมือใหม่มักพลาด</h2>
+<ol>
+<li><strong>เลือกเผ่าแรงเกินตัว</strong> — Fae/Banshee เลือดน้อยใส่เหล็กไม่ได้ ตายง่ายมากช่วงแรก → เริ่มเขียวก่อน</li>
+<li><strong>ลืมข้อจำกัดอาหาร/นอน</strong> — เก็บเสบียงผิดประเภทแล้วอด หรือเจอเผ่านอนไม่ได้แล้วงง (เช็ก <code>K</code>)</li>
+<li><strong>ใส่เกราะเหล็กกับเผ่าเวทย์</strong> — โดนลงโทษ (ช้า/เจ็บ) ใช้หนัง/ทอง/โซ่ หรือเอนแชนต์แก้</li>
+<li><strong>วิ่งไกลสปอนเร็วไป</strong> — Dungeon Difficulty ทำมอนแกร่งตามระยะ ของยังกากอยู่จะโดนตบ</li>
+<li><strong>ยืนตีแลกไม่ยอมหลบ</strong> — ลืมว่ามี <code>R</code> กลิ้งหลบ</li>
+<li><strong>ปลูกพืชผิดฤดู</strong> — มอด <strong>Serene Seasons</strong> ทำพืชโตตามฤดูกาล หน้าหนาวหลายอย่างไม่โต</li>
+<li><strong>ปุ่มชนกันเยอะ</strong> — <code>B</code>, <code>V</code>, <code>Z</code>, <code>H</code>, <code>O</code> ผูกซ้ำหลายมอด → เข้า <strong>Options → Controls</strong> จัดใหม่ตามเผ่า+คลาสที่เล่น และผูก <strong>FTB Quests / Spell Hotbar</strong> ที่ยังว่าง</li>
+</ol>
+<h3 id="เส้นทางโต-early-mid-late">เส้นทางโต early → mid → late</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ช่วง</th>
+<th>เป้าหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🌱 <strong>Early</strong> (วันแรก ๆ)</td>
+<td>รอบ ๆ สปอน: เครื่องมือหิน→เหล็ก, บ้าน+Waystone, ลองพลังเผ่า+คลิกขวาร่ายคาถาใบแรก</td>
+</tr>
+<tr>
+<td>⚔️ <strong>Mid</strong></td>
+<td>เพชร+เอนแชนต์, ขยับเข้าโซน Adventure/Dungeon, สะสม Spell Power จากเครื่องประดับ, ตีบอสเล็ก (Illager Invasion/BOMD)</td>
+</tr>
+<tr>
+<td>💀 <strong>Late</strong></td>
+<td>เกียร์ Power Level สูง, ลุยโซน Apocalypse + บอส Heroic/Mythic, เนเธอร์/เอนด์/Deeper Darker</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="เช็คลิสต์-สรุปไว">✅ เช็คลิสต์/สรุปไว</h2>
+<p><strong>ปุ่มที่ต้องจำ (default จริง):</strong>
+<code>G</code> พลังเผ่า · <code>K</code> ดูพลังเผ่า · <code>R</code> กลิ้งหลบ · <code>J/M</code> แผนที่ · <code>B</code> ปักหมุด/กระเป๋า · <code>Z</code> ซูม · คลิกขวา = ร่ายคาถา (เลือกด้วยเลข 1–9 ตอนถืออาวุธคาถา) · ชี้ของ + <code>R/U</code> ใน JEI ดูสูตร</p>
+<p><strong>3 กฎรอด:</strong>
+1. เริ่มเผ่าเขียว เช็คข้อจำกัด (เหล็ก/อาหาร/นอน) ด้วย <code>K</code>
+2. เกียร์ยังไม่พร้อม <strong>อย่าออกไกล</strong> — โลกแกร่งตามระยะ
+3. โดนรุมกด <code>R</code> หลบ แล้วค่อยสวน</p>
+<p><strong>ต้องตั้งเองก่อนสนุกเต็มที่:</strong> ปุ่ม FTB Quests + Spell Hotbar (Options → Controls)</p><div class="foot"><a class="pv" href="choose-origin.html"><div class="fl">← ก่อนหน้า</div><div class="ft">เลือกเผ่า</div></a><a class="nx" href="keybinds.html"><div class="fl">ถัดไป →</div><div class="ft">ปุ่มพลัง</div></a></div>
+<div class="credit"><span class="di">◆</span> ตำรา Minecraft · RPG Origins + เซิร์ฟเพื่อน 26.1.2 <span class="di">◆</span><br>เนื้อหาตรวจกับไฟล์มอดจริง · เฟส HTML</div>
+</main></div>
+<script>
+const mb=document.querySelector('.menu-btn'),toc=document.querySelector('.toc'),scrim=document.querySelector('.scrim');
+if(mb){mb.onclick=()=>{toc.classList.toggle('open');scrim.classList.toggle('show')};
+  scrim.onclick=()=>{toc.classList.remove('open');scrim.classList.remove('show')};
+  toc.querySelectorAll('a').forEach(a=>a.onclick=()=>{toc.classList.remove('open');scrim.classList.remove('show')});}
+const links=[...document.querySelectorAll('.toc a')],secs=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+const spy=()=>{let i=secs.length;while(--i>=0){if(secs[i]&&secs[i].getBoundingClientRect().top<120)break}
+  links.forEach(a=>a.classList.remove('on'));if(i>=0&&links[i])links[i].classList.add('on')};
+document.addEventListener('scroll',spy,{passive:true});spy();
+</script>
+</body></html>

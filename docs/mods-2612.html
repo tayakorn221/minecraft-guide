@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="th"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>มอดใหม่ 26.1.2 · ตำรา RPG Origins</title>
+<style>
+:root{
+  --bg:#14110c;--surface:#1c1812;--raised:#242019;--raised-2:#2b2619;
+  --line:#3a3225;--line-soft:#2c2519;--line-bright:#4d4231;
+  --ink:#f3ecdd;--ink-dim:#d2c6ad;--ink-mute:#a1957c;
+  --gold:#c9a24b;--gold-bright:#e2bf6e;
+  --t1:#7aa45c;--t2:#c89a45;--t3:#bd5651;--t0:#8f8975;
+  --good:#86a85f;--bad:#c4625b;
+  --serif:"Georgia","Iowan Old Style","Palatino Linotype","Times New Roman",serif;
+  --sans:"Leelawadee UI","Segoe UI","Noto Sans Thai",Tahoma,sans-serif;
+  --nav-h:58px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+::selection{background:rgba(201,162,75,.28);color:#fff}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:var(--surface)}
+::-webkit-scrollbar-thumb{background:#3c3324;border:3px solid var(--surface);border-radius:8px}
+::-webkit-scrollbar-thumb:hover{background:#4d4231}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;position:relative;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ── top nav ── */
+.nav{position:sticky;top:0;z-index:60;height:var(--nav-h);background:rgba(20,17,12,.95);border-bottom:1px solid var(--line);backdrop-filter:blur(8px);display:flex;align-items:center;gap:18px;padding:0 20px}
+.nav .brand{font-family:var(--serif);font-weight:700;font-size:17px;color:var(--ink);display:flex;align-items:center;gap:9px;white-space:nowrap;text-decoration:none}
+.nav .brand .di{color:var(--gold);transform:rotate(45deg);display:inline-block;font-size:11px}
+.nav .brand em{font-style:italic;color:var(--gold)}
+.nav .links{display:flex;gap:3px;flex:1;overflow-x:auto;scrollbar-width:none}
+.nav .links::-webkit-scrollbar{display:none}
+.nav a.nl{font-size:13px;color:var(--ink-mute);text-decoration:none;padding:7px 12px;border-radius:3px;white-space:nowrap;transition:color .15s,background .15s;border:1px solid transparent}
+.nav a.nl:hover{color:var(--ink);background:var(--surface)}
+.nav a.nl.active{color:var(--gold-bright);border-color:var(--line-bright);background:var(--surface)}
+.nav .gh{color:var(--ink-mute);text-decoration:none;font-size:13px;border:1px solid var(--line-bright);padding:6px 12px;border-radius:3px;white-space:nowrap;transition:all .15s}
+.nav .gh:hover{color:var(--ink);border-color:var(--gold)}
+.menu-btn{display:none;background:var(--surface);border:1px solid var(--line-bright);color:var(--ink);width:38px;height:38px;border-radius:3px;font-size:18px;cursor:pointer}
+
+/* ── layout ── */
+.shell{max-width:1180px;margin:0 auto;padding:0 22px;display:grid;grid-template-columns:232px 1fr;gap:40px;position:relative;z-index:1}
+.toc{position:sticky;top:calc(var(--nav-h) + 24px);align-self:start;height:calc(100vh - var(--nav-h) - 48px);overflow-y:auto;padding:28px 0 40px;font-size:13px}
+.toc .tl{font-size:10.5px;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);font-weight:700;margin-bottom:14px;padding-left:13px}
+.toc a{display:block;color:var(--ink-mute);text-decoration:none;padding:5px 13px;border-left:2px solid var(--line-soft);line-height:1.45;transition:color .15s,border-color .15s}
+.toc a:hover{color:var(--ink-dim)}
+.toc a.h3{padding-left:26px;font-size:12.5px}
+.toc a.on{color:var(--gold-bright);border-left-color:var(--gold)}
+main{min-width:0;padding:38px 0 80px;max-width:820px}
+
+/* ── prose ── */
+.kicker{font:700 11.5px/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+main h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,5vw,46px);line-height:1.08;letter-spacing:.4px;color:var(--ink);margin:0 0 10px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+main h1 em{font-style:italic;color:var(--gold)}
+main h2{font-family:var(--serif);font-weight:700;font-size:clamp(22px,3vw,28px);color:var(--ink);margin:46px 0 16px;padding-top:10px;display:flex;align-items:center;gap:13px;scroll-margin-top:calc(var(--nav-h) + 16px)}
+main h2::before{content:"◆";color:var(--gold);font-size:14px;flex-shrink:0}
+main h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line-bright),transparent)}
+main h3{font-family:var(--serif);font-weight:700;font-size:19px;color:var(--gold-bright);margin:30px 0 12px;letter-spacing:.2px;scroll-margin-top:calc(var(--nav-h) + 16px)}
+main h4{font-family:var(--sans);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-dim);margin:22px 0 10px}
+main p{color:var(--ink-dim);margin:13px 0}
+main a{color:var(--gold-bright);text-decoration:none;border-bottom:1px solid rgba(201,162,75,.32);transition:border-color .15s}
+main a:hover{border-bottom-color:var(--gold-bright)}
+main strong{color:var(--ink);font-weight:700}
+main em{color:var(--ink-dim)}
+main ul,main ol{margin:13px 0 13px 4px;padding-left:22px}
+main li{color:var(--ink-dim);margin:7px 0;padding-left:6px}
+main ul li::marker{color:var(--gold);content:"◆  ";font-size:.8em}
+main ol li::marker{color:var(--gold);font-family:var(--serif);font-weight:700}
+main li>ul,main li>ol{margin:7px 0}
+main hr{border:none;height:34px;position:relative;margin:30px 0}
+main hr::before{content:"◆";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:var(--gold);font-size:12px;background:var(--bg);padding:0 14px}
+main hr::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,transparent,var(--line-bright),transparent)}
+
+/* code */
+main code{font-family:"Consolas","SF Mono",monospace;font-size:.86em;background:var(--raised-2);color:var(--gold-bright);border:1px solid var(--line);border-radius:3px;padding:2px 7px;white-space:nowrap}
+main pre{background:#100d08;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px;padding:16px 18px;overflow-x:auto;margin:16px 0}
+main pre code{background:none;border:none;color:var(--ink-dim);padding:0;white-space:pre;font-size:13.5px;line-height:1.6}
+
+/* tables — ledger style */
+.tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:5px}
+main table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:480px}
+main thead th{background:var(--raised-2);color:var(--gold-bright);font-family:var(--serif);font-weight:700;text-align:left;padding:11px 15px;border-bottom:1px solid var(--line-bright);letter-spacing:.2px;white-space:nowrap}
+main tbody td{padding:10px 15px;border-bottom:1px solid var(--line-soft);color:var(--ink-dim);vertical-align:top}
+main tbody tr:nth-child(even){background:rgba(255,255,255,.012)}
+main tbody tr:hover{background:rgba(201,162,75,.05)}
+main tbody tr:last-child td{border-bottom:none}
+main td strong{color:var(--ink)}
+
+/* blockquote → callout */
+main blockquote{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:3px;padding:13px 18px;margin:16px 0;color:var(--ink-dim);font-size:14px}
+main blockquote p{margin:6px 0;color:var(--ink-dim)}
+main blockquote p:first-child{margin-top:0}main blockquote p:last-child{margin-bottom:0}
+main blockquote.warn{border-left-color:var(--t3);background:linear-gradient(90deg,rgba(189,86,81,.07),var(--surface) 60%)}
+main blockquote.tip{border-left-color:var(--gold)}
+main blockquote.goal{border-left-color:var(--t1);background:linear-gradient(90deg,rgba(122,164,92,.06),var(--surface) 60%)}
+
+/* task list checkboxes */
+main .task{list-style:none;padding-left:0;position:relative}
+main .task::marker{content:""}
+main .cb{display:inline-flex;width:17px;height:17px;border:1px solid var(--line-bright);border-radius:3px;margin-right:9px;vertical-align:-3px;align-items:center;justify-content:center;font-size:11px;color:var(--gold);flex-shrink:0}
+main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
+
+/* footer nav */
+.foot{border-top:1px solid var(--line);margin-top:50px;padding-top:26px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.foot a{flex:1;min-width:200px;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:14px 18px;text-decoration:none;transition:border-color .18s,transform .15s;display:block}
+.foot a:hover{border-color:var(--gold);transform:translateY(-2px)}
+.foot .fl{font-size:11px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.14em}
+.foot .ft{font-family:var(--serif);font-size:16px;color:var(--gold-bright);font-weight:700;margin-top:3px}
+.foot a.nx{text-align:right}
+.credit{text-align:center;color:var(--ink-mute);font-size:12px;padding:36px 0 10px;line-height:1.8}
+.credit .di{color:var(--gold);transform:rotate(45deg);display:inline-block;margin:0 6px}
+
+/* ── responsive ── */
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr;gap:0}
+  .toc{position:fixed;top:var(--nav-h);left:0;bottom:0;width:262px;height:auto;background:var(--surface);border-right:1px solid var(--line);padding:24px 14px 40px;transform:translateX(-105%);transition:transform .26s ease;z-index:55}
+  .toc.open{transform:none;box-shadow:18px 0 40px rgba(0,0,0,.5)}
+  .menu-btn{display:flex;align-items:center;justify-content:center}
+  main{padding:26px 0 60px}
+  .nav .links{display:none}
+  .scrim{position:fixed;inset:var(--nav-h) 0 0;background:rgba(8,6,4,.6);z-index:54;display:none}
+  .scrim.show{display:block}
+}
+@media(min-width:901px){.menu-btn,.scrim{display:none}}
+</style></head><body>
+<nav class="nav">
+<button class="menu-btn" aria-label="menu">☰</button>
+<a class="brand" href="index.html"><span class="di">◆</span> ตำรา <em>Minecraft</em></a>
+<div class="links"><a class="nl" href="choose-origin.html">เลือกเผ่า</a><a class="nl" href="getting-started.html">เริ่มเล่น</a><a class="nl" href="keybinds.html">ปุ่มพลัง</a><a class="nl" href="origins-codex.html">คู่มือเผ่า 27</a><a class="nl" href="join-server.html">เข้าเซิร์ฟเพื่อน</a><a class="nl active" href="mods-2612.html">มอดใหม่ 26.1.2</a></div>
+<a class="gh" href="https://github.com/tayakorn221/minecraft-guide" target="_blank" rel="noopener">GitHub ↗</a>
+</nav>
+<div class="scrim"></div>
+<div class="shell">
+<aside class="toc"><div class="tl">ในหน้านี้</div><a class="" href="#tl-dr-3-มอดที่เปลี่ยนวิธีเล่นมากสุด">TL;DR — 3 มอดที่เปลี่ยนวิธีเล่นมากสุด</a><a class="" href="#ตารางภาพรวมทั้งชุด">ตารางภาพรวมทั้งชุด</a><a class="" href="#เจาะรายตัว-วิธีใช้จริงในเกม">เจาะรายตัว — วิธีใช้จริงในเกม</a><a class="h3" href="#veinminer-ขุดทั้งสายทีเดียว">⛏️ VeinMiner — ขุดทั้งสายทีเดียว</a><a class="h3" href="#waystones-เสาวาร์ปข้ามแมพ">🪧 Waystones — เสาวาร์ปข้ามแมพ</a><a class="h3" href="#traveler-s-backpack-เป้สวมหลังสารพัดประโยชน์">🎒 Traveler's Backpack — เป้สวมหลังสารพัดประโยชน์</a><a class="h3" href="#combatify-รื้อระบบคอมแบทใหม่">⚔️ Combatify — รื้อระบบคอมแบทใหม่</a><a class="h3" href="#mutantmonsters-มินิบอส-5-ตัว">👹 MutantMonsters — มินิบอส 5 ตัว</a><a class="h3" href="#easy-anvils-ทั่งไม่พัง-ตีได้ไม่จำกัด">🔨 Easy Anvils — ทั่งไม่พัง ตีได้ไม่จำกัด</a><a class="h3" href="#comforts-ถุงนอน-amp-เปลญวน-นอนได้ทุกที่">🛏️ Comforts — ถุงนอน &amp; เปลญวน นอนได้ทุกที่</a><a class="h3" href="#highlighter-ไฮไลต์ของที่เพิ่งเก็บ">✨ Highlighter — ไฮไลต์ของที่เพิ่งเก็บ</a><a class="" href="#คอมโบเด็ด-ใช้คู่กันดี">🔗 คอมโบเด็ด — ใช้คู่กันดี</a><a class="" href="#เช็คลิสต์เริ่มใช้เร็ว">✅ เช็คลิสต์เริ่มใช้เร็ว</a><a class="h3" href="#หมายเหตุฝั่ง-client-server-เผื่อแก้ปัญหา">หมายเหตุฝั่ง client/server (เผื่อแก้ปัญหา)</a></aside>
+<main><h1>คู่มือใช้งานมอดชุดใหม่ — Minecraft 26.1.2 (ลง 2026-06-28)</h1>
+<blockquote class="tip">
+<p>อ้างอิงจากไฟล์ jar จริงใน <code>.minecraft\mods\</code> ทุกตัว — ชื่อไอเทม/สูตร/ปุ่ม/ดรอป ดึงจากในมอดตรง ๆ
+ค่าที่ตั้งได้ในเกม (เช่น ปุ่มลัด, ค่าใน config) จะวงเล็บไว้ว่า "ตั้งเอง" — ของพวกนี้เปิดดู/แก้ได้ใน <strong>Mod Menu → ปุ่มเฟือง</strong> ของแต่ละมอด</p>
+</blockquote>
+<hr />
+<h2 id="tl-dr-3-มอดที่เปลี่ยนวิธีเล่นมากสุด">TL;DR — 3 มอดที่เปลี่ยนวิธีเล่นมากสุด</h2>
+<ol>
+<li><strong>Waystones</strong> — วางเสา "Waystone" คลิกขวาตั้งชื่อ = จุดวาร์ป เดินทางข้ามแมพฟรี/เสียค่า XP เล็กน้อย แชร์กับเพื่อนได้ผ่าน Sharestone</li>
+<li><strong>Traveler's Backpack</strong> — เป้สวมหลังจุของเยอะมาก + อัปเกรดเตา/โต๊ะคราฟต์/แม่เหล็กดูดของ/ถังน้ำ + ถุงนอนในตัว กางนอนได้ทุกที่</li>
+<li><strong>VeinMiner</strong> — กดปุ่มค้างแล้วขุดแร่ทีเดียวทั้งสาย (และตัดไม้/ขุดดินทั้งกอง) เลือกรูปทรงขุดได้ (ปกติ/อุโมงค์/แนวราบ)</li>
+</ol>
+<blockquote class="tip">
+<p>เสริม: <strong>Combatify</strong> รื้อระบบตีใหม่ (อิงจาก Combat Test ของ Mojang) + เพิ่มมีดสั้น/ดาบยาว/โล่ตามวัสดุ — <strong>MutantMonsters</strong> ใส่มินิบอส 5 ตัวที่ดรอปของแรง</p>
+</blockquote>
+<hr />
+<h2 id="ตารางภาพรวมทั้งชุด">ตารางภาพรวมทั้งชุด</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>มอด</th>
+<th>ทำอะไร</th>
+<th>ใช้ยังไง (โดยย่อ)</th>
+<th>ฝั่ง</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VeinMiner</strong></td>
+<td>ขุดแร่/ตัดไม้ทีเดียวทั้งสาย</td>
+<td>กดปุ่มค้าง (ตั้งเอง) ขณะขุด</td>
+<td>client+server</td>
+</tr>
+<tr>
+<td><strong>Waystones</strong></td>
+<td>เสาวาร์ปข้ามแมพ + แชร์ทีม</td>
+<td>คราฟต์ Waystone → คลิกขวาตั้งชื่อ</td>
+<td>client+server</td>
+</tr>
+<tr>
+<td><strong>Traveler's Backpack</strong></td>
+<td>เป้จุของ + อัปเกรด + ถุงนอน</td>
+<td>คราฟต์ → คลิกขวาที่มือสวมหลัง → กดปุ่มเปิด</td>
+<td>client+server</td>
+</tr>
+<tr>
+<td><strong>Combatify</strong></td>
+<td>รื้อระบบคอมแบท + อาวุธ/โล่ใหม่</td>
+<td>ติดตั้งแล้วทำงานเลย; อาวุธใหม่ต้องเปิด pack เสริม</td>
+<td>client+server</td>
+</tr>
+<tr>
+<td><strong>MutantMonsters</strong></td>
+<td>มินิบอส 5 ตัว + ของดรอปแรง</td>
+<td>เจอแบบสุ่มที่ม็อบปกติเกิด</td>
+<td>client+server</td>
+</tr>
+<tr>
+<td><strong>Advanced Netherite</strong></td>
+<td>เกราะ/อาวุธสายเหนือ netherite</td>
+<td>คราฟต์ต่อยอดจาก netherite</td>
+<td>client+server</td>
+</tr>
+<tr>
+<td><strong>Dungeons &amp; Taverns</strong></td>
+<td>ดันเจี้ยน/โครงสร้างใหม่ใน worldgen</td>
+<td>เจอตอนสำรวจ (เฉพาะแมพที่เจนใหม่)</td>
+<td>server</td>
+</tr>
+<tr>
+<td><strong>Easy Anvils</strong></td>
+<td>ทั่งไม่พัง + ไม่มี "Too Expensive"</td>
+<td>ใช้ทั่งปกติ ตีได้ไม่จำกัด</td>
+<td>client+server</td>
+</tr>
+<tr>
+<td><strong>Comforts</strong></td>
+<td>ถุงนอน/เปลญวน นอนได้ทุกที่</td>
+<td>คราฟต์ → คลิกขวาวางแล้วนอน</td>
+<td>client+server</td>
+</tr>
+<tr>
+<td><strong>Highlighter</strong></td>
+<td>ไฮไลต์ของที่เพิ่งเก็บใน inventory</td>
+<td>อัตโนมัติ ไม่ต้องกดอะไร</td>
+<td>client only</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="เจาะรายตัว-วิธีใช้จริงในเกม">เจาะรายตัว — วิธีใช้จริงในเกม</h2>
+<h3 id="veinminer-ขุดทั้งสายทีเดียว">⛏️ VeinMiner — ขุดทั้งสายทีเดียว</h3>
+<p>ขุดบล็อกเดียวแล้วบล็อกชนิดเดียวกันที่ติดกันทั้งก้อนแตกตามทันที (แร่, ไม้, ดิน, หิน ฯลฯ)</p>
+<p><strong>วิธีใช้:</strong>
+1. ไป <strong>Options → Controls → หมวด "Veinminer"</strong> ผูกปุ่มก่อน (มาตรฐานยังไม่ผูกให้)
+   - <strong>Veinmining (Hold)</strong> — กดค้างขณะขุด = ขุดทั้งสาย (แนะนำ ปลอดภัยสุด)
+   - <strong>Veinmining (Toggle)</strong> — กดสลับเปิด/ปิดถาวร
+   - <strong>Open Client Settings</strong> — เปิดหน้าตั้งค่า client
+2. เล็งแร่ → กดปุ่มที่ผูกไว้ค้าง → ขุด → ทั้งสายหายรวด</p>
+<p><strong>รูปทรงการขุด (เปลี่ยนในหน้า Client Settings):</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>รูปทรง</th>
+<th>ผล</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Normal</td>
+<td>ตามสายบล็อกชนิดเดียวกันที่ติดกัน (ดีฟอลต์)</td>
+</tr>
+<tr>
+<td>Tunnel 1x1 / 2x2 / 3x3</td>
+<td>เจาะเป็นอุโมงค์ตามขนาด</td>
+</tr>
+<tr>
+<td>Flat</td>
+<td>ขุดเป็นแผ่นแนวราบ</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="warn">
+<p>⚠️ กินความทนทานจอบ/อีเต้อตามจำนวนบล็อกที่แตก — สายยาว ๆ พลั่วหมดสภาพไว พกของซ่อม/Mending
+💡 ตัว <code>veinminer-client</code> (มีในเครื่อง) คือส่วนที่ให้ปุ่ม+รูปทรง ถ้าเล่นเซิร์ฟเพื่อน เซิร์ฟมี veinminer หลักอยู่แล้วใช้ได้เลย</p>
+</blockquote>
+<hr />
+<h3 id="waystones-เสาวาร์ปข้ามแมพ">🪧 Waystones — เสาวาร์ปข้ามแมพ</h3>
+<p>หัวใจคือ <strong>Warp Stone</strong> (วัตถุดิบกลาง) เอาไปคราฟต์ทุกอย่างต่อ</p>
+<p><strong>สูตรหลัก:</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ไอเทม</th>
+<th>สูตร</th>
+<th>ได้</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Warp Stone</strong></td>
+<td>amethyst×4 + ender pearl×4 + gold ingot×1 (AEA/EGE/AEA)</td>
+<td>1 (ของวาร์ปพกติดตัว มีคูลดาวน์)</td>
+</tr>
+<tr>
+<td><strong>Waystone</strong> (เสาหลัก)</td>
+<td>หินตกแต่ง×6 + Warp Stone×1 (<code>S</code>/<code>SWS</code>/<code>SSS</code>)</td>
+<td>1 เสา</td>
+</tr>
+<tr>
+<td><strong>Warp Scroll</strong></td>
+<td>gold nugget×4 + ink sac×1 + amethyst×1 + paper×3</td>
+<td>3 (ม้วนวาร์ปใช้ครั้งเดียว ไปได้ทุกเสาที่เปิดแล้ว)</td>
+</tr>
+<tr>
+<td><strong>Return Scroll</strong></td>
+<td>gold nugget×4 + ink sac×1 + paper×3</td>
+<td>3 (กลับเสาที่ผูก/ใกล้สุด ใช้ครั้งเดียว)</td>
+</tr>
+<tr>
+<td><strong>Sharestone</strong> (แชร์ทีม)</td>
+<td>stone bricks×6 + copper ingot×2 + Warp Stone×1</td>
+<td>1 (เสาแชร์ — ใครอยู่เครือข่ายสีเดียวกันวาร์ปหากันได้)</td>
+</tr>
+<tr>
+<td><strong>Warp Plate</strong></td>
+<td>stone bricks×4 + amethyst×4 + flint×1</td>
+<td>1 (แผ่นเหยียบวาร์ปอัตโนมัติ)</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="tip">
+<p>🪨 <strong>"หินตกแต่ง" ของ Waystone เลือกได้หลายแบบ</strong> (จากในมอด): deepslate, chiseled sandstone, andesite, blackstone, prismarine, purpur, end stone, mud bricks, red nether bricks — แบบไหนก็ได้ ×6 + Warp Stone×1 วางทรง <code>S</code>/<code>SWS</code>/<code>SSS</code> เหมือนกันหมด · <strong>Sharestone</strong> ต่างหากที่ใช้ stone bricks×6</p>
+</blockquote>
+<p><strong>วิธีผูกจุด:</strong>
+1. วาง Waystone กับพื้น → <strong>คลิกขวา</strong> → ใส่ชื่อ (เช่น "บ้าน", "เหมือง") → กดยืนยัน = เสานี้ "เปิด" แล้ว
+2. ไปวางเสาที่อื่นอีก ทำซ้ำ
+3. <strong>คลิกขวาที่เสาใดก็ได้</strong> → ขึ้นเมนูรายชื่อเสาที่เปิดแล้ว → คลิกชื่อ = วาร์ปไป
+4. วาร์ปจากที่ไหนก็ได้ด้วย <strong>Warp Stone</strong> (คลิกขวาค้าง เลือกเสา) — มีคูลดาวน์</p>
+<p><strong>ลูกเล่นในเมนูเสา (ปุ่ม Manage / Personal Settings):</strong>
+- จัดเรียงเสา (ลากเรียง, double-click ดันขึ้นบนสุด), ตั้ง Favorite, จัดกลุ่ม (Group)
+- เรียงตาม: Manual / ชื่อ / ระยะทาง
+- ตั้งการมองเห็นเสา: เปิดเมื่อ activate / เห็นทุกคน (Global) / ผ่าน Attuned Shard เท่านั้น</p>
+<blockquote class="goal">
+<p>💰 การวาร์ปอาจ <strong>เสีย XP</strong> ตามระยะ (ตั้งได้ใน config — ปิดให้ฟรีก็ได้) เมนูจะบอก "Level Cost / Experience Cost" ก่อนวาร์ป
+👥 เล่นกับเพื่อน: ใช้ <strong>Sharestone</strong> ทำเครือข่ายร่วม หรือเปิดเสาเป็น <strong>Global</strong> ให้ทุกคนเห็น</p>
+</blockquote>
+<hr />
+<h3 id="traveler-s-backpack-เป้สวมหลังสารพัดประโยชน์">🎒 Traveler's Backpack — เป้สวมหลังสารพัดประโยชน์</h3>
+<p>จุของเยอะ ใส่อัปเกรดได้ มีถุงนอนในตัว</p>
+<p><strong>ลำดับคราฟต์ (ทำตามนี้):</strong>
+1. <strong>ถุงนอน TB</strong> = ขนแกะ×3 เรียงแนวนอน (<code>##X</code>) — <em>จำเป็นต่อสูตรเป้</em> (advancement "Getting Started")
+2. <strong>Backpack Tank</strong> (ออปชัน) = แก้วใส×6 + iron ingot×2 (<code>BAB</code>/<code>B B</code>/<code>BAB</code>)
+3. <strong>เป้ Standard</strong> = หนัง×4 + เชือก×1 + หีบไม้×1 + Backpack Tank×2 + ถุงนอน TB×1
+   - เรียง: <code>XBX</code> / <code>CDC</code> / <code>XSX</code> (X=หนัง, B=เชือก, C=tank, D=หีบ, S=ถุงนอน)</p>
+<p><strong>สวม &amp; เปิด:</strong>
+- <strong>สวม:</strong> ถือเป้ไว้มือหลัก → คลิกขวา (หรือเปิดช่อง Back Slot Integration เอาใส่ช่องหลังตรง ๆ)
+- <strong>เปิด:</strong> กดปุ่ม <strong>Open Backpack</strong> (ตั้งเองใน Controls หมวด "Traveler's Backpack")
+- ปุ่มอื่นในหมวดเดียวกัน: Sort Backpack, <strong>Enable/Disable Special Ability</strong>, <strong>Swap Tool/Change Hose Mode</strong> (ดีฟอลต์ Z), Toggle Upgrade ช่อง 1–4</p>
+<p><strong>ยกระดับ Tier (จุเพิ่ม):</strong> ใช้ <strong>Smithing Table</strong> — เอา <strong>Leather เป็น template</strong> + เป้ tier ปัจจุบัน → เลื่อนขั้น Leather → Iron → Gold → Diamond → Netherite</p>
+<p><strong>อัปเกรด</strong> (วางในช่องด้านขวาของหน้าเป้):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>อัปเกรด</th>
+<th>ทำอะไร</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Crafting</td>
+<td>โต๊ะคราฟต์ 3×3 ในเป้</td>
+</tr>
+<tr>
+<td>Furnace / Smoker / Blast Furnace</td>
+<td>เตาเผา/รมควัน/หลอมในเป้</td>
+</tr>
+<tr>
+<td>Pickup</td>
+<td>ของที่เก็บได้ไหลเข้าเป้อัตโนมัติ</td>
+</tr>
+<tr>
+<td>Magnet</td>
+<td>ดูดของรอบตัวตามรัศมี (ตั้งได้)</td>
+</tr>
+<tr>
+<td>Feeding</td>
+<td>กินอาหารจากเป้ให้อัตโนมัติ</td>
+</tr>
+<tr>
+<td>Refill</td>
+<td>เติมไอเทมที่เลือกกลับเข้า inventory อัตโนมัติ</td>
+</tr>
+<tr>
+<td>Void</td>
+<td>ถังขยะ + ฟิลเตอร์ลบของที่ไม่อยากได้</td>
+</tr>
+<tr>
+<td>Tanks</td>
+<td>เพิ่มถังของเหลว 2 ถัง</td>
+</tr>
+<tr>
+<td>Lantern / Jukebox</td>
+<td>ไฟส่องสว่าง / เปิดเพลง</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>ถุงนอนในเป้:</strong> เปิดหน้าเป้ → ปุ่ม <strong>Use Sleeping Bag</strong> (ถ้าไม่เห็น กดปุ่ม 3 จุด) นอนได้เลยไม่ต้องพกเตียง
+<strong>ความสามารถพิเศษ (Ability):</strong> เป้แต่ละวัสดุมีพลังต่างกัน เช่น Cactus เติมน้ำตอนฝนตก, Creeper ระเบิดกันตาย, Cake ป้อนอาหาร+ฟื้นเลือด, Spider ปีนกำแพง — กดปุ่ม Ability เปิด/ปิด</p>
+<blockquote class="warn">
+<p>💧 <strong>Hose (สายยาง):</strong> สวมเป้แล้วถือ Hose จิ้มของเหลวในถัง — กด Z สลับโหมด/ถัง เติม/เทน้ำ-ลาวา-โพชั่นได้
+☠️ ของในเป้ตอนตาย: ตั้งได้ใน config (Backpack Death Place / Void Protection) ว่าจะตกพื้นหรือกันหาย</p>
+</blockquote>
+<hr />
+<h3 id="combatify-รื้อระบบคอมแบทใหม่">⚔️ Combatify — รื้อระบบคอมแบทใหม่</h3>
+<p>อิงจาก <strong>Combat Test snapshots</strong> ของ Mojang (ระบบตีทดลองที่ไม่เคยลงเกมจริง) — เปลี่ยน "ฟีล" การต่อสู้ทันทีที่ลง ไม่ต้องคราฟต์อะไร</p>
+<p><strong>สิ่งที่เปลี่ยน (รวม ๆ):</strong>
+- ระยะเอื้อมโจมตี (attack reach) และจังหวะคูลดาวน์ตีต่างจาก vanilla
+- <strong>โล่</strong> ทำงานละเอียดขึ้น (มีโล่หลายระดับวัสดุ, กลไกบล็อก/โดนปลดต่างเดิม)
+- เพิ่ม <strong>หมวดอาวุธ</strong>: knife (มีดสั้น), longsword (ดาบยาว), spear, mace ฯลฯ — ของเดิมถูกจัดหมวดใหม่</p>
+<p><strong>อาวุธ/โล่ใหม่ที่คราฟต์ได้</strong> (ทุกวัสดุ: wood/stone/copper/iron/gold/diamond/netherite):
+- <strong>Knife</strong> = วัสดุ×1 วางบน stick×1 (แนวตั้ง <code>X</code>/<code>#</code>) → ตีเร็ว ดาเมจน้อย
+- <strong>Longsword</strong> = วัสดุ×2 + Knife วัสดุเดียวกัน×1 (<code>X</code>/<code>X</code>/<code>#</code> โดย #=knife) → ระยะเอื้อมไกล
+- <strong>Shield</strong> ตามวัสดุ (copper/iron/gold/diamond/netherite) + ย้อมสีได้ 16 สี</p>
+<blockquote class="warn">
+<p>⚠️ <strong>อาวุธใหม่ (knife/longsword/โล่ตามวัสดุ) อยู่ใน pack เสริมในตัวมอด</strong> — ต้องเปิด built-in datapack/resourcepack ของ Combatify ก่อนถึงจะคราฟต์ได้ (เปิดใน <strong>Mod Menu → Combatify</strong> หรือเมนู Datapacks ตอนสร้างโลก) ⚠️ ตัวเลขดาเมจ/ระยะที่แน่นอน ต้องเช็คในเกม
+🛡️ Combatify มี option ปรับเยอะ (สไตล์ vanilla/combat-test, กลไกโล่หลายแบบ) — เข้าไปจูนใน Mod Menu ได้ ตั้งให้ตรงกับเซิร์ฟเพื่อน</p>
+</blockquote>
+<hr />
+<h3 id="mutantmonsters-มินิบอส-5-ตัว">👹 MutantMonsters — มินิบอส 5 ตัว</h3>
+<p>ม็อบกลายพันธุ์ตัวใหญ่ เลือดเยอะ ตีแรง <strong>เกิดแบบสุ่ม (โอกาสน้อย) ตรงที่ม็อบปกติชนิดนั้นเกิด</strong> — เจอแล้วเตรียมรับมือ</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>มินิบอส</th>
+<th>เจอจาก</th>
+<th>ดรอป/ของเด่น</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mutant Zombie</strong></td>
+<td>โซมบี้ (สุ่ม)</td>
+<td><strong>Hulk Hammer</strong> (ค้อนทุบแรง) — ล้มแล้วยังฟื้น ต้องจุดไฟด้วย flint &amp; steel ตอนมันล้มถึงตายสนิท</td>
+</tr>
+<tr>
+<td><strong>Mutant Skeleton</strong></td>
+<td>สเกเลตัน</td>
+<td>ชิ้นส่วนกระดูก (limb/rib/pelvis/shoulder pad) + <strong>Skull</strong> → คราฟต์เป็น <strong>ชุดเกราะ Mutant Skeleton</strong></td>
+</tr>
+<tr>
+<td><strong>Mutant Creeper</strong></td>
+<td>ครีปเปอร์</td>
+<td><strong>Creeper Shard</strong> (ตัว charged ดรอปมากกว่า) ใช้ทำ Creeper Minion</td>
+</tr>
+<tr>
+<td><strong>Mutant Enderman</strong></td>
+<td>เอนเดอร์แมน</td>
+<td><strong>Endersoul Hand</strong> (ไอเทมเทเลพอร์ตตัวเอง) + Endersoul Fragment</td>
+</tr>
+<tr>
+<td><strong>Spider Pig</strong></td>
+<td>สร้างเอง</td>
+<td>ป้อนหมู fermented spider eye แล้วปา <strong>Chemical X</strong> ใส่</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>ชุดเกราะ Mutant Skeleton (คราฟต์จากชิ้นส่วน) — โบนัสติดเกราะ:</strong>
+- Boots = กระโดดสูงขึ้น | Leggings = วิ่งเร็วขึ้น | Chestplate = ขึ้นธนูไว (quick draw) | Skull/หัว = ปลดล็อก multishot ให้ธนู</p>
+<p><strong>ของพิเศษอื่น:</strong>
+- <strong>Chemical X</strong> — ได้เป็นโพชั่น ใช้สร้าง Mutant Snow Golem / Spider Pig
+- <strong>Creeper Minion</strong> — ฟักจาก Creeper Minion Egg เป็นสัตว์เลี้ยง ใช้ <strong>Creeper Minion Tracker</strong> ตั้งค่ารัศมีระเบิด/ขี่บ่า/โชว์ชื่อ
+- <strong>Hulk Hammer</strong> — ใช้ฆ่า Mutant Zombie ได้ปั๊บ (advancement "Hulk Smash!")</p>
+<blockquote class="warn">
+<p>⚠️ Mutant Zombie ล้มแล้ว "ไม่ตายจริง" จนกว่าจะจุดไฟทับ — อย่าเพิ่งวางใจ
+💀 ตัวพวกนี้แรงพอจะฆ่าคนเกราะเหล็กได้ ควรมีโล่ (Combatify) + เกราะดี + อาหารก่อนสู้</p>
+</blockquote>
+<hr />
+<h3 id="easy-anvils-ทั่งไม่พัง-ตีได้ไม่จำกัด">🔨 Easy Anvils — ทั่งไม่พัง ตีได้ไม่จำกัด</h3>
+<p>ใช้ทั่ง vanilla ตามปกติ แต่:
+- <strong>ทั่งไม่เสื่อม/ไม่แตก</strong> (ไม่มี chipped/damaged anvil) — ทุบใช้ได้ตลอด
+- <strong>ตัด "Too Expensive!"</strong> ทิ้ง — รวมเอนแชนต์/ซ่อมได้เรื่อย ๆ ไม่ตันที่ 39 เลเวล
+- <strong>เปลี่ยนชื่อใส่สี/ฟอร์แมตได้</strong> — ใช้รหัส <code>§</code> (สี, ตัวหนา, เอียง ฯลฯ) ในช่องตั้งชื่อทั่ง</p>
+<blockquote class="tip">
+<p>💡 คู่กับ Mending: เอาของหลายชิ้นมารวมเอนแชนต์ในทั่งได้ถูกลงเยอะเมื่อไม่มีเพดาน Too Expensive</p>
+</blockquote>
+<hr />
+<h3 id="comforts-ถุงนอน-amp-เปลญวน-นอนได้ทุกที่">🛏️ Comforts — ถุงนอน &amp; เปลญวน นอนได้ทุกที่</h3>
+<p>นอนข้ามคืน/ข้ามวันโดย <strong>ไม่ต้องตั้ง spawn</strong> และกัน Phantom ได้ (ตั้งใน config)</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ไอเทม</th>
+<th>สูตร</th>
+<th>ใช้ยังไง</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sleeping Bag</strong></td>
+<td>ขนแกะ×3 เรียงแนวตั้ง (<code>#</code>×3)</td>
+<td>ย่อตัว (crouch) แล้วคลิกขวาวางพื้น → นอน; <strong>มีโอกาสขาดหลังใช้</strong></td>
+</tr>
+<tr>
+<td><strong>Hammock</strong> (เปลญวน)</td>
+<td>ขนแกะ×1 + เชือก×2 + แท่งไม้×2 (<code>X</code>/<code>S#S</code>/<code>X</code>)</td>
+<td>ต้องแขวนระหว่าง <strong>Rope and Nail</strong> สองอัน; นอนได้ตอน <strong>กลางวัน</strong> (ข้ามไปกลางคืน)</td>
+</tr>
+<tr>
+<td><strong>Rope and Nail</strong></td>
+<td>เชือก×4 + iron ingot×1 (<code>SS</code>/<code>SI</code>/<code>S</code>)</td>
+<td>ได้ 2 อัน — สำหรับแขวนเปลญวน</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>ขั้นตอนเปลญวน:</strong> วาง Rope and Nail สองอันห่างกันพอดี → คลิกขวาวาง Hammock เชื่อมระหว่างสองอัน → คลิกขวานอน (กลางวันเท่านั้น)</p>
+<blockquote class="tip">
+<p>💤 Sleeping Bag = นอนเร็วทุกที่แต่เปลือง (ขาดได้), Hammock = ถาวรกว่าแต่ต้องตั้งเสา + นอนกลางวัน
+👻 ทั้งคู่ตั้งให้ "พยายามนอน = หยุด Phantom เกิด" ได้แม้ไม่ได้นอนจริง (config: hammocksStopPhantoms / sleepingBagsStopPhantoms)</p>
+</blockquote>
+<hr />
+<h3 id="highlighter-ไฮไลต์ของที่เพิ่งเก็บ">✨ Highlighter — ไฮไลต์ของที่เพิ่งเก็บ</h3>
+<p><strong>Client only — ทำงานอัตโนมัติ ไม่มีปุ่ม</strong> ของชิ้นที่เพิ่งเก็บเข้า inventory จะมี <strong>ขอบเรืองไฮไลต์</strong> ในหน้า inventory ให้เห็นว่าได้อะไรมาใหม่ (กันพลาด/กันหาของ)</p>
+<blockquote class="tip">
+<p>หมายเหตุ: เป็นไฮไลต์ "ของในช่อง inventory" ตอนเปิดกระเป๋า ไม่ใช่ไฮไลต์ไอเทมที่ตกอยู่บนพื้นในโลก</p>
+</blockquote>
+<hr />
+<h2 id="คอมโบเด็ด-ใช้คู่กันดี">🔗 คอมโบเด็ด — ใช้คู่กันดี</h2>
+<ol>
+<li><strong>VeinMiner + เป้ (Pickup/Magnet upgrade)</strong> → ขุดแร่ทั้งสายทีเดียว ของเด้งเข้าเป้เองหมด ไม่ต้องไล่เก็บ</li>
+<li><strong>Waystones + เป้</strong> → ตั้งเสาที่เหมือง/ฟาร์ม/บ้าน ขนของเต็มเป้แล้ววาร์ปกลับ ลดเวลาเดินทาง</li>
+<li><strong>Comforts/ถุงนอนในเป้ + Waystones</strong> → ออกสำรวจไกล นอนข้ามคืนทุกที่ + กัน Phantom + วาร์ปกลับเมื่อเสร็จ</li>
+<li><strong>Combatify (โล่หลายระดับ) + MutantMonsters</strong> → เจอมินิบอส มีโล่ดี ๆ บล็อกไหว รอดสูงขึ้น</li>
+<li><strong>Easy Anvils + ของดรอปบอส/Advanced Netherite</strong> → รวมเอนแชนต์เกราะ-อาวุธชุดลุยบอสได้ถูก ไม่ตัน Too Expensive</li>
+<li><strong>เกราะ Mutant Skeleton + ธนู</strong> → quick draw + multishot ยิงรัวหลายดอก เปิดศึกระยะไกลกับมินิบอสตัวอื่น</li>
+</ol>
+<hr />
+<h2 id="เช็คลิสต์เริ่มใช้เร็ว">✅ เช็คลิสต์เริ่มใช้เร็ว</h2>
+<ul>
+<li class="task"><span class="cb"></span><strong>VeinMiner:</strong> ไป Controls → หมวด Veinminer → ผูกปุ่ม "Veinmining (Hold)" ก่อนเลย</li>
+<li class="task"><span class="cb"></span><strong>Traveler's Backpack:</strong> ผูกปุ่ม "Open Backpack" + คราฟต์ถุงนอน TB (ขนแกะ 3 แนวนอน) เป็นด่านแรก</li>
+<li class="task"><span class="cb"></span><strong>Waystones:</strong> หา amethyst + ender pearl + gold ทำ <strong>Warp Stone</strong> → ต่อยอดทุกอย่าง</li>
+<li class="task"><span class="cb"></span><strong>Combatify:</strong> เปิด built-in pack เสริมใน Mod Menu ถ้าอยากได้ knife/longsword/โล่วัสดุ + จูนให้ตรงเซิร์ฟ</li>
+<li class="task"><span class="cb"></span><strong>Comforts:</strong> พกถุงนอน (ขนแกะ 3 แนวตั้ง) ติดตัวเวลาออกไกล</li>
+<li class="task"><span class="cb"></span><strong>MutantMonsters:</strong> เจอ Mutant Zombie ล้ม → <strong>จุดไฟด้วย flint &amp; steel</strong> ให้ตายสนิท</li>
+<li class="task"><span class="cb"></span><strong>Easy Anvils / Highlighter:</strong> ไม่ต้องตั้งอะไร ใช้งานได้เลย</li>
+</ul>
+<hr />
+<h3 id="หมายเหตุฝั่ง-client-server-เผื่อแก้ปัญหา">หมายเหตุฝั่ง client/server (เผื่อแก้ปัญหา)</h3>
+<ul>
+<li>ลง <strong>ทั้ง client + server</strong>: VeinMiner, Waystones, Traveler's Backpack, Combatify, MutantMonsters, Advanced Netherite, Dungeons &amp; Taverns, Easy Anvils, Comforts</li>
+<li><strong>client เท่านั้น</strong> (เพื่อนไม่ต้องลง): <code>veinminer-client</code> (ปุ่ม+รูปทรงขุด), <code>Highlighter</code></li>
+<li>เล่นเซิร์ฟเพื่อน: ฝั่งเซิร์ฟต้องมีมอด server ครบ ของพวกนี้ถึงทำงาน — Combatify ควรตั้งค่าให้ตรงกันสองฝั่ง</li>
+</ul><div class="foot"><a class="pv" href="join-server.html"><div class="fl">← ก่อนหน้า</div><div class="ft">เข้าเซิร์ฟเพื่อน</div></a></div>
+<div class="credit"><span class="di">◆</span> ตำรา Minecraft · RPG Origins + เซิร์ฟเพื่อน 26.1.2 <span class="di">◆</span><br>เนื้อหาตรวจกับไฟล์มอดจริง · เฟส HTML</div>
+</main></div>
+<script>
+const mb=document.querySelector('.menu-btn'),toc=document.querySelector('.toc'),scrim=document.querySelector('.scrim');
+if(mb){mb.onclick=()=>{toc.classList.toggle('open');scrim.classList.toggle('show')};
+  scrim.onclick=()=>{toc.classList.remove('open');scrim.classList.remove('show')};
+  toc.querySelectorAll('a').forEach(a=>a.onclick=()=>{toc.classList.remove('open');scrim.classList.remove('show')});}
+const links=[...document.querySelectorAll('.toc a')],secs=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+const spy=()=>{let i=secs.length;while(--i>=0){if(secs[i]&&secs[i].getBoundingClientRect().top<120)break}
+  links.forEach(a=>a.classList.remove('on'));if(i>=0&&links[i])links[i].classList.add('on')};
+document.addEventListener('scroll',spy,{passive:true});spy();
+</script>
+</body></html>
