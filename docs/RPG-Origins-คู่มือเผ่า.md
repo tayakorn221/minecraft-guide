@@ -9,22 +9,22 @@
 - **RAM ที่ตั้ง:** 6144 MB (6GB) — เครื่องมี 16GB
 - **แยกจาก** เซ็ต MC 26.1.2 ที่เล่นกับเพื่อน (คนละ launcher คนละโลก)
 
-## 🔵 อ่านจุดสี (impact) ยังไง
+## 🔵 วิธีอ่านจุดสี (impact)
 - 🟢 **impact 1 (เขียว)** = สมดุล เล่นง่าย พลังเบา จุดอ่อนเบา
-- 🟡 **impact 2 (เหลือง)** = กลางๆ พลังเด่นขึ้น จุดอ่อนชัดขึ้น
-- 🔴 **impact 3 (แดง/ชมพู)** = พลังแรงสุด **แต่จุดอ่อนหนัก เล่นยาก**
-- ⚪ **impact 0** = Human (วานิลลา ไม่มีพลังไม่มีจุดอ่อน)
+- 🟡 **impact 2 (เหลือง)** = ปานกลาง พลังเด่นขึ้น จุดอ่อนชัดขึ้น
+- 🔴 **impact 3 (แดง/ชมพู)** = พลังแรงที่สุด **แต่จุดอ่อนหนัก เล่นยาก**
+- ⚪ **impact 0** = Human (วานิลลา ไม่มีทั้งพลังและจุดอ่อน)
 
 ## 🎯 แนะนำสำหรับสาย "สำรวจ + สร้าง"
 | Tier | เผ่าแนะนำ | เพราะ |
 |---|---|---|
-| 🟢 เขียว | **Arachnid** (ปีนกำแพง) / **Elytrian** (ปีกบิน) / **Avian** (ตกไม่เจ็บ) | สำรวจ+สร้างคล่อง จุดอ่อนเบา เริ่มง่าย |
-| 🟡 เหลือง | **Enderian** (วาร์ป+ตัวสูงเอื้อมไกล) | เดินทางไว สร้างสูงสะดวก (กลัวน้ำนิดหน่อย) |
-| 🔴 แดง | **Fae** (ลอยบินได้ + เร่งโตพืช) | บินสำรวจ + ฟาร์มไว **ไม่กลัวแดด/น้ำ สร้างกลางวันได้** — ดีสุดในโซนแดง |
+| 🟢 เขียว | **Arachnid** (ปีนกำแพง) / **Elytrian** (ปีกบิน) / **Avian** (ตกไม่เจ็บ) | สำรวจและสร้างได้คล่อง จุดอ่อนเบา เริ่มเล่นง่าย |
+| 🟡 เหลือง | **Enderian** (วาร์ป + ตัวสูงเอื้อมไกล) | เดินทางไว สร้างที่สูงสะดวก (กลัวน้ำนิดหน่อย) |
+| 🔴 แดง | **Fae** (ลอยบินได้ + เร่งโตพืช) | บินสำรวจ + ฟาร์มไว **ไม่กลัวแดดหรือน้ำ สร้างตอนกลางวันได้** — ดีที่สุดในโซนแดง |
 
-> ⚠️ ในโซนแดงเลี่ยง: **Ogre** (ลอดประตูไม่ได้), **Revenant/Plague Victim** (เก็บพืชไม่ได้/ชาวบ้านไม่เทรด), **Phantom/Gorgon** (กลางวันมีปัญหา) — ไม่เข้าสายสร้างของ
+> ⚠️ ในโซนแดงควรเลี่ยง: **Ogre** (ลอดประตูไม่ได้), **Revenant/Plague Victim** (เก็บพืชไม่ได้ / ชาวบ้านไม่เทรดด้วย), **Phantom/Gorgon** (กลางวันมีปัญหา) — ไม่เหมาะกับสายสร้างของ
 
-> 💡 เปลี่ยนเผ่าทีหลังได้ด้วยไอเทม **Orb of Origin**
+> 💡 เปลี่ยนเผ่าภายหลังได้ด้วยไอเทม **Orb of Origin**
 
 ---
 ## 🔴 แดง — impact 3 (พลังแรง จุดอ่อนหนัก)
@@ -142,7 +142,7 @@
 - **Disturbed** — Experimenting in the forbidden warps the mind. Revenants cannot sleep, too scared to dream of what they wish they did not know.
 - **Unguarded** — Obsessing over the spirit realm leaves revenants more open to attack in the physical realm. Most mobs deal more damage to them.
 
-## 🟡 เหลือง — impact 2 (กลางๆ)
+## 🟡 เหลือง — impact 2 (ปานกลาง)
 
 ### Arachnae
 *Overview:  + Poison, Crowd Control + Wall Climbing • Carnivore - Hunger, Armor A grotesque amalgamation of spider and human, with venomous fangs and bristled feet yet the ability to walk upright and wield weaponry.*

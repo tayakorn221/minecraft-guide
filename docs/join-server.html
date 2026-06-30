@@ -182,11 +182,11 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 <aside class="toc"><div class="toc-guides"><div class="tl">คู่มือทั้งหมด</div><a href="index.html">หน้าแรก</a><a href="choose-origin.html">เลือกเผ่า</a><a href="getting-started.html">เริ่มเล่น</a><a href="keybinds.html">ปุ่มพลัง</a><a href="origins-codex.html">คู่มือเผ่า 27</a><a href="join-server.html" class="cur">เข้าเซิร์ฟเพื่อน</a><a href="mods-2612.html">มอดใหม่ 26.1.2</a></div><div class="tl">ในหน้านี้</div><a class="" href="#tl-dr-อ่าน-30-วิ">TL;DR (อ่าน 30 วิ)</a><a class="" href="#1-เตรียมตัว-เวอร์ชันต้องตรงเป๊ะ">1. เตรียมตัว — เวอร์ชันต้องตรงเป๊ะ</a><a class="" href="#2-ลงทีละสเต็ป">2. ลงทีละสเต็ป</a><a class="h3" href="#ทางลัด-ถ้ามี-one-liner-จาก-repo">ทางลัด (ถ้ามี one-liner จาก repo)</a><a class="h3" href="#ทำมือ-windows">ทำมือ — Windows</a><a class="h3" href="#ทำมือ-macos">ทำมือ — macOS</a><a class="" href="#3-เอามอดมาจากไหน">3. เอามอดมาจากไหน</a><a class="" href="#4-เข้าเซิร์ฟ">4. เข้าเซิร์ฟ</a><a class="" href="#5-troubleshoot-เข้าไม่ติด-อ่านตารางนี้">5. Troubleshoot — เข้าไม่ติด (อ่านตารางนี้)</a><a class="h3" href="#จุดที่พังบ่อยสุด-เวอร์ชัน-มอดต้องตรงกับ-host-เป๊ะ">⚠️ จุดที่พังบ่อยสุด — เวอร์ชัน/มอดต้องตรงกับ host เป๊ะ</a><a class="" href="#เช็คลิสต์ก่อนกด-join-กลับมาดูเร็ว">เช็คลิสต์ก่อนกด Join (กลับมาดูเร็ว)</a></aside>
 <main><h1>เข้าเซิร์ฟเพื่อน — Fabric 26.1.2 (คู่มือมือใหม่ อ่านจบเข้าได้เลย)</h1>
 <blockquote class="tip">
-<p>สำหรับเพื่อนที่ <strong>ไม่เคยลงมอดมาก่อน</strong> — ทำตามทีละข้อ ไม่ต้องรู้อะไรล่วงหน้า</p>
+<p>สำหรับเพื่อนที่ <strong>ไม่เคยลงมอดมาก่อน</strong> — ทำตามทีละข้อไปเลย ไม่ต้องมีพื้นฐานอะไรมาก่อน</p>
 </blockquote>
 <hr />
 <h2 id="tl-dr-อ่าน-30-วิ">TL;DR (อ่าน 30 วิ)</h2>
-<p>ต้องมีครบ <strong>3 อย่าง</strong> ถึงจะเข้าได้:</p>
+<p>ต้องมีให้ครบ <strong>3 อย่าง</strong> ถึงจะเข้าเซิร์ฟได้:</p>
 <ol>
 <li><strong>Minecraft Java แท้ (premium)</strong> เวอร์ชัน <strong>26.1.2</strong> เป๊ะ — <em>ไม่ใช่</em> Bedrock/มือถือ</li>
 <li><strong>Fabric Loader 0.19.2</strong> ติดตั้งทับลงไป (ตัวรันมอด)</li>
@@ -194,7 +194,7 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 </ol>
 <p>แล้วเข้าเกม → Multiplayer → Add Server → ใส่ address: <strong><code>supply-adjustment.gl.joinmc.link</code></strong> → Join</p>
 <blockquote class="warn">
-<p>⚠️ <strong>กฎข้อเดียวที่ห้ามพลาด:</strong> เวอร์ชันเกม + Loader + ชุดมอด ต้อง <strong>ตรงกับ host เป๊ะ</strong> ผิดตัวเดียว = เด้งออก ดูตาราง Troubleshoot ท้ายหน้า</p>
+<p>⚠️ <strong>กฎข้อเดียวที่ห้ามพลาด:</strong> เวอร์ชันเกม + Loader + ชุดมอด ต้อง <strong>ตรงกับ host เป๊ะ</strong> ผิดแค่ตัวเดียวก็เด้งออก ถ้าติดปัญหาดูตาราง Troubleshoot ท้ายหน้าได้เลย</p>
 </blockquote>
 <hr />
 <h2 id="1-เตรียมตัว-เวอร์ชันต้องตรงเป๊ะ">1. เตรียมตัว — เวอร์ชันต้องตรงเป๊ะ</h2>
@@ -225,12 +225,12 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 </tbody>
 </table></div>
 <blockquote class="tip">
-<p>💡 ยังไม่มี 26.1.2 ในเครื่อง? เปิด Minecraft Launcher → กดเล่น 26.1.2 หนึ่งครั้งให้ดาวน์โหลดไฟล์เกมก่อน แล้วค่อยลง Fabric</p>
+<p>💡 ยังไม่มี 26.1.2 ในเครื่อง? เปิด Minecraft Launcher → กดเล่น 26.1.2 สักครั้งให้มันโหลดไฟล์เกมมาก่อน แล้วค่อยลง Fabric</p>
 </blockquote>
 <hr />
 <h2 id="2-ลงทีละสเต็ป">2. ลงทีละสเต็ป</h2>
 <h3 id="ทางลัด-ถ้ามี-one-liner-จาก-repo">ทางลัด (ถ้ามี one-liner จาก repo)</h3>
-<p>repo เพื่อนมีสคริปต์ลงให้อัตโนมัติ (โหลด Fabric + ก๊อปมอดให้ครบในคำสั่งเดียว):</p>
+<p>ใน repo ของเพื่อนมีสคริปต์ลงให้อัตโนมัติ (โหลด Fabric + ก๊อปมอดให้ครบจบในคำสั่งเดียว):</p>
 <ul>
 <li><strong>Windows</strong> → <code>install.ps1</code></li>
 <li><strong>macOS</strong> → <code>install.sh</code></li>
@@ -238,8 +238,8 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 <blockquote class="warn">
 <p>⚠️ คำสั่งเป๊ะๆ (URL ที่ต้อง copy ไปวาง) อยู่ใน <strong>README ของ repo</strong> — เปิดดูที่
 https://github.com/tayakorn221/mc-26.1.2-friends-pack
-วิธีรันสั้นๆ: Windows เปิด <strong>PowerShell</strong> แล้ววางคำสั่งจาก README · macOS เปิด <strong>Terminal</strong> แล้ววาง</p>
-<p>ไม่อยากใช้สคริปต์ก็ทำมือตามด้านล่างได้ ผลเหมือนกัน</p>
+วิธีรันสั้นๆ: Windows เปิด <strong>PowerShell</strong> แล้ววางคำสั่งจาก README · macOS เปิด <strong>Terminal</strong> แล้ววางเหมือนกัน</p>
+<p>ไม่อยากใช้สคริปต์ก็ทำมือตามด้านล่างได้ ผลลัพธ์เหมือนกันเป๊ะ</p>
 </blockquote>
 <h3 id="ทำมือ-windows">ทำมือ — Windows</h3>
 <ol>
@@ -264,7 +264,7 @@ https://github.com/tayakorn221/mc-26.1.2-friends-pack
 </ol>
 <hr />
 <h2 id="3-เอามอดมาจากไหน">3. เอามอดมาจากไหน</h2>
-<p>โหลดจาก GitHub ของ host (public ใครก็โหลดได้):</p>
+<p>โหลดจาก GitHub ของ host ได้เลย (เป็น public ใครก็โหลดได้):</p>
 <ul>
 <li><strong>Repo:</strong> https://github.com/tayakorn221/mc-26.1.2-friends-pack</li>
 <li><strong>ไฟล์:</strong> ไปที่แท็บ <strong>Releases → v1.0.0 → <code>friends-mods.zip</code></strong> (≈ 23 MB)</li>
@@ -302,20 +302,20 @@ https://github.com/tayakorn221/mc-26.1.2-friends-pack
 </tbody>
 </table></div>
 <blockquote class="warn">
-<p>⚠️ <strong>อย่าผสมมอดเอง</strong> ห้ามเพิ่ม/ลบตัวไหน นอกจาก host บอก — มอดในแพ็กต้อง <strong>ครบและตรงชุด</strong> กับ server</p>
+<p>⚠️ <strong>อย่าผสมมอดเอง</strong> ห้ามเพิ่มหรือลบตัวไหนเด็ดขาด นอกจาก host จะบอก — มอดในแพ็กต้อง <strong>ครบและตรงชุด</strong> กับ server</p>
 </blockquote>
 <hr />
 <h2 id="4-เข้าเซิร์ฟ">4. เข้าเซิร์ฟ</h2>
 <ol>
-<li>host ต้อง <strong>เปิด server ค้างไว้ก่อน</strong> (เซิร์ฟไม่เปิด = เข้าไม่ได้ทุกกรณี)</li>
+<li>host ต้อง <strong>เปิด server ค้างไว้ก่อน</strong> (ถ้าเซิร์ฟไม่เปิด ยังไงก็เข้าไม่ได้)</li>
 <li>ในเกม: <strong>Multiplayer → Add Server</strong></li>
 <li>ช่อง <em>Server Address</em> วาง:</li>
 </ol>
 <p><code>supply-adjustment.gl.joinmc.link</code></p>
 <blockquote class="tip">
-<p>ไม่ต้องใส่ <code>:25565</code> ต่อท้าย — address นี้ชี้พอร์ตให้แล้ว
+<p>ไม่ต้องใส่ <code>:25565</code> ต่อท้ายนะ — address นี้ชี้พอร์ตให้เรียบร้อยแล้ว
 4. <strong>Done</strong> → ดับเบิลคลิกชื่อเซิร์ฟ → Join</p>
-<p>💡 address ตัวนี้เป็น <strong>playit.gg free tier</strong> อาจเปลี่ยนได้ถ้า host รีสตาร์ต tunnel — ถ้าเข้าไม่ได้ ถาม host ขอ address ล่าสุดก่อนเสมอ</p>
+<p>💡 address ตัวนี้เป็น <strong>playit.gg free tier</strong> ซึ่งอาจเปลี่ยนได้ถ้า host รีสตาร์ต tunnel — ถ้าเข้าไม่ได้ ให้ถาม host ขอ address ล่าสุดก่อนเสมอ</p>
 </blockquote>
 <hr />
 <h2 id="5-troubleshoot-เข้าไม่ติด-อ่านตารางนี้">5. Troubleshoot — เข้าไม่ติด (อ่านตารางนี้)</h2>
@@ -331,50 +331,50 @@ https://github.com/tayakorn221/mc-26.1.2-friends-pack
 <tr>
 <td>เด้งตอน join: <em>"…client/server… mods"</em> หรือชื่อมอด + Missing/Mismatch</td>
 <td><strong>มอดไม่ครบ / ไม่ตรงชุด</strong> กับ server</td>
-<td>โหลด <code>friends-mods.zip</code> ใหม่ ลบมอดเก่าใน <code>mods</code> ทิ้งให้หมด วางชุดใหม่ครบ 19 ตัว</td>
+<td>โหลด <code>friends-mods.zip</code> มาใหม่ ลบมอดเก่าใน <code>mods</code> ทิ้งให้หมด แล้ววางชุดใหม่ให้ครบ 19 ตัว</td>
 </tr>
 <tr>
 <td><em>"Outdated client/server"</em> หรือเวอร์ชันไม่ตรง</td>
 <td><strong>เกมหรือ Loader ผิดเวอร์ชัน</strong></td>
-<td>เช็กว่าเล่นโปรไฟล์ <strong>fabric-loader-26.1.2</strong> จริง (ไม่ใช่ vanilla/เวอร์ชันอื่น) + Loader = 0.19.2</td>
+<td>เช็กให้ชัวร์ว่าเล่นโปรไฟล์ <strong>fabric-loader-26.1.2</strong> จริง (ไม่ใช่ vanilla หรือเวอร์ชันอื่น) และ Loader = 0.19.2</td>
 </tr>
 <tr>
 <td>เซิร์ฟขึ้นเทา / <em>Connection refused</em> / <em>timed out</em></td>
 <td><strong>server ปิดอยู่ หรือ address เปลี่ยน</strong></td>
-<td>บอก host เปิด server + ขอ address playit ล่าสุด แล้วลบเซิร์ฟเก่าใน list สร้างใหม่</td>
+<td>บอก host ให้เปิด server แล้วขอ address playit ล่าสุด จากนั้นลบเซิร์ฟเก่าใน list ทิ้งแล้วสร้างใหม่</td>
 </tr>
 <tr>
 <td><em>Failed to authenticate / Invalid session</em></td>
 <td><strong>บัญชีไม่ใช่ premium</strong> หรือ session ค้าง</td>
-<td>ต้องเป็น MC Java แท้ · ออกแล้ว login launcher ใหม่</td>
+<td>ต้องเป็น MC Java แท้เท่านั้น · ลองออกแล้ว login launcher เข้าใหม่</td>
 </tr>
 <tr>
 <td>เกมเปิดไม่ขึ้น/crash ก่อนถึงเมนู</td>
-<td>มอดไม่ครบ dep หรือมีไฟล์แปลกปน</td>
-<td>ใน <code>mods</code> ต้องมีเฉพาะ <code>.jar</code> จากแพ็ก — ลบไฟล์อื่นทิ้ง โหลดแพ็กใหม่</td>
+<td>มอดขาด dep หรือมีไฟล์แปลกปนอยู่</td>
+<td>ใน <code>mods</code> ต้องมีเฉพาะ <code>.jar</code> จากแพ็กเท่านั้น — ลบไฟล์อื่นทิ้งแล้วโหลดแพ็กมาใหม่</td>
 </tr>
 <tr>
 <td>เห็นแต่ Bedrock / มือถือเข้าไม่ได้</td>
-<td>คนละเกม</td>
+<td>คนละเกมกัน</td>
 <td>เซิร์ฟนี้ <strong>Java Edition เท่านั้น</strong> Bedrock เข้าไม่ได้</td>
 </tr>
 </tbody>
 </table></div>
 <h3 id="จุดที่พังบ่อยสุด-เวอร์ชัน-มอดต้องตรงกับ-host-เป๊ะ">⚠️ จุดที่พังบ่อยสุด — เวอร์ชัน/มอดต้องตรงกับ host เป๊ะ</h3>
-<p>Fabric เช็ก mod ตอน join แบบ <strong>ตัวต่อตัว</strong> ผิดแม้แต่ตัวเดียวก็เด้ง จำ 3 ข้อนี้:</p>
+<p>Fabric จะเช็กมอดตอน join แบบ <strong>ตัวต่อตัว</strong> ผิดแม้แต่ตัวเดียวก็เด้ง จำ 3 ข้อนี้ไว้:</p>
 <ol>
-<li><strong>เวอร์ชันเกม 26.1.2 เป๊ะ</strong> — 26.1.1 หรือ 26.1.3 ก็เข้าไม่ได้</li>
-<li><strong>Loader 0.19.2</strong> — ดูเลขตอนลง Fabric อย่ากดเวอร์ชันอื่น</li>
+<li><strong>เวอร์ชันเกม 26.1.2 เป๊ะ</strong> — เป็น 26.1.1 หรือ 26.1.3 ก็เข้าไม่ได้</li>
+<li><strong>Loader 0.19.2</strong> — ดูเลขให้ดีตอนลง Fabric อย่าเผลอกดเวอร์ชันอื่น</li>
 <li><strong>ชุดมอด = ชุดเดียวกับ host</strong> — ครบ ไม่ขาด ไม่เกิน</li>
 </ol>
 <blockquote class="warn">
 <p>🔴 <strong>เรื่องที่ host ต้องรู้ (สำคัญมาก):</strong>
-ตอนนี้ server ถูกเพิ่ม <strong>ชุดมอดบอส/QoL ชุดใหม่ (2026)</strong> เข้าไปแล้ว (เช่น Mutant Monsters, Combatify, Waystones, Traveler's Backpack, Advanced Netherite ฯลฯ) — แต่ชุดนี้ <strong>ยังไม่ได้ใส่ใน <code>friends-mods.zip</code></strong></p>
+ตอนนี้ server ได้เพิ่ม <strong>ชุดมอดบอส/QoL ชุดใหม่ (2026)</strong> เข้าไปแล้ว (เช่น Mutant Monsters, Combatify, Waystones, Traveler's Backpack, Advanced Netherite ฯลฯ) — แต่ชุดนี้ <strong>ยังไม่ได้ใส่ลงใน <code>friends-mods.zip</code></strong></p>
 <p>มอดพวกนี้หลายตัวเป็นแบบ <em>client ต้องมีด้วย</em> ถ้า server รันอยู่แต่เพื่อนมีแค่ 19 ตัวเดิม <strong>เพื่อนจะโดนเด้งเพราะมอดไม่ตรง</strong></p>
-<p>ทางแก้ (host เลือกอย่างใดอย่างหนึ่ง):
-- <strong>ยังไม่อัปเดตแพ็ก</strong> → ปิด/ไม่รันมอดชุดใหม่บน server ชั่วคราว ให้เพื่อนเข้าด้วย 19 ตัวเดิมไปก่อน
-- <strong>อยากใช้ชุดใหม่</strong> → อัปเดต <code>friends-mods.zip</code> + ออก release ใหม่ ส่งให้เพื่อนลงเพิ่ม <strong>ทุกคน</strong> ก่อนเข้า</p>
-<p><em>(มอด client-only ล้วน เช่น Inventory Profiles Next / FastTrading / Highlighter ไม่กระทบการ join — ไม่ต้องตรงกับ server)</em></p>
+<p>ทางแก้ (host เลือกทางใดทางหนึ่ง):
+- <strong>ยังไม่อัปเดตแพ็ก</strong> → ปิดหรือไม่รันมอดชุดใหม่บน server ไว้ชั่วคราว ให้เพื่อนเข้าด้วย 19 ตัวเดิมไปก่อน
+- <strong>อยากใช้ชุดใหม่</strong> → อัปเดต <code>friends-mods.zip</code> แล้วออก release ใหม่ ส่งให้เพื่อนลงเพิ่มให้ครบ <strong>ทุกคน</strong> ก่อนเข้า</p>
+<p><em>(ส่วนมอดที่เป็น client-only ล้วนๆ เช่น Inventory Profiles Next / FastTrading / Highlighter ไม่กระทบการ join — ไม่ต้องตรงกับ server)</em></p>
 </blockquote>
 <hr />
 <h2 id="เช็คลิสต์ก่อนกด-join-กลับมาดูเร็ว">เช็คลิสต์ก่อนกด Join (กลับมาดูเร็ว)</h2>
@@ -386,7 +386,7 @@ https://github.com/tayakorn221/mc-26.1.2-friends-pack
 <li class="task"><span class="cb"></span>address = <code>supply-adjustment.gl.joinmc.link</code> (ถามว่าเปลี่ยนรึยัง)</li>
 <li class="task"><span class="cb"></span>ถ้า host เปิดมอดชุดใหม่ 2026 → ได้มอดเพิ่มจาก host ครบแล้ว</li>
 </ul>
-<p>เข้าไม่ได้หลังเช็กครบ → ส่ง <strong>ข้อความ error เต็มๆ</strong> ให้ host เทียบกับตาราง Troubleshoot ข้างบน</p><div class="foot"><a class="pv" href="origins-codex.html"><div class="fl">← ก่อนหน้า</div><div class="ft">คู่มือเผ่า 27</div></a><a class="nx" href="mods-2612.html"><div class="fl">ถัดไป →</div><div class="ft">มอดใหม่ 26.1.2</div></a></div>
+<p>เช็กครบทุกข้อแล้วยังเข้าไม่ได้ → ส่ง <strong>ข้อความ error เต็มๆ</strong> ให้ host เอาไปเทียบกับตาราง Troubleshoot ข้างบน</p><div class="foot"><a class="pv" href="origins-codex.html"><div class="fl">← ก่อนหน้า</div><div class="ft">คู่มือเผ่า 27</div></a><a class="nx" href="mods-2612.html"><div class="fl">ถัดไป →</div><div class="ft">มอดใหม่ 26.1.2</div></a></div>
 <div class="credit"><span class="di">◆</span> ตำรา Minecraft · RPG Origins + เซิร์ฟเพื่อน 26.1.2 <span class="di">◆</span><br>เนื้อหาตรวจกับไฟล์มอดจริง (jar)</div>
 </main></div>
 <script>

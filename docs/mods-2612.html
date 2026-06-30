@@ -182,18 +182,18 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 <aside class="toc"><div class="toc-guides"><div class="tl">คู่มือทั้งหมด</div><a href="index.html">หน้าแรก</a><a href="choose-origin.html">เลือกเผ่า</a><a href="getting-started.html">เริ่มเล่น</a><a href="keybinds.html">ปุ่มพลัง</a><a href="origins-codex.html">คู่มือเผ่า 27</a><a href="join-server.html">เข้าเซิร์ฟเพื่อน</a><a href="mods-2612.html" class="cur">มอดใหม่ 26.1.2</a></div><div class="tl">ในหน้านี้</div><a class="" href="#tl-dr-3-มอดที่เปลี่ยนวิธีเล่นมากสุด">TL;DR — 3 มอดที่เปลี่ยนวิธีเล่นมากสุด</a><a class="" href="#ตารางภาพรวมทั้งชุด">ตารางภาพรวมทั้งชุด</a><a class="" href="#เจาะรายตัว-วิธีใช้จริงในเกม">เจาะรายตัว — วิธีใช้จริงในเกม</a><a class="h3" href="#veinminer-ขุดทั้งสายทีเดียว">⛏️ VeinMiner — ขุดทั้งสายทีเดียว</a><a class="h3" href="#waystones-เสาวาร์ปข้ามแมพ">🪧 Waystones — เสาวาร์ปข้ามแมพ</a><a class="h3" href="#traveler-s-backpack-เป้สวมหลังสารพัดประโยชน์">🎒 Traveler's Backpack — เป้สวมหลังสารพัดประโยชน์</a><a class="h3" href="#combatify-รื้อระบบคอมแบทใหม่">⚔️ Combatify — รื้อระบบคอมแบทใหม่</a><a class="h3" href="#mutantmonsters-มินิบอส-5-ตัว">👹 MutantMonsters — มินิบอส 5 ตัว</a><a class="h3" href="#easy-anvils-ทั่งไม่พัง-ตีได้ไม่จำกัด">🔨 Easy Anvils — ทั่งไม่พัง ตีได้ไม่จำกัด</a><a class="h3" href="#comforts-ถุงนอน-amp-เปลญวน-นอนได้ทุกที่">🛏️ Comforts — ถุงนอน &amp; เปลญวน นอนได้ทุกที่</a><a class="h3" href="#highlighter-ไฮไลต์ของที่เพิ่งเก็บ">✨ Highlighter — ไฮไลต์ของที่เพิ่งเก็บ</a><a class="" href="#คอมโบเด็ด-ใช้คู่กันดี">🔗 คอมโบเด็ด — ใช้คู่กันดี</a><a class="" href="#เช็คลิสต์เริ่มใช้เร็ว">✅ เช็คลิสต์เริ่มใช้เร็ว</a><a class="h3" href="#หมายเหตุฝั่ง-client-server-เผื่อแก้ปัญหา">หมายเหตุฝั่ง client/server (เผื่อแก้ปัญหา)</a></aside>
 <main><h1>คู่มือใช้งานมอดชุดใหม่ — Minecraft 26.1.2 (ลง 2026-06-28)</h1>
 <blockquote class="tip">
-<p>อ้างอิงจากไฟล์ jar จริงใน <code>.minecraft\mods\</code> ทุกตัว — ชื่อไอเทม/สูตร/ปุ่ม/ดรอป ดึงจากในมอดตรง ๆ
-ค่าที่ตั้งได้ในเกม (เช่น ปุ่มลัด, ค่าใน config) จะวงเล็บไว้ว่า "ตั้งเอง" — ของพวกนี้เปิดดู/แก้ได้ใน <strong>Mod Menu → ปุ่มเฟือง</strong> ของแต่ละมอด</p>
+<p>ข้อมูลทุกอย่างดึงตรงจากไฟล์ jar จริงใน <code>.minecraft\mods\</code> — ชื่อไอเทม สูตร ปุ่ม ดรอป เอามาจากในมอดเป๊ะ ๆ
+ค่าไหนที่ตั้งได้เองในเกม (เช่น ปุ่มลัด หรือค่าใน config) จะวงเล็บกำกับว่า "ตั้งเอง" ไว้ — ของพวกนี้เปิดดู/แก้ได้ใน <strong>Mod Menu → ปุ่มเฟือง</strong> ของแต่ละมอด</p>
 </blockquote>
 <hr />
 <h2 id="tl-dr-3-มอดที่เปลี่ยนวิธีเล่นมากสุด">TL;DR — 3 มอดที่เปลี่ยนวิธีเล่นมากสุด</h2>
 <ol>
-<li><strong>Waystones</strong> — วางเสา "Waystone" คลิกขวาตั้งชื่อ = จุดวาร์ป เดินทางข้ามแมพฟรี/เสียค่า XP เล็กน้อย แชร์กับเพื่อนได้ผ่าน Sharestone</li>
-<li><strong>Traveler's Backpack</strong> — เป้สวมหลังจุของเยอะมาก + อัปเกรดเตา/โต๊ะคราฟต์/แม่เหล็กดูดของ/ถังน้ำ + ถุงนอนในตัว กางนอนได้ทุกที่</li>
-<li><strong>VeinMiner</strong> — กดปุ่มค้างแล้วขุดแร่ทีเดียวทั้งสาย (และตัดไม้/ขุดดินทั้งกอง) เลือกรูปทรงขุดได้ (ปกติ/อุโมงค์/แนวราบ)</li>
+<li><strong>Waystones</strong> — วางเสา "Waystone" คลิกขวาตั้งชื่อ ก็ได้จุดวาร์ปแล้ว เดินทางข้ามแมพได้ฟรี (หรือเสียค่า XP นิดหน่อย) แถมแชร์กับเพื่อนได้ผ่าน Sharestone</li>
+<li><strong>Traveler's Backpack</strong> — เป้สวมหลังที่จุของเยอะโคตร ใส่อัปเกรดได้ทั้งเตา/โต๊ะคราฟต์/แม่เหล็กดูดของ/ถังน้ำ แถมมีถุงนอนในตัว กางนอนได้ทุกที่</li>
+<li><strong>VeinMiner</strong> — กดปุ่มค้างแล้วขุดแร่ทีเดียวหมดทั้งสาย (ตัดไม้/ขุดดินทั้งกองก็ได้) แถมเลือกรูปทรงขุดได้ด้วย (ปกติ/อุโมงค์/แนวราบ)</li>
 </ol>
 <blockquote class="tip">
-<p>เสริม: <strong>Combatify</strong> รื้อระบบตีใหม่ (อิงจาก Combat Test ของ Mojang) + เพิ่มมีดสั้น/ดาบยาว/โล่ตามวัสดุ — <strong>MutantMonsters</strong> ใส่มินิบอส 5 ตัวที่ดรอปของแรง</p>
+<p>เสริม: <strong>Combatify</strong> รื้อระบบตีใหม่ทั้งยวง (อิงจาก Combat Test ของ Mojang) แล้วเพิ่มมีดสั้น/ดาบยาว/โล่ตามวัสดุเข้ามา — ส่วน <strong>MutantMonsters</strong> ใส่มินิบอส 5 ตัวที่ดรอปของแรง ๆ</p>
 </blockquote>
 <hr />
 <h2 id="ตารางภาพรวมทั้งชุด">ตารางภาพรวมทั้งชุด</h2>
@@ -210,7 +210,7 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 <tr>
 <td><strong>VeinMiner</strong></td>
 <td>ขุดแร่/ตัดไม้ทีเดียวทั้งสาย</td>
-<td>กดปุ่มค้าง (ตั้งเอง) ขณะขุด</td>
+<td>กดปุ่มค้าง (ตั้งเอง) ตอนขุด</td>
 <td>client+server</td>
 </tr>
 <tr>
@@ -222,19 +222,19 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 <tr>
 <td><strong>Traveler's Backpack</strong></td>
 <td>เป้จุของ + อัปเกรด + ถุงนอน</td>
-<td>คราฟต์ → คลิกขวาที่มือสวมหลัง → กดปุ่มเปิด</td>
+<td>คราฟต์ → ถือไว้คลิกขวาสวมหลัง → กดปุ่มเปิด</td>
 <td>client+server</td>
 </tr>
 <tr>
 <td><strong>Combatify</strong></td>
 <td>รื้อระบบคอมแบท + อาวุธ/โล่ใหม่</td>
-<td>ติดตั้งแล้วทำงานเลย; อาวุธใหม่ต้องเปิด pack เสริม</td>
+<td>ลงแล้วทำงานเลย ส่วนอาวุธใหม่ต้องเปิด pack เสริมก่อน</td>
 <td>client+server</td>
 </tr>
 <tr>
 <td><strong>MutantMonsters</strong></td>
 <td>มินิบอส 5 ตัว + ของดรอปแรง</td>
-<td>เจอแบบสุ่มที่ม็อบปกติเกิด</td>
+<td>โผล่แบบสุ่มตรงที่ม็อบปกติเกิด</td>
 <td>client+server</td>
 </tr>
 <tr>
@@ -264,7 +264,7 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 <tr>
 <td><strong>Highlighter</strong></td>
 <td>ไฮไลต์ของที่เพิ่งเก็บใน inventory</td>
-<td>อัตโนมัติ ไม่ต้องกดอะไร</td>
+<td>ทำงานอัตโนมัติ ไม่ต้องกดอะไร</td>
 <td>client only</td>
 </tr>
 </tbody>
@@ -272,13 +272,13 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 <hr />
 <h2 id="เจาะรายตัว-วิธีใช้จริงในเกม">เจาะรายตัว — วิธีใช้จริงในเกม</h2>
 <h3 id="veinminer-ขุดทั้งสายทีเดียว">⛏️ VeinMiner — ขุดทั้งสายทีเดียว</h3>
-<p>ขุดบล็อกเดียวแล้วบล็อกชนิดเดียวกันที่ติดกันทั้งก้อนแตกตามทันที (แร่, ไม้, ดิน, หิน ฯลฯ)</p>
+<p>ขุดบล็อกเดียว แล้วบล็อกชนิดเดียวกันที่ติดกันทั้งก้อนจะแตกตามทันที (แร่, ไม้, ดิน, หิน ฯลฯ)</p>
 <p><strong>วิธีใช้:</strong>
-1. ไป <strong>Options → Controls → หมวด "Veinminer"</strong> ผูกปุ่มก่อน (มาตรฐานยังไม่ผูกให้)
-   - <strong>Veinmining (Hold)</strong> — กดค้างขณะขุด = ขุดทั้งสาย (แนะนำ ปลอดภัยสุด)
-   - <strong>Veinmining (Toggle)</strong> — กดสลับเปิด/ปิดถาวร
-   - <strong>Open Client Settings</strong> — เปิดหน้าตั้งค่า client
-2. เล็งแร่ → กดปุ่มที่ผูกไว้ค้าง → ขุด → ทั้งสายหายรวด</p>
+1. ไป <strong>Options → Controls → หมวด "Veinminer"</strong> ผูกปุ่มก่อน (เริ่มมายังไม่ผูกให้)
+   - <strong>Veinmining (Hold)</strong> — กดค้างตอนขุด = ขุดทั้งสาย (แนะนำตัวนี้ ปลอดภัยสุด)
+   - <strong>Veinmining (Toggle)</strong> — กดสลับเปิด/ปิดค้างไว้
+   - <strong>Open Client Settings</strong> — เปิดหน้าตั้งค่าฝั่ง client
+2. เล็งแร่ → กดปุ่มที่ผูกไว้ค้าง → ขุด → ทั้งสายหายรวดเดียว</p>
 <p><strong>รูปทรงการขุด (เปลี่ยนในหน้า Client Settings):</strong></p>
 <div class="tw"><table>
 <thead>
@@ -303,12 +303,12 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 </tbody>
 </table></div>
 <blockquote class="warn">
-<p>⚠️ กินความทนทานจอบ/อีเต้อตามจำนวนบล็อกที่แตก — สายยาว ๆ พลั่วหมดสภาพไว พกของซ่อม/Mending
-💡 ตัว <code>veinminer-client</code> (มีในเครื่อง) คือส่วนที่ให้ปุ่ม+รูปทรง ถ้าเล่นเซิร์ฟเพื่อน เซิร์ฟมี veinminer หลักอยู่แล้วใช้ได้เลย</p>
+<p>⚠️ กินความทนทานของจอบ/อีเต้อตามจำนวนบล็อกที่แตก — สายยาว ๆ พลั่วหมดสภาพไว พกของซ่อมหรือติด Mending ไว้
+💡 ตัว <code>veinminer-client</code> (ที่มีในเครื่อง) คือส่วนที่ให้ปุ่มกับรูปทรงขุด ถ้าเล่นเซิร์ฟเพื่อน เซิร์ฟมี veinminer ตัวหลักอยู่แล้วก็ใช้ได้เลย</p>
 </blockquote>
 <hr />
 <h3 id="waystones-เสาวาร์ปข้ามแมพ">🪧 Waystones — เสาวาร์ปข้ามแมพ</h3>
-<p>หัวใจคือ <strong>Warp Stone</strong> (วัตถุดิบกลาง) เอาไปคราฟต์ทุกอย่างต่อ</p>
+<p>หัวใจของมอดนี้คือ <strong>Warp Stone</strong> (วัตถุดิบกลาง) เอาไปต่อยอดคราฟต์ของอื่นได้หมด</p>
 <p><strong>สูตรหลัก:</strong></p>
 <div class="tw"><table>
 <thead>
@@ -355,31 +355,31 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 <p>🪨 <strong>"หินตกแต่ง" ของ Waystone เลือกได้หลายแบบ</strong> (จากในมอด): deepslate, chiseled sandstone, andesite, blackstone, prismarine, purpur, end stone, mud bricks, red nether bricks — แบบไหนก็ได้ ×6 + Warp Stone×1 วางทรง <code>S</code>/<code>SWS</code>/<code>SSS</code> เหมือนกันหมด · <strong>Sharestone</strong> ต่างหากที่ใช้ stone bricks×6</p>
 </blockquote>
 <p><strong>วิธีผูกจุด:</strong>
-1. วาง Waystone กับพื้น → <strong>คลิกขวา</strong> → ใส่ชื่อ (เช่น "บ้าน", "เหมือง") → กดยืนยัน = เสานี้ "เปิด" แล้ว
-2. ไปวางเสาที่อื่นอีก ทำซ้ำ
-3. <strong>คลิกขวาที่เสาใดก็ได้</strong> → ขึ้นเมนูรายชื่อเสาที่เปิดแล้ว → คลิกชื่อ = วาร์ปไป
-4. วาร์ปจากที่ไหนก็ได้ด้วย <strong>Warp Stone</strong> (คลิกขวาค้าง เลือกเสา) — มีคูลดาวน์</p>
+1. วาง Waystone ลงพื้น → <strong>คลิกขวา</strong> → ใส่ชื่อ (เช่น "บ้าน", "เหมือง") → กดยืนยัน เสานี้ก็ "เปิด" แล้ว
+2. ไปวางเสาที่อื่นต่อ ทำซ้ำแบบเดิม
+3. <strong>คลิกขวาที่เสาไหนก็ได้</strong> → จะขึ้นเมนูรายชื่อเสาที่เปิดไว้ → คลิกชื่อก็วาร์ปไปเลย
+4. อยากวาร์ปจากที่ไหนก็ได้ ใช้ <strong>Warp Stone</strong> (คลิกขวาค้างแล้วเลือกเสา) — แต่มีคูลดาวน์นะ</p>
 <p><strong>ลูกเล่นในเมนูเสา (ปุ่ม Manage / Personal Settings):</strong>
-- จัดเรียงเสา (ลากเรียง, double-click ดันขึ้นบนสุด), ตั้ง Favorite, จัดกลุ่ม (Group)
+- จัดเรียงเสา (ลากเรียงเอง หรือ double-click ดันขึ้นบนสุด), ปักเป็น Favorite, จัดกลุ่ม (Group)
 - เรียงตาม: Manual / ชื่อ / ระยะทาง
-- ตั้งการมองเห็นเสา: เปิดเมื่อ activate / เห็นทุกคน (Global) / ผ่าน Attuned Shard เท่านั้น</p>
+- ตั้งการมองเห็นเสาได้: เปิดเมื่อ activate / เห็นกันหมดทุกคน (Global) / ต้องมี Attuned Shard ถึงเห็น</p>
 <blockquote class="goal">
-<p>💰 การวาร์ปอาจ <strong>เสีย XP</strong> ตามระยะ (ตั้งได้ใน config — ปิดให้ฟรีก็ได้) เมนูจะบอก "Level Cost / Experience Cost" ก่อนวาร์ป
-👥 เล่นกับเพื่อน: ใช้ <strong>Sharestone</strong> ทำเครือข่ายร่วม หรือเปิดเสาเป็น <strong>Global</strong> ให้ทุกคนเห็น</p>
+<p>💰 การวาร์ปอาจ <strong>เสีย XP</strong> ตามระยะทาง (ตั้งได้ใน config จะปิดให้ฟรีก็ได้) เมนูจะบอก "Level Cost / Experience Cost" ให้เห็นก่อนวาร์ป
+👥 เล่นกับเพื่อน: ใช้ <strong>Sharestone</strong> ทำเครือข่ายร่วมกัน หรือเปิดเสาเป็น <strong>Global</strong> ให้ทุกคนเห็นก็ได้</p>
 </blockquote>
 <hr />
 <h3 id="traveler-s-backpack-เป้สวมหลังสารพัดประโยชน์">🎒 Traveler's Backpack — เป้สวมหลังสารพัดประโยชน์</h3>
-<p>จุของเยอะ ใส่อัปเกรดได้ มีถุงนอนในตัว</p>
-<p><strong>ลำดับคราฟต์ (ทำตามนี้):</strong>
+<p>จุของเยอะ ใส่อัปเกรดได้สารพัด แถมมีถุงนอนในตัว</p>
+<p><strong>ลำดับคราฟต์ (ทำตามนี้เลย):</strong>
 1. <strong>ถุงนอน TB</strong> = ขนแกะ×3 เรียงแนวนอน (<code>##X</code>) — <em>จำเป็นต่อสูตรเป้</em> (advancement "Getting Started")
 2. <strong>Backpack Tank</strong> (ออปชัน) = แก้วใส×6 + iron ingot×2 (<code>BAB</code>/<code>B B</code>/<code>BAB</code>)
 3. <strong>เป้ Standard</strong> = หนัง×4 + เชือก×1 + หีบไม้×1 + Backpack Tank×2 + ถุงนอน TB×1
    - เรียง: <code>XBX</code> / <code>CDC</code> / <code>XSX</code> (X=หนัง, B=เชือก, C=tank, D=หีบ, S=ถุงนอน)</p>
 <p><strong>สวม &amp; เปิด:</strong>
-- <strong>สวม:</strong> ถือเป้ไว้มือหลัก → คลิกขวา (หรือเปิดช่อง Back Slot Integration เอาใส่ช่องหลังตรง ๆ)
+- <strong>สวม:</strong> ถือเป้ไว้มือหลัก → คลิกขวา (หรือจะเปิดช่อง Back Slot Integration แล้วใส่ช่องหลังตรง ๆ ก็ได้)
 - <strong>เปิด:</strong> กดปุ่ม <strong>Open Backpack</strong> (ตั้งเองใน Controls หมวด "Traveler's Backpack")
-- ปุ่มอื่นในหมวดเดียวกัน: Sort Backpack, <strong>Enable/Disable Special Ability</strong>, <strong>Swap Tool/Change Hose Mode</strong> (ดีฟอลต์ Z), Toggle Upgrade ช่อง 1–4</p>
-<p><strong>ยกระดับ Tier (จุเพิ่ม):</strong> ใช้ <strong>Smithing Table</strong> — เอา <strong>Leather เป็น template</strong> + เป้ tier ปัจจุบัน → เลื่อนขั้น Leather → Iron → Gold → Diamond → Netherite</p>
+- ปุ่มอื่นในหมวดเดียวกัน: Sort Backpack, <strong>Enable/Disable Special Ability</strong>, <strong>Swap Tool/Change Hose Mode</strong> (ดีฟอลต์ปุ่ม Z), Toggle Upgrade ช่อง 1–4</p>
+<p><strong>ยกระดับ Tier (เพิ่มความจุ):</strong> ใช้ <strong>Smithing Table</strong> — เอา <strong>Leather เป็น template</strong> วางคู่กับเป้ tier ปัจจุบัน → ไล่ขั้น Leather → Iron → Gold → Diamond → Netherite</p>
 <p><strong>อัปเกรด</strong> (วางในช่องด้านขวาของหน้าเป้):</p>
 <div class="tw"><table>
 <thead>
@@ -399,7 +399,7 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 </tr>
 <tr>
 <td>Pickup</td>
-<td>ของที่เก็บได้ไหลเข้าเป้อัตโนมัติ</td>
+<td>ของที่เก็บได้ไหลเข้าเป้ให้อัตโนมัติ</td>
 </tr>
 <tr>
 <td>Magnet</td>
@@ -407,19 +407,19 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 </tr>
 <tr>
 <td>Feeding</td>
-<td>กินอาหารจากเป้ให้อัตโนมัติ</td>
+<td>ป้อนอาหารจากเป้ให้อัตโนมัติ</td>
 </tr>
 <tr>
 <td>Refill</td>
-<td>เติมไอเทมที่เลือกกลับเข้า inventory อัตโนมัติ</td>
+<td>เติมไอเทมที่เลือกไว้กลับเข้า inventory ให้อัตโนมัติ</td>
 </tr>
 <tr>
 <td>Void</td>
-<td>ถังขยะ + ฟิลเตอร์ลบของที่ไม่อยากได้</td>
+<td>ถังขยะ + ฟิลเตอร์คอยลบของที่ไม่อยากได้</td>
 </tr>
 <tr>
 <td>Tanks</td>
-<td>เพิ่มถังของเหลว 2 ถัง</td>
+<td>เพิ่มถังของเหลวอีก 2 ถัง</td>
 </tr>
 <tr>
 <td>Lantern / Jukebox</td>
@@ -427,30 +427,30 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 </tr>
 </tbody>
 </table></div>
-<p><strong>ถุงนอนในเป้:</strong> เปิดหน้าเป้ → ปุ่ม <strong>Use Sleeping Bag</strong> (ถ้าไม่เห็น กดปุ่ม 3 จุด) นอนได้เลยไม่ต้องพกเตียง
-<strong>ความสามารถพิเศษ (Ability):</strong> เป้แต่ละวัสดุมีพลังต่างกัน เช่น Cactus เติมน้ำตอนฝนตก, Creeper ระเบิดกันตาย, Cake ป้อนอาหาร+ฟื้นเลือด, Spider ปีนกำแพง — กดปุ่ม Ability เปิด/ปิด</p>
+<p><strong>ถุงนอนในเป้:</strong> เปิดหน้าเป้ → กดปุ่ม <strong>Use Sleeping Bag</strong> (ถ้าไม่เห็น กดปุ่ม 3 จุด) นอนได้เลยโดยไม่ต้องพกเตียง
+<strong>ความสามารถพิเศษ (Ability):</strong> เป้แต่ละวัสดุมีพลังไม่เหมือนกัน เช่น Cactus เติมน้ำตอนฝนตก, Creeper ระเบิดกันตาย, Cake ป้อนอาหาร+ฟื้นเลือด, Spider ปีนกำแพงได้ — กดปุ่ม Ability เพื่อเปิด/ปิด</p>
 <blockquote class="warn">
-<p>💧 <strong>Hose (สายยาง):</strong> สวมเป้แล้วถือ Hose จิ้มของเหลวในถัง — กด Z สลับโหมด/ถัง เติม/เทน้ำ-ลาวา-โพชั่นได้
-☠️ ของในเป้ตอนตาย: ตั้งได้ใน config (Backpack Death Place / Void Protection) ว่าจะตกพื้นหรือกันหาย</p>
+<p>💧 <strong>Hose (สายยาง):</strong> สวมเป้แล้วถือ Hose จิ้มของเหลวในถังได้เลย — กด Z สลับโหมด/สลับถัง เติมหรือเทน้ำ-ลาวา-โพชั่นได้หมด
+☠️ ของในเป้ตอนตาย: ตั้งได้ใน config (Backpack Death Place / Void Protection) ว่าจะให้ตกพื้นหรือกันหายไว้</p>
 </blockquote>
 <hr />
 <h3 id="combatify-รื้อระบบคอมแบทใหม่">⚔️ Combatify — รื้อระบบคอมแบทใหม่</h3>
-<p>อิงจาก <strong>Combat Test snapshots</strong> ของ Mojang (ระบบตีทดลองที่ไม่เคยลงเกมจริง) — เปลี่ยน "ฟีล" การต่อสู้ทันทีที่ลง ไม่ต้องคราฟต์อะไร</p>
-<p><strong>สิ่งที่เปลี่ยน (รวม ๆ):</strong>
-- ระยะเอื้อมโจมตี (attack reach) และจังหวะคูลดาวน์ตีต่างจาก vanilla
-- <strong>โล่</strong> ทำงานละเอียดขึ้น (มีโล่หลายระดับวัสดุ, กลไกบล็อก/โดนปลดต่างเดิม)
-- เพิ่ม <strong>อาวุธใหม่ทุกวัสดุ</strong> (wood→netherite): <strong>knife</strong> (มีดสั้น), <strong>longsword</strong> (ดาบยาว), <strong>shield</strong> (โล่โลหะ) — ⚠️ <strong>ไม่มี spear/mace</strong> (spear อยู่ใน Advanced Netherite ต่างหาก)</p>
+<p>อิงจาก <strong>Combat Test snapshots</strong> ของ Mojang (ระบบตีทดลองที่ไม่เคยลงเกมจริงสักที) — เปลี่ยน "ฟีล" การต่อสู้ทันทีที่ลง ไม่ต้องคราฟต์อะไรเลย</p>
+<p><strong>สิ่งที่เปลี่ยนไป (รวม ๆ):</strong>
+- ระยะเอื้อมโจมตี (attack reach) กับจังหวะคูลดาวน์ตี ต่างจาก vanilla
+- <strong>โล่</strong> ทำงานละเอียดขึ้น (มีโล่หลายระดับตามวัสดุ, กลไกบล็อก/โดนปลดก็ต่างจากเดิม)
+- เพิ่ม <strong>อาวุธใหม่ครบทุกวัสดุ</strong> (wood→netherite): <strong>knife</strong> (มีดสั้น), <strong>longsword</strong> (ดาบยาว), <strong>shield</strong> (โล่โลหะ) — ⚠️ <strong>ไม่มี spear/mace</strong> (spear ไปอยู่ใน Advanced Netherite ต่างหาก)</p>
 <p><strong>อาวุธ/โล่ใหม่ที่คราฟต์ได้</strong> (ทุกวัสดุ: wood/stone/copper/iron/gold/diamond/netherite):
-- <strong>Knife</strong> = วัสดุ×1 วางบน stick×1 (แนวตั้ง <code>X</code>/<code>#</code>) → ตีเร็ว ดาเมจน้อย
-- <strong>Longsword</strong> = วัสดุ×2 + Knife วัสดุเดียวกัน×1 (<code>X</code>/<code>X</code>/<code>#</code> โดย #=knife) → ระยะเอื้อมไกล
-- <strong>Shield</strong> ตามวัสดุ (copper/iron/gold/diamond/netherite) + ย้อมสีได้ 16 สี</p>
+- <strong>Knife</strong> = วัสดุ×1 วางบน stick×1 (แนวตั้ง <code>X</code>/<code>#</code>) → ตีเร็ว แต่ดาเมจน้อย
+- <strong>Longsword</strong> = วัสดุ×2 + Knife วัสดุเดียวกัน×1 (<code>X</code>/<code>X</code>/<code>#</code> โดย #=knife) → แลกมาด้วยระยะเอื้อมที่ไกลขึ้น
+- <strong>Shield</strong> ทำตามวัสดุได้ (copper/iron/gold/diamond/netherite) แถมย้อมสีได้ 16 สี</p>
 <blockquote class="warn">
-<p>⚠️ <strong>อาวุธใหม่ (knife/longsword/โล่ตามวัสดุ) อยู่ใน pack เสริมในตัวมอด</strong> — ต้องเปิด built-in datapack/resourcepack ของ Combatify ก่อนถึงจะคราฟต์ได้ (เปิดใน <strong>Mod Menu → Combatify</strong> หรือเมนู Datapacks ตอนสร้างโลก) ⚠️ ตัวเลขดาเมจ/ระยะที่แน่นอน ต้องเช็คในเกม
-🛡️ Combatify มี option ปรับเยอะ (สไตล์ vanilla/combat-test, กลไกโล่หลายแบบ) — เข้าไปจูนใน Mod Menu ได้ ตั้งให้ตรงกับเซิร์ฟเพื่อน</p>
+<p>⚠️ <strong>อาวุธใหม่ (knife/longsword/โล่ตามวัสดุ) อยู่ใน pack เสริมที่มากับตัวมอด</strong> — ต้องเปิด built-in datapack/resourcepack ของ Combatify ก่อนถึงจะคราฟต์ได้ (เปิดใน <strong>Mod Menu → Combatify</strong> หรือเมนู Datapacks ตอนสร้างโลก) ⚠️ ตัวเลขดาเมจ/ระยะที่แน่นอน ต้องเช็คในเกม
+🛡️ Combatify มี option ให้ปรับเยอะ (เลือกสไตล์ vanilla/combat-test, กลไกโล่หลายแบบ) — เข้าไปจูนได้ใน Mod Menu ตั้งให้ตรงกับเซิร์ฟเพื่อนด้วย</p>
 </blockquote>
 <hr />
 <h3 id="mutantmonsters-มินิบอส-5-ตัว">👹 MutantMonsters — มินิบอส 5 ตัว</h3>
-<p>ม็อบกลายพันธุ์ตัวใหญ่ เลือดเยอะ ตีแรง <strong>เกิดแบบสุ่ม (โอกาสน้อย) ตรงที่ม็อบปกติชนิดนั้นเกิด</strong> — เจอแล้วเตรียมรับมือ</p>
+<p>ม็อบกลายพันธุ์ตัวใหญ่ เลือดหนา ตีเจ็บ <strong>เกิดแบบสุ่ม (โอกาสน้อย) ตรงที่ม็อบปกติชนิดนั้นเกิด</strong> — เจอเมื่อไหร่เตรียมรับมือไว้เลย</p>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -463,17 +463,17 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 <tr>
 <td><strong>Mutant Zombie</strong></td>
 <td>โซมบี้ (สุ่ม)</td>
-<td><strong>Hulk Hammer</strong> (ค้อนทุบแรง) — ล้มแล้วยังฟื้น ต้องจุดไฟด้วย flint &amp; steel ตอนมันล้มถึงตายสนิท</td>
+<td><strong>Hulk Hammer</strong> (ค้อนทุบแรง ๆ) — ตีล้มแล้วยังฟื้นได้ ต้องเอา flint &amp; steel จุดไฟใส่ตอนมันล้มถึงจะตายสนิท</td>
 </tr>
 <tr>
 <td><strong>Mutant Skeleton</strong></td>
 <td>สเกเลตัน</td>
-<td>ชิ้นส่วนกระดูก (limb/pelvis/rib cage/arms) → คราฟต์ <strong>ชุดเกราะ Mutant Skeleton</strong> · <strong>Skull</strong> (เอาไปทำ Chemical X)</td>
+<td>ชิ้นส่วนกระดูก (limb/pelvis/rib cage/arms) → เอาไปคราฟต์ <strong>ชุดเกราะ Mutant Skeleton</strong> · <strong>Skull</strong> (เอาไปทำ Chemical X)</td>
 </tr>
 <tr>
 <td><strong>Mutant Creeper</strong></td>
 <td>ครีปเปอร์</td>
-<td><strong>Creeper Shard</strong> (ตัว charged ดรอปมากกว่า) ใช้ทำ Creeper Minion</td>
+<td><strong>Creeper Shard</strong> (ตัว charged ดรอปเยอะกว่า) เอาไปทำ Creeper Minion</td>
 </tr>
 <tr>
 <td><strong>Mutant Enderman</strong></td>
@@ -483,13 +483,13 @@ main .cb.on{background:var(--gold);border-color:var(--gold);color:#1a1408}
 <tr>
 <td><strong>Spider Pig</strong></td>
 <td>สร้างเอง</td>
-<td>ป้อนหมู fermented spider eye แล้วปา <strong>Chemical X</strong> ใส่</td>
+<td>ป้อน fermented spider eye ให้หมู แล้วปา <strong>Chemical X</strong> ใส่</td>
 </tr>
 </tbody>
 </table></div>
-<p><strong>ชุดเกราะ Mutant Skeleton</strong> — คราฟต์จากชิ้นส่วนกระดูกที่ดรอป ได้ <strong>4 ชิ้น: boots / leggings / chestplate / arms</strong> (ชุดนี้ <strong>ไม่มี helmet</strong> — เช่น chestplate = arms + rib cage)</p>
+<p><strong>ชุดเกราะ Mutant Skeleton</strong> — คราฟต์จากชิ้นส่วนกระดูกที่ดรอปมา ได้ทั้งหมด <strong>4 ชิ้น: boots / leggings / chestplate / arms</strong> (ชุดนี้ <strong>ไม่มี helmet</strong> — อย่างเช่น chestplate = arms + rib cage)</p>
 <blockquote class="warn">
-<p>⚠️ โบนัสรายชิ้น (กระโดดสูง / วิ่งเร็ว / ขึ้นธนูไว ฯลฯ) <strong>ต้องเช็คในเกม</strong> — ค่าอยู่ในโค้ดมอด หาจากไฟล์ตรงๆ ไม่ได้</p>
+<p>⚠️ โบนัสรายชิ้น (กระโดดสูง / วิ่งเร็ว / ขึ้นธนูไว ฯลฯ) <strong>ต้องเช็คในเกม</strong> — ค่าฝังอยู่ในโค้ดมอด หาจากไฟล์ตรง ๆ ไม่ได้</p>
 </blockquote>
 <p><strong>ของพิเศษอื่น:</strong>
 - <strong>Chemical X</strong> — คราฟต์: <strong>obsidian (หรือ crying obsidian)×4 ล้อมของดรอปบอส×1</strong> (Hulk Hammer / Endersoul Hand / Creeper Shard / Mutant Skeleton Skull) → ใช้สร้าง Mutant Snow Golem / Spider Pig
